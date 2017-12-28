@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://oi28tswuq.bkt.clouddn.com/images/wechat1.png-public">
 <meta property="og:image" content="http://oi28tswuq.bkt.clouddn.com/images/wechat2.png-public">
 <meta property="og:image" content="http://oi28tswuq.bkt.clouddn.com/images/wechat3.png-public">
-<meta property="og:updated_time" content="2017-01-10T09:00:31.309Z">
+<meta property="og:updated_time" content="2017-12-28T09:00:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="域名服务器及ngrok环境配置。">
 <meta name="twitter:description" content="域名最好买一个，万一你先买了个牛比的域名，到时候还能卖不少钞票，哈哈，如果你不是专门炒域名的，估计比中彩票机率还小。服务器最好是用vpn搭建一个，对新手来说有一定的难度，所以推荐使用下面的方法。             ngrok并不稳定，推荐使用一个网站：www.tunnel.mobi.1.mac系统自带python web服务,通过python在控制台开启一个简单的web服务器，命令如下：1p">
@@ -228,10 +228,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>域名最好买一个，万一你先买了个牛比的域名，到时候还能卖不少钞票，哈哈，如果你不是专门炒域名的，估计比中彩票机率还小。服务器最好是用vpn搭建一个，对新手来说有一定的难度，所以推荐使用下面的方法。</p>
-<p><div align="center"><br>    <img src="http://oi28tswuq.bkt.clouddn.com/images/wechat1.png-public" alt=""><br>    <img src="http://oi28tswuq.bkt.clouddn.com/images/wechat2.png-public" alt=""><br>    <img src="http://oi28tswuq.bkt.clouddn.com/images/wechat3.png-public" alt=""><br></div><br>ngrok并不稳定，推荐使用一个网站：www.tunnel.mobi.<br>1.mac系统自带python web服务,通过python在控制台开启一个简单的web服务器，命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python m SimpleHTTPSwrver 8080,8080为端口号。</div></pre></td></tr></table></figure></p>
+<p><div align="center"><br>    <img src="http://oi28tswuq.bkt.clouddn.com/images/wechat1.png-public" alt=""><br>    <img src="http://oi28tswuq.bkt.clouddn.com/images/wechat2.png-public" alt=""><br>    <img src="http://oi28tswuq.bkt.clouddn.com/images/wechat3.png-public" alt=""><br></div><br>ngrok并不稳定，推荐使用一个网站：www.tunnel.mobi.<br>1.mac系统自带python web服务,通过python在控制台开启一个简单的web服务器，命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python m SimpleHTTPSwrver 8080,8080为端口号。</span><br></pre></td></tr></table></figure></p>
 <p>当然也可以使用nginx，apache等等开启一个本地web服务，只要能开启一个特定端口号的服务即可。</p>
-<p>2.按照mobi官方文档来，开启ngrok这个工具。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./ngrok -config ngrok.cfg -subdomain webywx-wechat 8080//ywx-wechat为子域名</div></pre></td></tr></table></figure></p>
-<p>开启成功之后，会得到两个链接，一个http的,一个https的，例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http://webywx-wechat.tunnel.mobi-&gt;127.0.0.1:8080</div><div class="line">https://webywx-wechat.tunnel.mobi-&gt;127.0.0.1:8080</div></pre></td></tr></table></figure></p>
+<p>2.按照mobi官方文档来，开启ngrok这个工具。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./ngrok -config ngrok.cfg -subdomain webywx-wechat 8080//ywx-wechat为子域名</span><br></pre></td></tr></table></figure></p>
+<p>开启成功之后，会得到两个链接，一个http的,一个https的，例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://webywx-wechat.tunnel.mobi-&gt;127.0.0.1:8080</span><br><span class="line">https://webywx-wechat.tunnel.mobi-&gt;127.0.0.1:8080</span><br></pre></td></tr></table></figure></p>
 <p>注：当然端口号建议使用1234,4321等小数字的，有人碰到过使用大数字而导致代理失效</p>
 <p>3.复制链接能成功打开即说明成功了。不过有时候此网站使用的人也会很多，流量太大服务器直接挂了，或者作者把服务器关了，此时建议使用nodejs的第三方模块：localtunnel服务</p>
 <h4 id="建议使用localtunnel服务（比较方便）：方法如下："><a href="#建议使用localtunnel服务（比较方便）：方法如下：" class="headerlink" title="建议使用localtunnel服务（比较方便）：方法如下："></a>建议使用localtunnel服务（比较方便）：方法如下：</h4><p>安装：npm install -g localtunnel<br>安装成之后可以通过localtunnel的缩写lt来开启一个端口：lt –prot 8080<br>运行之后它会自动生成一个随机的二级域名。复制到浏览器能打开就成功了。<br>缺点就是不能指定特定的域名，它会随机生成。关闭服务重启url会变，所以还需要重新配置公众号后台的url。</p>

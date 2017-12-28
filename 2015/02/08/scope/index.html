@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="闫文喜的个人前端博客">
 <meta property="og:description" content="预编译var a=2;执行分为两个过程：代码执行前先进行预编译，此时只是声明了一个变量a，此时a的值为undefined，当代码运行到a=2时，变量a才会赋值2。总结： 变量的赋值操作会执行两个动作， 首先编译器会在当前作用域中声明一个变量（ 如果之前没有声明过）， 然后在运行时引擎会在作用域中查找该变量， 如果能够找到就会对它赋值。 类型错误12345function foo(a) &amp;#123;">
 <meta property="og:locale" content="ch">
-<meta property="og:updated_time" content="2017-02-08T07:52:07.764Z">
+<meta property="og:updated_time" content="2017-12-28T09:00:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="作用域预编译及引发异常问题">
 <meta name="twitter:description" content="预编译var a=2;执行分为两个过程：代码执行前先进行预编译，此时只是声明了一个变量a，此时a的值为undefined，当代码运行到a=2时，变量a才会赋值2。总结： 变量的赋值操作会执行两个动作， 首先编译器会在当前作用域中声明一个变量（ 如果之前没有声明过）， 然后在运行时引擎会在作用域中查找该变量， 如果能够找到就会对它赋值。 类型错误12345function foo(a) &amp;#123;">
@@ -224,9 +224,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="预编译"><a href="#预编译" class="headerlink" title="预编译"></a>预编译</h4><p>var a=2;执行分为两个过程：<br>代码执行前先进行预编译，此时只是声明了一个变量a，此时a的值为undefined，当代码运行到a=2时，变量a才会赋值2。<br>总结： 变量的赋值操作会执行两个动作， 首先编译器会在当前作用域中声明一个变量（ 如果之前没有声明过）， 然后在运行时引擎会在作用域中查找该变量， 如果能够找到就会对<br>它赋值。</p>
-<h4 id="类型错误"><a href="#类型错误" class="headerlink" title="类型错误"></a>类型错误</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function foo(a) &#123;</div><div class="line">console.log( a + b );</div><div class="line">b = a;</div><div class="line">&#125; </div><div class="line">foo( 2 );</div></pre></td></tr></table></figure>
+<h4 id="类型错误"><a href="#类型错误" class="headerlink" title="类型错误"></a>类型错误</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function foo(a) &#123;</span><br><span class="line">console.log( a + b );</span><br><span class="line">b = a;</span><br><span class="line">&#125; </span><br><span class="line">foo( 2 );</span><br></pre></td></tr></table></figure>
 <p>上述代码在严格模式中 找不到变量b时（此句对应 console.log( a + b )）， 并不会创建并返回一个全局变量， 引擎会抛出一个ReferenceError 异常。在非严格模式下，如果找不到变量b（此句对应b=a，给b赋值时它会看预编译的时候有没有声明b，如果没有声明，在非严格模式下它会声明并给其赋值），在全局作用域中就会创建一个具有该名称的变量b， 并将其返还给引擎</p>
-<p>如果你对一个变量的值进行不合理的操作，比如试图对一个非函数类型的值进行函数调用， 或着引用 null 或 undefined 类型的值中的属性， 那么引擎会抛出另外一种类型的异常， 叫作 TypeError。例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var a=12;</div><div class="line">var b=null;</div></pre></td></tr></table></figure></p>
+<p>如果你对一个变量的值进行不合理的操作，比如试图对一个非函数类型的值进行函数调用， 或着引用 null 或 undefined 类型的值中的属性， 那么引擎会抛出另外一种类型的异常， 叫作 TypeError。例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a=12;</span><br><span class="line">var b=null;</span><br></pre></td></tr></table></figure></p>
 <p>执行a(),b.property或者b.length都会抛出一个TypeError异常。</p>
 <p>总结：ReferenceError 同作用域判别失败相关（在相关作用域内及全局作用域内没有找到变量）， 而 TypeError 则代表作用域判别成功了(在作用域内找到了变量)， 但是对结果的操作是非法或不合理的。</p>
 <h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>作用域是一套规则， 用于确定在何处以及如何查找变量（ 标识符）。 如果查找的目的是对变量进行赋值， 那么就会使用 LHS 查询； 如果目的是获取变量的值， 就会使用 RHS 查询。</p>

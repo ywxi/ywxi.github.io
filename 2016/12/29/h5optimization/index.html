@@ -18,7 +18,7 @@
 <meta property="og:description" content="概述 PC优化手段在Mobile侧同样适用 在Mobile侧我们提出三秒种渲染完成首屏指标 基于第二点，首屏加载3秒完成或使用Loading 基于联通3G网络平均338KB/s(2.71Mb/s)，所以首屏资源不应超过1014KB Mobile侧因手机配置原因，除加载外渲染速度也是优化重点 基于第五点，要合理处理代码减少渲染损耗 基于第二、第五点，所有影响首屏加载和渲染的代码应在处理逻">
 <meta property="og:locale" content="ch">
 <meta property="og:image" content="http://oi28tswuq.bkt.clouddn.com/images/h5optimization.png">
-<meta property="og:updated_time" content="2017-02-04T08:11:18.698Z">
+<meta property="og:updated_time" content="2017-12-28T09:00:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动H5前端性能优化指南">
 <meta name="twitter:description" content="概述 PC优化手段在Mobile侧同样适用 在Mobile侧我们提出三秒种渲染完成首屏指标 基于第二点，首屏加载3秒完成或使用Loading 基于联通3G网络平均338KB/s(2.71Mb/s)，所以首屏资源不应超过1014KB Mobile侧因手机配置原因，除加载外渲染速度也是优化重点 基于第五点，要合理处理代码减少渲染损耗 基于第二、第五点，所有影响首屏加载和渲染的代码应在处理逻">
@@ -250,7 +250,7 @@
 </li>
 <li><p>预加载<br>大型重资源页面（如游戏）可使用增加Loading的方法，资源加载完成后再显示页面。但Loading时间过长，会造成用户流失<br>对用户行为分析，可以在当前页加载下一页资源，提升速度<br>a) 可感知Loading(如进入空间游戏的Loading)<br>b) 不可感知的Loading（如提前加载下一页）</p>
 </li>
-<li><p>压缩图片<br>图片是最占流量的资源，因此尽量避免使用他，使用时选择最合适的格式（实现需求的前提下，以大小判断），合适的大小，然后使用智图压缩，同时在代码中用Srcset来按需显示<br>PS：过度压缩图片大小影响图片显示效果<br>a) 使用智图（ <a href="http://zhitu.isux.us/" target="_blank" rel="external">http://zhitu.isux.us/</a> ）<br>b) 使用其它方式代替图片(1. 使用CSS3 2. 使用SVG 3. 使用IconFont)<br>c) 使用Srcset<br>d) 选择合适的图片(1. webP优于JPG 2. PNG8优于GIF)<br>e) 选择合适的大小（1. 首次加载不大于1014KB 2. 不宽于640（基于手机屏幕一般宽度））</p>
+<li><p>压缩图片<br>图片是最占流量的资源，因此尽量避免使用他，使用时选择最合适的格式（实现需求的前提下，以大小判断），合适的大小，然后使用智图压缩，同时在代码中用Srcset来按需显示<br>PS：过度压缩图片大小影响图片显示效果<br>a) 使用智图（ <a href="http://zhitu.isux.us/" target="_blank" rel="noopener">http://zhitu.isux.us/</a> ）<br>b) 使用其它方式代替图片(1. 使用CSS3 2. 使用SVG 3. 使用IconFont)<br>c) 使用Srcset<br>d) 选择合适的图片(1. webP优于JPG 2. PNG8优于GIF)<br>e) 选择合适的大小（1. 首次加载不大于1014KB 2. 不宽于640（基于手机屏幕一般宽度））</p>
 </li>
 <li><p>减少Cookie<br>Cookie会影响加载速度，所以静态资源域名不使用Cookie</p>
 </li>

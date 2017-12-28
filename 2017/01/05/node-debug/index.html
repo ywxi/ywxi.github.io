@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="闫文喜的个人前端博客">
 <meta property="og:description" content="一般在nodejs需要进行调试的时候，可以使用console.log()方法来将调试信息输出到控制台，当发布到生产环境的时候，需要将这些调试信息都注释掉，为了方便切换而不需要改动程序代码，可以使用nodejs的debug模块;gsb常用调试语句如下：1set DEBUG=gsb:* &amp;amp;&amp;amp; set CMS_HOST=w2&amp;amp;&amp;amp; node app.js --harmony">
 <meta property="og:locale" content="ch">
-<meta property="og:updated_time" content="2017-01-05T03:04:05.360Z">
+<meta property="og:updated_time" content="2017-12-28T09:00:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="debug模块介绍">
 <meta name="twitter:description" content="一般在nodejs需要进行调试的时候，可以使用console.log()方法来将调试信息输出到控制台，当发布到生产环境的时候，需要将这些调试信息都注释掉，为了方便切换而不需要改动程序代码，可以使用nodejs的debug模块;gsb常用调试语句如下：1set DEBUG=gsb:* &amp;amp;&amp;amp; set CMS_HOST=w2&amp;amp;&amp;amp; node app.js --harmony">
@@ -223,12 +223,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>一般在nodejs需要进行调试的时候，可以使用console.log()方法来将调试信息输出到控制台，当发布到生产环境的时候，需要将这些调试信息都注释掉，为了方便切换而不需要改动程序代码，可以使用nodejs的debug模块;<br>gsb常用调试语句如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set DEBUG=gsb:* &amp;&amp; set CMS_HOST=w2&amp;&amp; node app.js --harmony</div></pre></td></tr></table></figure></p>
+        <p>一般在nodejs需要进行调试的时候，可以使用console.log()方法来将调试信息输出到控制台，当发布到生产环境的时候，需要将这些调试信息都注释掉，为了方便切换而不需要改动程序代码，可以使用nodejs的debug模块;<br>gsb常用调试语句如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set DEBUG=gsb:* &amp;&amp; set CMS_HOST=w2&amp;&amp; node app.js --harmony</span><br></pre></td></tr></table></figure></p>
 <p>debug调试打印的是开发者自己在 控制台 打印的信息，它的目的是要代替 console.log()。<br>特点：1.可以设置打印的信息来自哪个哪个模块：控制台输出的蓝色字体就是表示来自app模块（自己写的模块名）。 2.在发布到外网的情况下，可以用发布模式，这时 debug里打印信息将不会在显示。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var debug = require(&apos;debug&apos;)(&apos;myapp:main&apos;);</div><div class="line">debug(&apos;现在的时间是 %s&apos; , new Date());</div></pre></td></tr></table></figure>
-<p>如果是开发环境，只需要设置环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">D:\nodej\workspace\spider\set debug=myapp:*</div></pre></td></tr></table></figure></p>
-<p>此后再控制台执行node app.js即可输出调试信息了<br>如果需要关闭调试信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">D:\nodej\workspace\spider\set debug=null</div></pre></td></tr></table></figure></p>
-<p>具体的使用方法可以参考<a href="http://npmjs.org/package/debug" target="_blank" rel="external">debug模块</a>的主页 <a href="http://npmjs.org/package/debug" target="_blank" rel="external">http://npmjs.org/package/debug</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var debug = require(&apos;debug&apos;)(&apos;myapp:main&apos;);</span><br><span class="line">debug(&apos;现在的时间是 %s&apos; , new Date());</span><br></pre></td></tr></table></figure>
+<p>如果是开发环境，只需要设置环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\nodej\workspace\spider\set debug=myapp:*</span><br></pre></td></tr></table></figure></p>
+<p>此后再控制台执行node app.js即可输出调试信息了<br>如果需要关闭调试信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\nodej\workspace\spider\set debug=null</span><br></pre></td></tr></table></figure></p>
+<p>具体的使用方法可以参考<a href="http://npmjs.org/package/debug" target="_blank" rel="noopener">debug模块</a>的主页 <a href="http://npmjs.org/package/debug" target="_blank" rel="noopener">http://npmjs.org/package/debug</a></p>
 
       
     </div>
