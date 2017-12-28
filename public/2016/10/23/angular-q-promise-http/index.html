@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>AngularJS中的$http、$q服务和promise对象的联系 | 闫文喜的个人前端博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="angular中的$http$http服务是AngularJS系统自带的，可以用来进行网络通信、获取远程服务器的数据。要记住的是，$http是对浏览器XMLHttpRequest的封装，也就是说，它其实是Ajax。
+首先为了用$http发起请求，我们得先找到一个可以测试的API，这里我用：https://randomuser.me/api/来测试：用get请求，它能够返回json格式的一个随机用户">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AngularJS中的$http、$q服务和promise对象的联系">
+<meta property="og:url" content="http://yoursite.com/2016/10/23/angular-q-promise-http/index.html">
+<meta property="og:site_name" content="闫文喜的个人前端博客">
+<meta property="og:description" content="angular中的$http$http服务是AngularJS系统自带的，可以用来进行网络通信、获取远程服务器的数据。要记住的是，$http是对浏览器XMLHttpRequest的封装，也就是说，它其实是Ajax。
+首先为了用$http发起请求，我们得先找到一个可以测试的API，这里我用：https://randomuser.me/api/来测试：用get请求，它能够返回json格式的一个随机用户">
+<meta property="og:image" content="http://oi28tswuq.bkt.clouddn.com/images/data.png">
+<meta property="og:image" content="http://oi28tswuq.bkt.clouddn.com/images/promise.png">
+<meta property="og:image" content="http://oi28tswuq.bkt.clouddn.com/images/defered.png">
+<meta property="og:updated_time" content="2016-12-23T08:22:39.187Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AngularJS中的$http、$q服务和promise对象的联系">
+<meta name="twitter:description" content="angular中的$http$http服务是AngularJS系统自带的，可以用来进行网络通信、获取远程服务器的数据。要记住的是，$http是对浏览器XMLHttpRequest的封装，也就是说，它其实是Ajax。
+首先为了用$http发起请求，我们得先找到一个可以测试的API，这里我用：https://randomuser.me/api/来测试：用get请求，它能够返回json格式的一个随机用户">
+<meta name="twitter:image" content="http://oi28tswuq.bkt.clouddn.com/images/data.png">
+  
+    <link rel="alternative" href="/atom.xml" title="闫文喜的个人前端博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">前端在路上</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+					        
+								<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Benchmark-jsPerf/" style="font-size: 10px;">Benchmark jsPerf</a> <a href="/tags/ES6、promise/" style="font-size: 10px;">ES6、promise</a> <a href="/tags/H5-移动端优化/" style="font-size: 10px;">H5 移动端优化</a> <a href="/tags/H5、bug/" style="font-size: 10px;">H5、bug</a> <a href="/tags/JS设计模式-设计模式/" style="font-size: 10px;">JS设计模式 设计模式</a> <a href="/tags/Jenkins-CI/" style="font-size: 10px;">Jenkins CI</a> <a href="/tags/Lodash/" style="font-size: 10px;">Lodash</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angular-http-q-promise/" style="font-size: 10px;">angular $http $q promise</a> <a href="/tags/angular-q-promise/" style="font-size: 10px;">angular $q promise</a> <a href="/tags/angular-decorator/" style="font-size: 10px;">angular decorator</a> <a href="/tags/angular-filter/" style="font-size: 10px;">angular filter</a> <a href="/tags/angular-服务/" style="font-size: 10px;">angular 服务</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/angular、-http/" style="font-size: 10px;">angular、$http</a> <a href="/tags/angular、Karma/" style="font-size: 10px;">angular、Karma</a> <a href="/tags/angular、directive/" style="font-size: 10px;">angular、directive</a> <a href="/tags/angular、html5/" style="font-size: 10px;">angular、html5</a> <a href="/tags/angular、module、controller/" style="font-size: 10px;">angular、module、controller</a> <a href="/tags/angular、promise、-q、deferred/" style="font-size: 10px;">angular、promise、$q、deferred</a> <a href="/tags/angular、router/" style="font-size: 10px;">angular、router</a> <a href="/tags/angular、ui-router/" style="font-size: 10px;">angular、ui-router</a> <a href="/tags/angular、表达式、filter/" style="font-size: 10px;">angular、表达式、filter</a> <a href="/tags/app-跨平台/" style="font-size: 10px;">app,跨平台</a> <a href="/tags/aso/" style="font-size: 10px;">aso</a> <a href="/tags/blockchain/" style="font-size: 10px;">blockchain</a> <a href="/tags/debugger/" style="font-size: 10px;">debugger</a> <a href="/tags/es5-js/" style="font-size: 10px;">es5 js</a> <a href="/tags/fit/" style="font-size: 10px;">fit</a> <a href="/tags/flex-css/" style="font-size: 10px;">flex css</a> <a href="/tags/git-github/" style="font-size: 10px;">git github</a> <a href="/tags/h5-webworkers/" style="font-size: 10px;">h5 webworkers</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/javascript、object-oriented、继承/" style="font-size: 10px;">javascript、object-oriented、继承</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/js-Array/" style="font-size: 10px;">js Array</a> <a href="/tags/js-Higher-order-function/" style="font-size: 10px;">js Higher-order-function</a> <a href="/tags/js-closure/" style="font-size: 10px;">js closure</a> <a href="/tags/js-lodash/" style="font-size: 10px;">js lodash</a> <a href="/tags/js-object/" style="font-size: 10px;">js object</a> <a href="/tags/js-scope/" style="font-size: 10px;">js scope</a> <a href="/tags/js-sea-js-模块化/" style="font-size: 10px;">js sea.js 模块化</a> <a href="/tags/js-this/" style="font-size: 10px;">js this</a> <a href="/tags/js-性能调试/" style="font-size: 10px;">js 性能调试</a> <a href="/tags/js-柯里化/" style="font-size: 10px;">js 柯里化</a> <a href="/tags/js-纯函数/" style="font-size: 10px;">js 纯函数</a> <a href="/tags/js、变态题/" style="font-size: 10px;">js、变态题</a> <a href="/tags/js、设计模式/" style="font-size: 10px;">js、设计模式</a> <a href="/tags/js、跨域、document-domain/" style="font-size: 10px;">js、跨域、document.domain</a> <a href="/tags/js模块化、AMD、CMD、CommonJs/" style="font-size: 10px;">js模块化、AMD、CMD、CommonJs</a> <a href="/tags/js继承/" style="font-size: 10px;">js继承</a> <a href="/tags/life、意念/" style="font-size: 10px;">life、意念</a> <a href="/tags/lodash-chain/" style="font-size: 10px;">lodash chain</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoDB-数据库/" style="font-size: 10px;">mongoDB 数据库</a> <a href="/tags/mvp/" style="font-size: 10px;">mvp</a> <a href="/tags/node/" style="font-size: 12px;">node</a> <a href="/tags/node-debug/" style="font-size: 10px;">node debug</a> <a href="/tags/node-wechat/" style="font-size: 18px;">node wechat</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/rap/" style="font-size: 16px;">rap</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/react-ant-design/" style="font-size: 10px;">react ant-design</a> <a href="/tags/seo/" style="font-size: 18px;">seo</a> <a href="/tags/seo-新闻源/" style="font-size: 10px;">seo 新闻源</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/web-交互/" style="font-size: 10px;">web 交互</a> <a href="/tags/web、前端/" style="font-size: 10px;">web、前端</a> <a href="/tags/web、性能优化/" style="font-size: 10px;">web、性能优化</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/wechat-webstorm/" style="font-size: 10px;">wechat webstorm</a> <a href="/tags/win10、linux/" style="font-size: 10px;">win10、linux</a> <a href="/tags/window-history-html5/" style="font-size: 10px;">window.history html5</a> <a href="/tags/wxapp/" style="font-size: 14px;">wxapp</a> <a href="/tags/yarn-npm/" style="font-size: 10px;">yarn npm</a> <a href="/tags/人生/" style="font-size: 10px;">人生</a> <a href="/tags/前后端分享/" style="font-size: 10px;">前后端分享</a> <a href="/tags/前端脚手架/" style="font-size: 10px;">前端脚手架</a> <a href="/tags/建站-seo/" style="font-size: 10px;">建站 seo</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/生活/" style="font-size: 20px;">生活</a> <a href="/tags/移动端、fixed/" style="font-size: 10px;">移动端、fixed</a> <a href="/tags/解构赋值-es6/" style="font-size: 10px;">解构赋值 es6</a> <a href="/tags/跨域、postMessage、html5/" style="font-size: 10px;">跨域、postMessage、html5</a> <a href="/tags/路由-html5/" style="font-size: 10px;">路由 html5</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.webywx.com/">前端博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.yanwenxi.site/">web小站</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">前端在路上</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">前端在路上</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+			        
+						<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-angular-q-promise-http" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/23/angular-q-promise-http/" class="article-date">
+  	<time datetime="2016-10-23T01:52:38.000Z" itemprop="datePublished">2016-10-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      AngularJS中的$http、$q服务和promise对象的联系
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular-http-q-promise/">angular $http $q promise</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="angular中的-http"><a href="#angular中的-http" class="headerlink" title="angular中的$http"></a>angular中的$http</h4><p>$http服务是AngularJS系统自带的，可以用来进行网络通信、获取远程服务器的数据。要记住的是，$http是对浏览器XMLHttpRequest的封装，也就是说，它其实是Ajax。</p>
+<p>首先为了用$http发起请求，我们得先找到一个可以测试的API，这里我用：<a href="https://randomuser.me/api/来测试：用get请求，它能够返回json格式的一个随机用户的资料。比如在浏览器中输入，可以看到返回的数据：" target="_blank" rel="external">https://randomuser.me/api/来测试：用get请求，它能够返回json格式的一个随机用户的资料。比如在浏览器中输入，可以看到返回的数据：</a><br> <img src="http://oi28tswuq.bkt.clouddn.com/images/data.png" alt=""><br> 注：这是一个公开的测试接口，以后测试也可以用。</p>
+<h4 id="http的基本用法："><a href="#http的基本用法：" class="headerlink" title="$http的基本用法："></a>$http的基本用法：</h4> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$http(options).success(successFn).error(errorFn)</div></pre></td></tr></table></figure>
+<p> options：包括url、method（get或post等）; successFn：成功的回调; errorFn：失败的回调<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">angular.module(&apos;myDemo&apos;, [])</div><div class="line"></div><div class="line">    .controller(&apos;myController&apos;, [&apos;$scope&apos;, &apos;$http&apos;, function ($scope, $http) &#123;</div><div class="line">        $scope.testHttp = function () &#123;</div><div class="line">            $http(&#123;</div><div class="line">                method: &apos;GET&apos;,</div><div class="line">                url: &apos;https://randomuser.me/api/&apos;</div><div class="line">            &#125;).success(function (data) &#123; // // 这里的data的类型是object，并且，它已经是返回数据的“数据”部分</div><div class="line">                console.log(angular.toJson(data, true));</div><div class="line">                $scope.result = data;</div><div class="line">            &#125;).error(function (err) &#123;</div><div class="line">                console.log(err);</div><div class="line">            &#125;)</div><div class="line">        &#125;</div><div class="line">    &#125;]);</div></pre></td></tr></table></figure></p>
+<p> 这里，$http(options)返回的是一个被封装的promise对象，我们可以console.log出来看看：<br> <img src="http://oi28tswuq.bkt.clouddn.com/images/promise.png" alt=""></p>
+<p> 从上图可以看到，黑色部分圈起来的是基本的promise部分（拥有then，catch，finally函数），除了这些函数以外，这个promise对象还有success和error函数（见红线处），这是$http返回的时候封装的，供我们使用的时候更方便。比如上述例子中，注释里说，success的回调函数返回的data直接就是我们想要的“数据部分”，那么如果我用的是then，那么返回的除了数据部分，还有额外的部分（比如状态码），这时候我就得自己拿出这个“数据部分”，代码如下：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var promise = ...;  // 省略$http过程</div><div class="line">promise.then(function (data) &#123;</div><div class="line">        // realData被包含在data的“data”字段中，一般它才是我们想要的</div><div class="line">        var realData = data.data;</div><div class="line">        console.log(realData);</div><div class="line">    &#125;, function (err) &#123;</div><div class="line"></div><div class="line">    &#125;);</div></pre></td></tr></table></figure></p>
+<h4 id="q的介绍与用处"><a href="#q的介绍与用处" class="headerlink" title="$q的介绍与用处:"></a>$q的介绍与用处:</h4><p>在上述例子中，我们是在Controller层写了网络请求。但是我们知道，在AngularJS的MVVM框架之中，业务逻辑（包括网络请求）的部分应该尽可能写到Service层中，而让Controller的逻辑尽可能少。但是，怎么把网络请求最终得到的有用的数据，返回给controller呢？这里有两种思路：</p>
+<p>方法一：把$http(options)返回的promise对象直接在Service中返回。在controller中拿到之后，再写success和error的回调。<br>方法二：在Service中返回一个自定义的promise对象，用来回调给controller。这里的回调者，由$q创建的“defered”对象来担任。</p>
+<p>第一种方法比较简单，现在直接用第二种方法来写，这种方法也是在项目中常用的，在此之前，先简单介绍一下AngularJS的q服务。q服务是在AngularJS中用来创建promise对象的，但它首先创建一个defered对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var deferred=$q.defer()</div></pre></td></tr></table></figure></p>
+<p>打印该defered对象：<br><img src="http://oi28tswuq.bkt.clouddn.com/images/defered.png" alt=""><br>可以看到它有3个方法：resolve，reject，notify，分别对应于接受、拒绝、通知。还有一个promise属性，它的值就是一个基本的promise对象，主要用来返回。比如上面的例子，我可以这样写：<br>server.js如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">.factory(&apos;userService&apos;, [&apos;$http&apos;, &apos;$q&apos;, function ($http, $q) &#123;</div><div class="line"></div><div class="line">        var userService = &#123;&#125;;   // 返回的服务</div><div class="line"></div><div class="line">        this.urlForRandomUser = &quot;https://randomuser.me/api/&quot;;</div><div class="line"></div><div class="line">        var that = this; // 获取当前作用域，下面要用到</div><div class="line">        userService.getRandomUser = function () &#123;</div><div class="line"></div><div class="line">            var defered = $q.defer();</div><div class="line"></div><div class="line">            $http.get(that.urlForRandomUser)</div><div class="line">                .success(function (data) &#123;</div><div class="line">                    defered.resolve(data.results[0]);</div><div class="line">                &#125;)</div><div class="line">                .error(function (err) &#123;</div><div class="line">                    defered.reject(err);</div><div class="line">                &#125;);</div><div class="line">            return defered.promise; // 把defered对象中的promise对象返回出来</div><div class="line">        &#125;;</div></pre></td></tr></table></figure></p>
+<p>controller.js如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">.controller(&apos;firstController&apos;, [&apos;$scope&apos;, &apos;userService&apos;, function ($scope, user) &#123;</div><div class="line"> //采用数组的方式可以防止压缩变量名称改变导致的问题，此处的变量user就代表userService.当然user也可以换成其他变量比如a,b,c等等，无论换成哪个变量，最终他都代表userService。当然要是不压缩代码的话可以直接注入userService服务，使用的时候是这个样子的：userService.getRandomUser();</div><div class="line">        $scope.getUser = function () &#123;</div><div class="line"></div><div class="line">            function success(data) &#123;</div><div class="line">                var str = angular.toJson(data, true);   // 用angular的格式化json的方法，更为清晰</div><div class="line">                $scope.result = str;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            function error(err) &#123;</div><div class="line">                $scope.result = err;</div><div class="line">                alert(&apos;error occured!\n&apos; + err);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            // 注意这里不能用success或error函数，用then就好,defered的promise是基本的promise对象，并没有success和error函数，所以要用then来执行回调。</div><div class="line">            user.getRandomUser().then(success, error);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;])</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/10/23/shejimoshi/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          你应了解的4种JS设计模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/14/life-yinian/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">意念如何影响我们的身体，不可思议！</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2017 前端在路上
+      </div>
+        <div class="footer-right">
+          <a href="http://webywx.com/" target="_blank">webywx</a>  Theme <a href="https://yanwenxi.site" target="_blank">前端在路上</a> by Scorpio
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
