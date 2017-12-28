@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>深入理解闭包 | 闫文喜的个人前端博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="闭包定义：当函数可以记住并访问所在的词法作用域时， 就产生了闭包， 即使函数是在当前词法作用域之外执行。12345678function foo() &amp;#123;var a = 2;function bar() &amp;#123;console.log( a ); // 2&amp;#125;bar();//基于词法作用域的查找规则， 函数bar() 可以访问外部作用域中的变量 a&amp;#125; foo();
+这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解闭包">
+<meta property="og:url" content="http://yoursite.com/2017/02/06/deepclosure/index.html">
+<meta property="og:site_name" content="闫文喜的个人前端博客">
+<meta property="og:description" content="闭包定义：当函数可以记住并访问所在的词法作用域时， 就产生了闭包， 即使函数是在当前词法作用域之外执行。12345678function foo() &amp;#123;var a = 2;function bar() &amp;#123;console.log( a ); // 2&amp;#125;bar();//基于词法作用域的查找规则， 函数bar() 可以访问外部作用域中的变量 a&amp;#125; foo();
+这">
+<meta property="og:updated_time" content="2017-02-08T10:16:54.428Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入理解闭包">
+<meta name="twitter:description" content="闭包定义：当函数可以记住并访问所在的词法作用域时， 就产生了闭包， 即使函数是在当前词法作用域之外执行。12345678function foo() &amp;#123;var a = 2;function bar() &amp;#123;console.log( a ); // 2&amp;#125;bar();//基于词法作用域的查找规则， 函数bar() 可以访问外部作用域中的变量 a&amp;#125; foo();
+这">
+  
+    <link rel="alternative" href="/atom.xml" title="闫文喜的个人前端博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">前端在路上</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+					        
+								<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Benchmark-jsPerf/" style="font-size: 10px;">Benchmark jsPerf</a> <a href="/tags/ES6、promise/" style="font-size: 10px;">ES6、promise</a> <a href="/tags/H5-移动端优化/" style="font-size: 10px;">H5 移动端优化</a> <a href="/tags/H5、bug/" style="font-size: 10px;">H5、bug</a> <a href="/tags/JS设计模式-设计模式/" style="font-size: 10px;">JS设计模式 设计模式</a> <a href="/tags/Jenkins-CI/" style="font-size: 10px;">Jenkins CI</a> <a href="/tags/Lodash/" style="font-size: 10px;">Lodash</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angular-http-q-promise/" style="font-size: 10px;">angular $http $q promise</a> <a href="/tags/angular-q-promise/" style="font-size: 10px;">angular $q promise</a> <a href="/tags/angular-decorator/" style="font-size: 10px;">angular decorator</a> <a href="/tags/angular-filter/" style="font-size: 10px;">angular filter</a> <a href="/tags/angular-服务/" style="font-size: 10px;">angular 服务</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/angular、-http/" style="font-size: 10px;">angular、$http</a> <a href="/tags/angular、Karma/" style="font-size: 10px;">angular、Karma</a> <a href="/tags/angular、directive/" style="font-size: 10px;">angular、directive</a> <a href="/tags/angular、html5/" style="font-size: 10px;">angular、html5</a> <a href="/tags/angular、module、controller/" style="font-size: 10px;">angular、module、controller</a> <a href="/tags/angular、promise、-q、deferred/" style="font-size: 10px;">angular、promise、$q、deferred</a> <a href="/tags/angular、router/" style="font-size: 10px;">angular、router</a> <a href="/tags/angular、ui-router/" style="font-size: 10px;">angular、ui-router</a> <a href="/tags/angular、表达式、filter/" style="font-size: 10px;">angular、表达式、filter</a> <a href="/tags/app-跨平台/" style="font-size: 10px;">app,跨平台</a> <a href="/tags/aso/" style="font-size: 10px;">aso</a> <a href="/tags/blockchain/" style="font-size: 10px;">blockchain</a> <a href="/tags/debugger/" style="font-size: 10px;">debugger</a> <a href="/tags/es5-js/" style="font-size: 10px;">es5 js</a> <a href="/tags/fit/" style="font-size: 10px;">fit</a> <a href="/tags/flex-css/" style="font-size: 10px;">flex css</a> <a href="/tags/git-github/" style="font-size: 10px;">git github</a> <a href="/tags/h5-webworkers/" style="font-size: 10px;">h5 webworkers</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/javascript、object-oriented、继承/" style="font-size: 10px;">javascript、object-oriented、继承</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/js-Array/" style="font-size: 10px;">js Array</a> <a href="/tags/js-Higher-order-function/" style="font-size: 10px;">js Higher-order-function</a> <a href="/tags/js-closure/" style="font-size: 10px;">js closure</a> <a href="/tags/js-lodash/" style="font-size: 10px;">js lodash</a> <a href="/tags/js-object/" style="font-size: 10px;">js object</a> <a href="/tags/js-scope/" style="font-size: 10px;">js scope</a> <a href="/tags/js-sea-js-模块化/" style="font-size: 10px;">js sea.js 模块化</a> <a href="/tags/js-this/" style="font-size: 10px;">js this</a> <a href="/tags/js-性能调试/" style="font-size: 10px;">js 性能调试</a> <a href="/tags/js-柯里化/" style="font-size: 10px;">js 柯里化</a> <a href="/tags/js-纯函数/" style="font-size: 10px;">js 纯函数</a> <a href="/tags/js、变态题/" style="font-size: 10px;">js、变态题</a> <a href="/tags/js、设计模式/" style="font-size: 10px;">js、设计模式</a> <a href="/tags/js、跨域、document-domain/" style="font-size: 10px;">js、跨域、document.domain</a> <a href="/tags/js模块化、AMD、CMD、CommonJs/" style="font-size: 10px;">js模块化、AMD、CMD、CommonJs</a> <a href="/tags/js继承/" style="font-size: 12px;">js继承</a> <a href="/tags/life、意念/" style="font-size: 10px;">life、意念</a> <a href="/tags/lodash-chain/" style="font-size: 10px;">lodash chain</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoDB-数据库/" style="font-size: 10px;">mongoDB 数据库</a> <a href="/tags/mvp/" style="font-size: 10px;">mvp</a> <a href="/tags/node/" style="font-size: 12px;">node</a> <a href="/tags/node-debug/" style="font-size: 10px;">node debug</a> <a href="/tags/node-wechat/" style="font-size: 18px;">node wechat</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/rap/" style="font-size: 16px;">rap</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/react-ant-design/" style="font-size: 10px;">react ant-design</a> <a href="/tags/seo/" style="font-size: 18px;">seo</a> <a href="/tags/seo-新闻源/" style="font-size: 10px;">seo 新闻源</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/web-交互/" style="font-size: 10px;">web 交互</a> <a href="/tags/web、前端/" style="font-size: 10px;">web、前端</a> <a href="/tags/web、性能优化/" style="font-size: 10px;">web、性能优化</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/wechat-webstorm/" style="font-size: 10px;">wechat webstorm</a> <a href="/tags/win10、linux/" style="font-size: 10px;">win10、linux</a> <a href="/tags/window-history-html5/" style="font-size: 10px;">window.history html5</a> <a href="/tags/wxapp/" style="font-size: 14px;">wxapp</a> <a href="/tags/yarn-npm/" style="font-size: 10px;">yarn npm</a> <a href="/tags/人生/" style="font-size: 10px;">人生</a> <a href="/tags/前后端分享/" style="font-size: 10px;">前后端分享</a> <a href="/tags/前端脚手架/" style="font-size: 10px;">前端脚手架</a> <a href="/tags/建站-seo/" style="font-size: 10px;">建站 seo</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/生活/" style="font-size: 20px;">生活</a> <a href="/tags/移动端、fixed/" style="font-size: 10px;">移动端、fixed</a> <a href="/tags/解构赋值-es6/" style="font-size: 10px;">解构赋值 es6</a> <a href="/tags/跨域、postMessage、html5/" style="font-size: 10px;">跨域、postMessage、html5</a> <a href="/tags/路由-html5/" style="font-size: 10px;">路由 html5</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.webywx.com/">前端博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.yanwenxi.site/">web小站</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">前端在路上</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">前端在路上</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+			        
+						<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-deepclosure" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/02/06/deepclosure/" class="article-date">
+  	<time datetime="2017-02-06T09:32:12.000Z" itemprop="datePublished">2017-02-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深入理解闭包
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js-closure/">js closure</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>闭包定义：当函数可以记住并访问所在的词法作用域时， 就产生了闭包， 即使函数是在当前词法作用域之外执行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function foo() &#123;</div><div class="line">var a = 2;</div><div class="line">function bar() &#123;</div><div class="line">console.log( a ); // 2</div><div class="line">&#125;</div><div class="line">bar();//基于词法作用域的查找规则， 函数bar() 可以访问外部作用域中的变量 a</div><div class="line">&#125; </div><div class="line">foo();</div></pre></td></tr></table></figure></p>
+<p>这是真正意义上的闭包吗？技术上来讲，也许是。但根据前面的定义，确切地说并不是。最准确地用来解释bar() 对 a 的引用的方法是词法作用域的查找规则， 而这些规则只是闭包的一部分。（ 但却是非常重要的一部分！） 。由于看上去 foo() 的内容不会再被使用， 所以引擎很自然地会考虑对其进行回收。foo()执行完，由于浏览器引擎的垃圾回收机制，foo函数的作用域都会被销毁。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function foo() &#123;</div><div class="line">var a = 2;</div><div class="line">function bar() &#123;</div><div class="line">console.log( a );</div><div class="line">&#125;</div><div class="line">return bar;</div><div class="line">&#125;</div><div class="line">var baz = foo();</div><div class="line">baz(); // 2 —— 这才是闭包</div></pre></td></tr></table></figure></p>
+<p>函数 bar() 的词法作用域能够访问 foo() 的内部作用域。 然后将 bar() 函数本身当作一个值类型进行传递。 在这个例子中， 我们将 bar 所引用的函数对象本身当作返回值。在 foo() 执行后， 其返回值（ 也就是内部的 bar() 函数） 赋值给变量 baz 并调用 baz()， 实际上只是通过不同的标识符引用调用了内部的函数 bar()。 但是在这个例子中，bar()在自己定义的词法作用域以外的地方执行。</p>
+<p>在 foo() 执行后， 通常会期待 foo() 的整个内部作用域都被销毁， 因为引擎有垃圾回收器用来释放不再使用的内存空间。 而闭包的“ 神奇” 之处正是可以阻止这件事情的发生。在此处事实上foo内部作用域依然存在， 因此没有被回收。 谁在使用这个内部作用域？ 原来是 bar() 本身在使用。拜 bar() 所声明的位置所赐， 它拥有涵盖 foo() 内部作用域的闭包，使得该作用域能够一直存活， 以供 bar() 在之后任何时间进行引用。bar() 依然持有对该作用域的引用， 而这个引用就叫作闭包。</p>
+<p> 这个函数在定义时的词法作用域以外的地方被调用。 闭包使得函数可以继续访问定义时的词法作用域。<br> 当然， 无论使用何种方式对函数类型的值进行传递， 当函数在别处被调用时都可以观察到闭包。<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">function foo() &#123;</div><div class="line">var a = 2;</div><div class="line">function baz() &#123;</div><div class="line">console.log( a ); // 2</div><div class="line">&#125; </div><div class="line">bar( baz );</div><div class="line">&#125;</div><div class="line">function bar(fn) &#123;</div><div class="line">fn(); // 快看呀， 这就是闭包！</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>把内部函数 baz 传递给 bar， 当调用这个内部函数时（ 现在叫作 fn）， 它涵盖的 foo() 内部作用域的闭包就可以观察到了， 因为它能够访问 a。传递函数当然也可以是间接的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var fn;</div><div class="line">function foo() &#123;</div><div class="line">var a = 2;</div><div class="line">function baz() &#123;</div><div class="line">console.log( a );</div><div class="line">&#125; </div><div class="line">fn = baz; // 将 baz 分配给全局变量</div><div class="line">&#125;</div><div class="line">function bar() &#123;</div><div class="line">fn(); // 妈妈快看呀， 这就是闭包！</div><div class="line">&#125; </div><div class="line">foo();</div><div class="line">bar(); // 2</div></pre></td></tr></table></figure></p>
+<p>无论通过何种手段将内部函数传递到所在的词法作用域以外， 它都会持有对原始定义作用域的引用， 无论在何处执行这个函数都会使用闭包。</p>
+<h4 id="循环和闭包"><a href="#循环和闭包" class="headerlink" title="循环和闭包"></a>循环和闭包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">for (var i=1; i&lt;=5; i++) &#123;</div><div class="line">setTimeout( function timer() &#123;</div><div class="line">console.log( i );</div><div class="line">&#125;, i*1000 );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上这段代码在运行时会以每秒一次的频率输出五次 6。（在定时器还没有执行完的时候，i的值已经是6了，因为定时器是异步的，for循环是同步的，执行速度可以忽略不记）</p>
+<p>正常情况下， 我们对这段代码行为的预期是分别输出数字 1~5， 每秒一次， 每次一个，那该如何做呢？可以利用闭包的特点来实现。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">for (var i=1; i&lt;=5; i++) &#123;</div><div class="line">(function() &#123;</div><div class="line">var j = i;</div><div class="line">setTimeout( function timer() &#123;</div><div class="line">console.log( j );</div><div class="line">&#125;, j*1000 );</div><div class="line">&#125;)();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以对上面代码进行一些改进：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">for (var i=1; i&lt;=5; i++) &#123;</div><div class="line">(function(j) &#123;</div><div class="line">setTimeout( function timer() &#123;</div><div class="line">console.log( j );</div><div class="line">&#125;, j*1000 );</div><div class="line">&#125;)( i );</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在迭代内使用 IIFE 会为每个迭代都生成一个新的作用域， 使得延迟函数的回调可以将新的作用域封闭在每个迭代内部， 每个迭代中都会含有一个具有正确值的变量供我们访问。</p>
+<font color="red">也可以用块作用域来实现</font>
+
+<p>使用 IIFE 在每次迭代时都创建一个新的作用域。 换句话说， 每次迭代我们都需要一个块作用域。let 可以用来劫持块作用域， 并且在这个块作用域中声明一个变量。本质上这是将一个块转换成一个可以被关闭的作用域。 因此， 下面这些看起来很酷的代码就可以正常运行了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">for (var i=1; i&lt;=5; i++) &#123;</div><div class="line">let j = i; // 是的， 闭包的块作用域！</div><div class="line">setTimeout( function timer() &#123;</div><div class="line">console.log( j );</div><div class="line">&#125;, j*1000 );</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>虽然实现了，但是不是最优的，for 循环头部的 let 声明还会有一个特殊的行为。 这个行为指出变量在循环过程中不止被声明一次， 每次迭代都会声明。 随后的每个迭代都会使用上一个迭代结束时的值来初始化这个变量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">for (let i=1; i&lt;=5; i++) &#123;</div><div class="line">setTimeout( function timer() &#123;</div><div class="line">console.log( i );</div><div class="line">&#125;, i*1000 );</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p> 块作用域和闭包联手便可天下无敌。 有了此功能你就可以成为一名快乐的 JavaScript 程序员了。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/02/07/flexintroduction/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          学习flex布局
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/06/wxapp-online/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">简易电商类小程序开发教程</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2017 前端在路上
+      </div>
+        <div class="footer-right">
+          <a href="http://webywx.com/" target="_blank">webywx</a>  Theme <a href="https://yanwenxi.site" target="_blank">前端在路上</a> by Scorpio
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

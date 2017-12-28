@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>微信小程序简单介绍 | 闫文喜的个人前端博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在语言方面，看上去小程序几乎重新定义了一套标准。但是实际上，它们与「前端三件套」 ——HTML、 CSS 和 JavaScript——差不太多。
+对比一下小程序开发语言和「前端三件套」有什么异同点：一、 HTML 与 WXML：两者差异比较大，如果之前没有接触过Android 开发，可能会觉得有些头疼。事实上， WXML 更像是 Android 开发中的界面 XML ᧿述文件，更适合于程序界面的构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序简单介绍">
+<meta property="og:url" content="http://yoursite.com/2017/02/06/wxappintroduction/index.html">
+<meta property="og:site_name" content="闫文喜的个人前端博客">
+<meta property="og:description" content="在语言方面，看上去小程序几乎重新定义了一套标准。但是实际上，它们与「前端三件套」 ——HTML、 CSS 和 JavaScript——差不太多。
+对比一下小程序开发语言和「前端三件套」有什么异同点：一、 HTML 与 WXML：两者差异比较大，如果之前没有接触过Android 开发，可能会觉得有些头疼。事实上， WXML 更像是 Android 开发中的界面 XML ᧿述文件，更适合于程序界面的构">
+<meta property="og:updated_time" content="2017-02-06T07:44:12.612Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信小程序简单介绍">
+<meta name="twitter:description" content="在语言方面，看上去小程序几乎重新定义了一套标准。但是实际上，它们与「前端三件套」 ——HTML、 CSS 和 JavaScript——差不太多。
+对比一下小程序开发语言和「前端三件套」有什么异同点：一、 HTML 与 WXML：两者差异比较大，如果之前没有接触过Android 开发，可能会觉得有些头疼。事实上， WXML 更像是 Android 开发中的界面 XML ᧿述文件，更适合于程序界面的构">
+  
+    <link rel="alternative" href="/atom.xml" title="闫文喜的个人前端博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">前端在路上</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+					        
+								<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Benchmark-jsPerf/" style="font-size: 10px;">Benchmark jsPerf</a> <a href="/tags/ES6、promise/" style="font-size: 10px;">ES6、promise</a> <a href="/tags/H5-移动端优化/" style="font-size: 10px;">H5 移动端优化</a> <a href="/tags/H5、bug/" style="font-size: 10px;">H5、bug</a> <a href="/tags/JS设计模式-设计模式/" style="font-size: 10px;">JS设计模式 设计模式</a> <a href="/tags/Jenkins-CI/" style="font-size: 10px;">Jenkins CI</a> <a href="/tags/Lodash/" style="font-size: 10px;">Lodash</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angular-http-q-promise/" style="font-size: 10px;">angular $http $q promise</a> <a href="/tags/angular-q-promise/" style="font-size: 10px;">angular $q promise</a> <a href="/tags/angular-decorator/" style="font-size: 10px;">angular decorator</a> <a href="/tags/angular-filter/" style="font-size: 10px;">angular filter</a> <a href="/tags/angular-服务/" style="font-size: 10px;">angular 服务</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/angular、-http/" style="font-size: 10px;">angular、$http</a> <a href="/tags/angular、Karma/" style="font-size: 10px;">angular、Karma</a> <a href="/tags/angular、directive/" style="font-size: 10px;">angular、directive</a> <a href="/tags/angular、html5/" style="font-size: 10px;">angular、html5</a> <a href="/tags/angular、module、controller/" style="font-size: 10px;">angular、module、controller</a> <a href="/tags/angular、promise、-q、deferred/" style="font-size: 10px;">angular、promise、$q、deferred</a> <a href="/tags/angular、router/" style="font-size: 10px;">angular、router</a> <a href="/tags/angular、ui-router/" style="font-size: 10px;">angular、ui-router</a> <a href="/tags/angular、表达式、filter/" style="font-size: 10px;">angular、表达式、filter</a> <a href="/tags/app-跨平台/" style="font-size: 10px;">app,跨平台</a> <a href="/tags/aso/" style="font-size: 10px;">aso</a> <a href="/tags/blockchain/" style="font-size: 10px;">blockchain</a> <a href="/tags/debugger/" style="font-size: 10px;">debugger</a> <a href="/tags/es5-js/" style="font-size: 10px;">es5 js</a> <a href="/tags/fit/" style="font-size: 10px;">fit</a> <a href="/tags/flex-css/" style="font-size: 10px;">flex css</a> <a href="/tags/git-github/" style="font-size: 10px;">git github</a> <a href="/tags/h5-webworkers/" style="font-size: 10px;">h5 webworkers</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/javascript、object-oriented、继承/" style="font-size: 10px;">javascript、object-oriented、继承</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/js-Array/" style="font-size: 10px;">js Array</a> <a href="/tags/js-Higher-order-function/" style="font-size: 10px;">js Higher-order-function</a> <a href="/tags/js-closure/" style="font-size: 10px;">js closure</a> <a href="/tags/js-lodash/" style="font-size: 10px;">js lodash</a> <a href="/tags/js-object/" style="font-size: 10px;">js object</a> <a href="/tags/js-scope/" style="font-size: 10px;">js scope</a> <a href="/tags/js-sea-js-模块化/" style="font-size: 10px;">js sea.js 模块化</a> <a href="/tags/js-this/" style="font-size: 10px;">js this</a> <a href="/tags/js-性能调试/" style="font-size: 10px;">js 性能调试</a> <a href="/tags/js-柯里化/" style="font-size: 10px;">js 柯里化</a> <a href="/tags/js-纯函数/" style="font-size: 10px;">js 纯函数</a> <a href="/tags/js、变态题/" style="font-size: 10px;">js、变态题</a> <a href="/tags/js、设计模式/" style="font-size: 10px;">js、设计模式</a> <a href="/tags/js、跨域、document-domain/" style="font-size: 10px;">js、跨域、document.domain</a> <a href="/tags/js模块化、AMD、CMD、CommonJs/" style="font-size: 10px;">js模块化、AMD、CMD、CommonJs</a> <a href="/tags/js继承/" style="font-size: 12px;">js继承</a> <a href="/tags/life、意念/" style="font-size: 10px;">life、意念</a> <a href="/tags/lodash-chain/" style="font-size: 10px;">lodash chain</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoDB-数据库/" style="font-size: 10px;">mongoDB 数据库</a> <a href="/tags/mvp/" style="font-size: 10px;">mvp</a> <a href="/tags/node/" style="font-size: 12px;">node</a> <a href="/tags/node-debug/" style="font-size: 10px;">node debug</a> <a href="/tags/node-wechat/" style="font-size: 18px;">node wechat</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/rap/" style="font-size: 16px;">rap</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/react-ant-design/" style="font-size: 10px;">react ant-design</a> <a href="/tags/seo/" style="font-size: 18px;">seo</a> <a href="/tags/seo-新闻源/" style="font-size: 10px;">seo 新闻源</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/web-交互/" style="font-size: 10px;">web 交互</a> <a href="/tags/web、前端/" style="font-size: 10px;">web、前端</a> <a href="/tags/web、性能优化/" style="font-size: 10px;">web、性能优化</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/wechat-webstorm/" style="font-size: 10px;">wechat webstorm</a> <a href="/tags/win10、linux/" style="font-size: 10px;">win10、linux</a> <a href="/tags/window-history-html5/" style="font-size: 10px;">window.history html5</a> <a href="/tags/wxapp/" style="font-size: 14px;">wxapp</a> <a href="/tags/yarn-npm/" style="font-size: 10px;">yarn npm</a> <a href="/tags/人生/" style="font-size: 10px;">人生</a> <a href="/tags/前后端分享/" style="font-size: 10px;">前后端分享</a> <a href="/tags/前端脚手架/" style="font-size: 10px;">前端脚手架</a> <a href="/tags/建站-seo/" style="font-size: 10px;">建站 seo</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/生活/" style="font-size: 20px;">生活</a> <a href="/tags/移动端、fixed/" style="font-size: 10px;">移动端、fixed</a> <a href="/tags/解构赋值-es6/" style="font-size: 10px;">解构赋值 es6</a> <a href="/tags/跨域、postMessage、html5/" style="font-size: 10px;">跨域、postMessage、html5</a> <a href="/tags/路由-html5/" style="font-size: 10px;">路由 html5</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.webywx.com/">前端博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.yanwenxi.site/">web小站</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">前端在路上</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">前端在路上</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+			        
+						<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-wxappintroduction" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/02/06/wxappintroduction/" class="article-date">
+  	<time datetime="2017-02-06T02:38:24.000Z" itemprop="datePublished">2017-02-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      微信小程序简单介绍
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wxapp/">wxapp</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在语言方面，看上去小程序几乎重新定义了一套标准。但是实际上，它们与「前端三件套」 ——HTML、 CSS 和 JavaScript——差不太多。</p>
+<h4 id="对比一下小程序开发语言和「前端三件套」有什么异同点："><a href="#对比一下小程序开发语言和「前端三件套」有什么异同点：" class="headerlink" title="对比一下小程序开发语言和「前端三件套」有什么异同点："></a>对比一下小程序开发语言和「前端三件套」有什么异同点：</h4><p>一、 HTML 与 WXML：两者差异比较大，如果之前没有接触过Android 开发，可能会觉得有些头疼。事实上， WXML 更像是 Android 开发中的界面 XML ᧿述文件，更适合于程序界<br>面的构建；而 HTML 则倾向于文章的展示（这与 HTML 的历史有关），以及互联网页面的构建。<br>二、 WXSS 与 CSS：两者在语言上几乎没有差别，可以直接通用。<br>三、 JS 文件：小程序的 JS 文件与前端开发使用的 JS 几乎没有区别，小程序的 JS 新增了微信的一些 API 接口，并去除了一些不必要的功能（如 DOM）。</p>
+<p>小程序开发需要学习的语言主要有：</p>
+<ol>
+<li>微信标记语言  （weixin marked language,   wxml）</li>
+<li>微信样式表（weixin style sheet, wxss ）</li>
+<li>javascript</li>
+</ol>
+<p>小程序的界面并非是一个网页，而是一个应用界面，以往网页前端常见的<code>&lt;div&gt;、&lt;a&gt;</code>等标签都不复存在，网页前端开发人员需要适应wxml的逻辑和写法。</p>
+<p>小程序使用了rpx（responsive pixel）作为尺寸单位（保证不同分辨率设备的元素正常显示），开发人员需要了解rpx与各种长度单位的换算比例。</p>
+<h4 id="为什么需要动态单位和-rpx？"><a href="#为什么需要动态单位和-rpx？" class="headerlink" title="为什么需要动态单位和 rpx？"></a>为什么需要动态单位和 rpx？</h4><p>我们都知道，小程序是一个跨系统的平台。这就意味着，小程序会在不同的设备上运行，但不同设备的分辨率会有差异。<br>在小程序中，如何在分辨率不同的设备上保证视觉元素的正常显示？这就需要名为 rpx 的动态尺寸单位。</p>
+<p>在显示屏上，每一个画面都是由无数的点阵形成的。这个点阵中，每一个点叫做像素，就是 pixel（缩写为 px）。这对于很多人来说都是常识。</p>
+<p>但是，随着 Retina 屏幕（即「视网膜屏」）的推出和高分屏的普及，1 px 所能代表的实际长度并非是一成不变的。对于跨平台、跨设备的应用来说，单纯使用 px 并不能满足需要。因为，这很难保证小程序的元素，能在不同设备上正常显示——同样 px 尺寸的元素，在高分屏上显示会明显要比在低分屏显得更小。因此，我们需要一个动态的长度单位。这个单位通过对不同屏幕的分辨率进行调整和适配，保证相同元素在不同屏幕上的展示是正常的。</p>
+<font color="red" face="“黑体”">苹果和 Google 对此都有相应的措施：</font>
+
+<p>1.由于苹果对高分屏的优化良好，所以在 iOS 上，代码中的 1 px 所代表的实际像素数会根据不同设备动态调整，开发者不需要进行二次换算。<br>2.由于 Android 设备碎片化严重，Google 不得不建立了一个新的名叫「density-independent pixel（密度无关像素，缩写为 dp）」的尺寸单位，以适应不同分辨率屏幕的尺寸换算。</p>
+<p>微信也为小程序提供了一个动态单位解决方案：它就是 responsive pixel（动态像素），简称 rpx。</p>
+<font color="red">Pixel与rpx、dp之间的换算</font>
+
+<p>动态单位与 px 换算的基本概念是：选择一个分辨率作为基准，在基准分辨率中，一个像素点显示有多长，在其他屏幕上会显示同样长度。<br>例如，dp 与 px 换算公式是：dp = px <em> (目标设备 dpi 分辨率 / 160)。<br>但微信小程序的 rpx 换算方式，会与其他动态单位的换算方法有些出入。微信官方提供的换算方式更「傻瓜」一些：rpx = px </em> (目标设备宽 px 值 / 750)。</p>
+<font color="red" face="“黑体”">例如：</font>
+
+<p>目标设备的宽度如果是 375px，按照 750rpx 进行换算，则等于 1rpx = 0.5px<br>目标设备的宽度如果是 1125px，换算后 1rpx = 1.5px</p>
+<p>没错，如果将微信小程序放到平板电脑上运行，屏幕的宽度 px 值有可能会变化（横竖屏、分屏模式等等）。这时候，再以宽度为基准，就会出现元素显示不正确的问题。从这一点可以看出，微信团队目前并不希望将小程序扩展到手机以外的设备中。因此，开发者暂时可以专注于提高小程序在手机上的体验，无需担心多尺寸屏幕带来的适配问题。</p>
+<font color="red" face="“黑体”">那能不能直接让 rpx 和 dp 进行互换呢？当然不能！</font>
+
+<p>dp 是以屏幕分辨率为基准的动态单位，而 rpx 是以长度为基准的动态单位。就像「米」和「平方厘米」不能互换一样，dp 和 rpx 两者也是不能直接进行互换的，除非微信官方将 rpx 设定为分辨率基准而非长度基准。</p>
+<h4 id="设计师该怎么做？"><a href="#设计师该怎么做？" class="headerlink" title="设计师该怎么做？"></a>设计师该怎么做？</h4><p>由于微信使用了 rpx 动态单位，设计稿的尺寸单位也推荐使用 rpx。</p>
+<p>那么问题来了，如果要改用 rpx 单位，以什么尺寸的屏幕作为设计稿标准会比较合适呢？</p>
+<p>在微信官方的文档中，我们看到下面这样一句话：</p>
+<p>在 iPhone 6 上，屏幕宽度为 375px，共有 750 个物理像素，则 750rpx = 375px = 750 物理像素，1rpx = 0.5px = 1 物理像素。</p>
+<p>开发微信小程序时设计师可以用 iPhone 6 作为视觉稿的标准。<br>也就是说，设计师在设计小程序时，可以这样做：<br>直接以 iPhone 6 的屏幕尺寸（375×667）用作视觉稿尺寸，1 px = 0.5 rpx；<br>以 1 px = 1 rpx 的标准，将设计稿尺寸设定为 750×1334。<br>在将设计稿转交给开发人员之前，设计师需要清楚地描述设计稿尺寸和单位换算标准等，以便开发人员快速实现界面效果。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/02/06/wxapp1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          微信小程序之开发文档解读
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/05/performancetest/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">性能测试与调优</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2017 前端在路上
+      </div>
+        <div class="footer-right">
+          <a href="http://webywx.com/" target="_blank">webywx</a>  Theme <a href="https://yanwenxi.site" target="_blank">前端在路上</a> by Scorpio
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
