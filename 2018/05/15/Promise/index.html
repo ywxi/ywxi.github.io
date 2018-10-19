@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>promise学习笔记 | 闫文喜的个人前端博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是promisePromise 是异步编程的一种解决方案，它有三种状态，分别是pending(进行中)、 resolved(已完成)、rejected(已失败)。 当Promsie的状态由pending转变成resolved或rejected时，会执行相应的方法，并且状态一旦改变，就无法再次改变状态，这也是Promise-承诺名字的由来。 ES6之前的promise使用较为成熟的第三方prom">
+<meta name="keywords" content="promise、es6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="promise学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/05/15/Promise/index.html">
+<meta property="og:site_name" content="闫文喜的个人前端博客">
+<meta property="og:description" content="什么是promisePromise 是异步编程的一种解决方案，它有三种状态，分别是pending(进行中)、 resolved(已完成)、rejected(已失败)。 当Promsie的状态由pending转变成resolved或rejected时，会执行相应的方法，并且状态一旦改变，就无法再次改变状态，这也是Promise-承诺名字的由来。 ES6之前的promise使用较为成熟的第三方prom">
+<meta property="og:locale" content="ch">
+<meta property="og:updated_time" content="2018-10-19T06:30:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="promise学习笔记">
+<meta name="twitter:description" content="什么是promisePromise 是异步编程的一种解决方案，它有三种状态，分别是pending(进行中)、 resolved(已完成)、rejected(已失败)。 当Promsie的状态由pending转变成resolved或rejected时，会执行相应的方法，并且状态一旦改变，就无法再次改变状态，这也是Promise-承诺名字的由来。 ES6之前的promise使用较为成熟的第三方prom">
+  
+    <link rel="alternative" href="/atom.xml" title="闫文喜的个人前端博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">前端在路上</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+					        
+								<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Benchmark-jsPerf/" style="font-size: 10px;">Benchmark jsPerf</a> <a href="/tags/ES6、promise/" style="font-size: 10px;">ES6、promise</a> <a href="/tags/H5-移动端优化/" style="font-size: 10px;">H5 移动端优化</a> <a href="/tags/H5、bug/" style="font-size: 10px;">H5、bug</a> <a href="/tags/JS设计模式-设计模式/" style="font-size: 10px;">JS设计模式 设计模式</a> <a href="/tags/Jenkins-CI/" style="font-size: 10px;">Jenkins CI</a> <a href="/tags/Lodash/" style="font-size: 10px;">Lodash</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angular-http-q-promise/" style="font-size: 10px;">angular $http $q promise</a> <a href="/tags/angular-q-promise/" style="font-size: 10px;">angular $q promise</a> <a href="/tags/angular-decorator/" style="font-size: 10px;">angular decorator</a> <a href="/tags/angular-filter/" style="font-size: 10px;">angular filter</a> <a href="/tags/angular-服务/" style="font-size: 10px;">angular 服务</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/angular、-http/" style="font-size: 10px;">angular、$http</a> <a href="/tags/angular、Karma/" style="font-size: 10px;">angular、Karma</a> <a href="/tags/angular、directive/" style="font-size: 10px;">angular、directive</a> <a href="/tags/angular、html5/" style="font-size: 10px;">angular、html5</a> <a href="/tags/angular、module、controller/" style="font-size: 10px;">angular、module、controller</a> <a href="/tags/angular、promise、-q、deferred/" style="font-size: 10px;">angular、promise、$q、deferred</a> <a href="/tags/angular、router/" style="font-size: 10px;">angular、router</a> <a href="/tags/angular、ui-router/" style="font-size: 10px;">angular、ui-router</a> <a href="/tags/angular、表达式、filter/" style="font-size: 10px;">angular、表达式、filter</a> <a href="/tags/app-跨平台/" style="font-size: 10px;">app,跨平台</a> <a href="/tags/aso/" style="font-size: 10px;">aso</a> <a href="/tags/blockchain/" style="font-size: 10px;">blockchain</a> <a href="/tags/css-1px/" style="font-size: 10px;">css 1px</a> <a href="/tags/debugger/" style="font-size: 10px;">debugger</a> <a href="/tags/es5-js/" style="font-size: 10px;">es5 js</a> <a href="/tags/fit/" style="font-size: 10px;">fit</a> <a href="/tags/flex-css/" style="font-size: 10px;">flex css</a> <a href="/tags/git-github/" style="font-size: 10px;">git github</a> <a href="/tags/h5-webworkers/" style="font-size: 10px;">h5 webworkers</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/javascript、object-oriented、继承/" style="font-size: 10px;">javascript、object-oriented、继承</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/js-Array/" style="font-size: 10px;">js Array</a> <a href="/tags/js-Higher-order-function/" style="font-size: 10px;">js Higher-order-function</a> <a href="/tags/js-closure/" style="font-size: 10px;">js closure</a> <a href="/tags/js-lodash/" style="font-size: 10px;">js lodash</a> <a href="/tags/js-object/" style="font-size: 10px;">js object</a> <a href="/tags/js-scope/" style="font-size: 10px;">js scope</a> <a href="/tags/js-sea-js-模块化/" style="font-size: 10px;">js sea.js 模块化</a> <a href="/tags/js-this/" style="font-size: 10px;">js this</a> <a href="/tags/js-性能调试/" style="font-size: 10px;">js 性能调试</a> <a href="/tags/js-柯里化/" style="font-size: 10px;">js 柯里化</a> <a href="/tags/js-纯函数/" style="font-size: 10px;">js 纯函数</a> <a href="/tags/js、变态题/" style="font-size: 10px;">js、变态题</a> <a href="/tags/js、设计模式/" style="font-size: 10px;">js、设计模式</a> <a href="/tags/js、跨域、document-domain/" style="font-size: 10px;">js、跨域、document.domain</a> <a href="/tags/js模块化、AMD、CMD、CommonJs/" style="font-size: 10px;">js模块化、AMD、CMD、CommonJs</a> <a href="/tags/js继承/" style="font-size: 10px;">js继承</a> <a href="/tags/life、意念/" style="font-size: 10px;">life、意念</a> <a href="/tags/lodash-chain/" style="font-size: 10px;">lodash chain</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoDB-数据库/" style="font-size: 10px;">mongoDB 数据库</a> <a href="/tags/mvp/" style="font-size: 10px;">mvp</a> <a href="/tags/node/" style="font-size: 12px;">node</a> <a href="/tags/node-debug/" style="font-size: 10px;">node debug</a> <a href="/tags/node-wechat/" style="font-size: 18px;">node wechat</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/promise、es6/" style="font-size: 10px;">promise、es6</a> <a href="/tags/rap/" style="font-size: 16px;">rap</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/react-ant-design/" style="font-size: 10px;">react ant-design</a> <a href="/tags/seo/" style="font-size: 18px;">seo</a> <a href="/tags/seo-新闻源/" style="font-size: 10px;">seo 新闻源</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/web-交互/" style="font-size: 10px;">web 交互</a> <a href="/tags/web、前端/" style="font-size: 10px;">web、前端</a> <a href="/tags/web、性能优化/" style="font-size: 10px;">web、性能优化</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/wechat-webstorm/" style="font-size: 10px;">wechat webstorm</a> <a href="/tags/win10、linux/" style="font-size: 10px;">win10、linux</a> <a href="/tags/window-history-html5/" style="font-size: 10px;">window.history html5</a> <a href="/tags/wxapp/" style="font-size: 14px;">wxapp</a> <a href="/tags/yarn-npm/" style="font-size: 10px;">yarn npm</a> <a href="/tags/人生/" style="font-size: 10px;">人生</a> <a href="/tags/前后端分享/" style="font-size: 10px;">前后端分享</a> <a href="/tags/前端脚手架/" style="font-size: 10px;">前端脚手架</a> <a href="/tags/占位以后改过来/" style="font-size: 10px;">占位以后改过来</a> <a href="/tags/建站-seo/" style="font-size: 10px;">建站 seo</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/我先占个地以后改/" style="font-size: 10px;">我先占个地以后改</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/生活/" style="font-size: 20px;">生活</a> <a href="/tags/移动端、fixed/" style="font-size: 10px;">移动端、fixed</a> <a href="/tags/解构赋值-es6/" style="font-size: 10px;">解构赋值 es6</a> <a href="/tags/跨域、postMessage、html5/" style="font-size: 10px;">跨域、postMessage、html5</a> <a href="/tags/路由-html5/" style="font-size: 10px;">路由 html5</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.webywx.com/">前端博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.yanwenxi.site/">web小站</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">前端在路上</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">前端在路上</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+			        
+						<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Promise" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/05/15/Promise/" class="article-date">
+  	<time datetime="2018-05-15T06:12:39.000Z" itemprop="datePublished">2018-05-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      promise学习笔记
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/promise、es6/">promise、es6</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="什么是promise"><a href="#什么是promise" class="headerlink" title="什么是promise"></a>什么是promise</h3><p>Promise 是异步编程的一种解决方案，它有三种状态，分别是pending(进行中)、</p>
+<p>resolved(已完成)、rejected(已失败)。</p>
+<p>当Promsie的状态由pending转变成resolved或rejected时，会执行相应的方法，并且状态一旦改变，就无法再次改变状态，这也是Promise-承诺名字的由来。</p>
+<h3 id="ES6之前的promise"><a href="#ES6之前的promise" class="headerlink" title="ES6之前的promise"></a>ES6之前的promise</h3><p>使用较为成熟的第三方promise库—<a href="http://bluebirdjs.com/docs/getting-started.html" target="_blank" rel="noopener">Bluebird</a>,它是实现promise标准库功能最全、速度最快的一个库。</p>
+<p>经典使用方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var Promise = require(&apos;./bluebird&apos;);</span><br><span class="line"></span><br><span class="line">var readFile = Promise.promisify(require(&quot;fs&quot;).readFile);</span><br><span class="line">readFile(&quot;1.txt&quot;, &quot;utf8&quot;).then(function(contents) &#123;</span><br><span class="line">    console.log(contents);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">var fs = Promise.promisifyAll(require(&quot;fs&quot;));</span><br><span class="line"></span><br><span class="line">fs.readFileAsync(&quot;1.txt&quot;, &quot;utf8&quot;).then(function (contents) &#123;</span><br><span class="line">    console.log(contents);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="ES6的promise-基本使用方法"><a href="#ES6的promise-基本使用方法" class="headerlink" title="ES6的promise 基本使用方法"></a>ES6的promise 基本使用方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let promise=new Promise((resolve,reject)=&gt;&#123;</span><br><span class="line">    if(success)&#123;</span><br><span class="line">        resolve(successData)//pending=&gt;resolved,参数传递给对应的回调方法</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        reject(failData) //pending=&gt;rejected,参数传递给对应的回调方法</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">注：实例化的Promsie对象会立即执行。</span><br></pre></td></tr></table></figure>
+<h3 id="then-和catch-方法"><a href="#then-和catch-方法" class="headerlink" title="then()和catch()方法"></a>then()和catch()方法</h3><p>Promise.prototype.then()是Promise原型链上的方法，它有两个参数(都是函数)，分别对应resolved的回调和rejected的回调</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">promise.then(</span><br><span class="line">    (successData) =&gt; &#123; console.log(&apos;我是成功的回调参数是successData&apos;) &#125;,</span><br><span class="line">    (failData) =&gt; &#123; console.log(&apos;我是失败的回调参数是failData&apos;) &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>.catch()也是原型链上的方法，作用是捕获Promise的错误，与then()的rejected回调作用几乎一致。但是由于Promise的抛错具有冒泡性质，能够不断传递，这样就能够在下一个catch()中统一处理这些错误。同时catch()也能够捕获then()中抛出的错误，所以建议不要使用then()的rejected回调，而是统一使用catch()来处理错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">promise.then(</span><br><span class="line">    () =&gt; &#123; console.log(&apos;this is success callback&apos;) &#125;</span><br><span class="line">).catch(</span><br><span class="line">    (err) =&gt; &#123; console.log(err) &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>同样，catch()中也可以抛出错误，由于抛出的错误会在下一个catch中被捕获处理，因此可以再添加catch()；</p>
+<p>当状态已经改变为resolved后，即使抛出错误，也不会触发then()的错误回调或者catch()方法；</p>
+<p>then() 和 catch() 都会返回一个新的Promise对象，可以链式调用；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">promise.then(</span><br><span class="line">    () =&gt; &#123; console.log(&apos;this is success callback&apos;) &#125;</span><br><span class="line">).catch(</span><br><span class="line">    (err) =&gt; &#123; console.log(err) &#125;</span><br><span class="line">).then(</span><br><span class="line">    ...</span><br><span class="line">).catch(</span><br><span class="line">    ...</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="Promise实例的异步方法和then-中返回promise有什么区别？"><a href="#Promise实例的异步方法和then-中返回promise有什么区别？" class="headerlink" title="Promise实例的异步方法和then()中返回promise有什么区别？"></a>Promise实例的异步方法和then()中返回promise有什么区别？</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// p1异步方法中返回p2</span><br><span class="line">let p1 = new Promise ( (resolve, reject) =&gt; &#123;</span><br><span class="line">    resolve(p2)</span><br><span class="line">&#125; )</span><br><span class="line">let p2 = new Promise ( ... )</span><br><span class="line"></span><br><span class="line">// then()中返回promise</span><br><span class="line">let p3 = new Promise ( (resolve, reject) =&gt; &#123;</span><br><span class="line">    resolve()</span><br><span class="line">&#125; )</span><br><span class="line">let p4 = new Promise ( ... )</span><br><span class="line">p3.then(</span><br><span class="line">    () =&gt; return p4</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p><strong>p1异步方法中返回p2</strong></p>
+<p>p1的状态取决于p2，如果p2为pending，p1将等待p2状态的改变，p2的状态一旦改变，p1将会立即执行自己对应的回调，即then()中的方法针对的依然是p1</p>
+<p><strong>then()中返回promise</strong></p>
+<p>由于then()本身就会返回一个新的promise，所以后一个then()针对的永远是一个新的promise，但是像上面代码中我们自己手动返回p4，那么我们就可以在返回的promise中再次通过 resolve() 和 reject() 来改变状态</p>
+<h3 id="Promise-resolve-和Promise-reject"><a href="#Promise-resolve-和Promise-reject" class="headerlink" title="Promise.resolve()和Promise.reject()"></a>Promise.resolve()和Promise.reject()</h3><p>用来包装一个现有对象，将其转变为Promise对象，但Promise.resolve()会根据参数情况返回不同的Promise：</p>
+<p><strong>参数是Promise</strong>：原样返回<br><strong>参数带有then方法</strong>：转换为Promise后立即执行then方法<br><strong>参数不带then方法、不是对象或没有参数</strong>：返回resolved状态的Promise</p>
+<p>Promise.reject()会直接返回rejected状态的Promise;</p>
+<h3 id="其他api"><a href="#其他api" class="headerlink" title="其他api"></a>其他api</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Promise.all([promise1,promise2,promise3,promise4....])</span><br><span class="line">Promise.race([promise1,promise2,promise3,promise4....])</span><br><span class="line">Promise.done()/Promise.finally()</span><br><span class="line">//上述这几个api根据api名字自己脑补吧，娃哈哈。。。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//学完了练一练</span><br><span class="line">一、const promise = new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">    console.log(1)</span><br><span class="line">    resolve()</span><br><span class="line">    console.log(2)</span><br><span class="line">&#125;)</span><br><span class="line">promise.then(() =&gt; &#123;</span><br><span class="line">    console.log(3)</span><br><span class="line">&#125;)</span><br><span class="line">    console.log(4)</span><br><span class="line">Promise构造函数里中的代码是同步执行的，但是then方法是异步方法，then方法需要等到resolve函数执行时才能执行，所以结果是1、2、4、3.</span><br><span class="line"></span><br><span class="line">二、Promise.resolve(1).then(res=&gt;&#123;</span><br><span class="line">    console.log(res);</span><br><span class="line">    return 2;</span><br><span class="line">&#125;).catch(err=&gt;&#123;</span><br><span class="line">    return 3;</span><br><span class="line">&#125;).then(res=&gt;&#123;</span><br><span class="line">    console.log(res);</span><br><span class="line">&#125;)</span><br><span class="line">resolve(1)首先会执行第一个then函数，输出1.然后在函数中返回2，因为resolve是成功的状态，所以后面的catch不会执行，而是直接执行第二个then函数，输出2.所以结果是1、2.</span><br></pre></td></tr></table></figure>
+<h3 id="Promise原理"><a href="#Promise原理" class="headerlink" title="Promise原理"></a>Promise原理</h3><p>在Promise的内部有一个状态管理器，它有三种状态：pending/fulfilled/rejected</p>
+<p>1、promise对象初始化状态为pending。(new Promise时)</p>
+<p>2、当调用resolve(data),状态pending=&gt;fulfilled</p>
+<p>3、当调用resolve(err),状态pending=&gt;rejected</p>
+<p>状态由pending变fulfilled/rejected时，一旦状态变了就不能再改变了。当状态变为fulfilled时，then的成功回调函数会被调用，并接收传来的参数data，进而进行操作，rejected则反之。promise.then方法每次执行完后，都会返回一个新的promise对象所以可以链式调用(不管是resolve还是reject).</p>
+<p>举个例子来模拟Promise:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var fs=require(&apos;fs&apos;);</span><br><span class="line">var Promise = require(&apos;./Promise.js&apos;);</span><br><span class="line">var promise = new Promise(function (resolve,reject) &#123;</span><br><span class="line">    fs.readFile(&apos;1.txt&apos;,&apos;utf-8&apos;,function (err,data) &#123;</span><br><span class="line">        if(err)&#123;</span><br><span class="line">            reject(err);</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            resolve(data);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;);</span><br><span class="line">promise.then(function (data) &#123;</span><br><span class="line">    console.log(data);</span><br><span class="line">&#125;,function (err) &#123;</span><br><span class="line">    console.log(err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>用es5来模拟Promise</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function Promise(fn) &#123;</span><br><span class="line">   fn((data)=&gt;&#123;</span><br><span class="line">       this._success(data);</span><br><span class="line">   &#125;,(error)=&gt;&#123;</span><br><span class="line">       this._error(error);</span><br><span class="line">   &#125;);</span><br><span class="line">&#125;;</span><br><span class="line">Promise.prototype.then=function (onFul,onFail) &#123;</span><br><span class="line">    this._success=onFull;//</span><br><span class="line">    this._error=onFail;</span><br><span class="line">&#125;;</span><br><span class="line">Promise.prototype.resolve=function (data) &#123;</span><br><span class="line">    this._success(data);</span><br><span class="line">&#125;;</span><br><span class="line">Promise.prototype.reject=function (error) &#123;</span><br><span class="line">    this._error(error);</span><br><span class="line">&#125;;</span><br><span class="line">module.exports=Promise;</span><br></pre></td></tr></table></figure>
+<p>es6来模拟Promise</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class promise &#123;</span><br><span class="line">    constructor(fn)&#123;</span><br><span class="line">        fn((data)=&gt;&#123;</span><br><span class="line">            this._success(data);</span><br><span class="line">        &#125;,(error)=&gt;&#123;</span><br><span class="line">            this._error(error);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    resolve(data)&#123;</span><br><span class="line">        this._success(data);</span><br><span class="line">    &#125;</span><br><span class="line">    reject(err)&#123;</span><br><span class="line">        this._error(err)</span><br><span class="line">    &#125;</span><br><span class="line">    then(onFul,onFail)&#123;</span><br><span class="line">        this._success=onFul;</span><br><span class="line">        this._error=onFail;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/10/15/1px/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          移动端1px细线解决方案总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/15/Vue/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vue相关学习</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2018 前端在路上
+      </div>
+        <div class="footer-right">
+          <a href="http://webywx.com/" target="_blank">webywx</a>  Theme <a href="https://yanwenxi.site" target="_blank">前端在路上</a> by Scorpio
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
