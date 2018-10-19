@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>学习GraphQL | 闫文喜的个人前端博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="REST将会过时，而GraphQL则会长存一、为何要使用GraphQL?GraphQL 能够非常漂亮地解决三个重要的问题：  为了得到视图所需的数据，需要进行多轮的网络调用：借助 GraphQL，要获取所有的初始化数据，我们仅需一次到服务器的网络调用。要在 REST API 中达到相同的目的，我们需要引入非结构化的参数和条件，这是很难管理和扩展的。 客户端对服务端的依赖：借助 GraphQL，客户">
+<meta name="keywords" content="GraphQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习GraphQL">
+<meta property="og:url" content="http://yoursite.com/2018/10/15/GraphQL/index.html">
+<meta property="og:site_name" content="闫文喜的个人前端博客">
+<meta property="og:description" content="REST将会过时，而GraphQL则会长存一、为何要使用GraphQL?GraphQL 能够非常漂亮地解决三个重要的问题：  为了得到视图所需的数据，需要进行多轮的网络调用：借助 GraphQL，要获取所有的初始化数据，我们仅需一次到服务器的网络调用。要在 REST API 中达到相同的目的，我们需要引入非结构化的参数和条件，这是很难管理和扩展的。 客户端对服务端的依赖：借助 GraphQL，客户">
+<meta property="og:locale" content="ch">
+<meta property="og:updated_time" content="2018-10-19T08:38:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习GraphQL">
+<meta name="twitter:description" content="REST将会过时，而GraphQL则会长存一、为何要使用GraphQL?GraphQL 能够非常漂亮地解决三个重要的问题：  为了得到视图所需的数据，需要进行多轮的网络调用：借助 GraphQL，要获取所有的初始化数据，我们仅需一次到服务器的网络调用。要在 REST API 中达到相同的目的，我们需要引入非结构化的参数和条件，这是很难管理和扩展的。 客户端对服务端的依赖：借助 GraphQL，客户">
+  
+    <link rel="alternative" href="/atom.xml" title="闫文喜的个人前端博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">前端在路上</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+					        
+								<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Benchmark-jsPerf/" style="font-size: 10px;">Benchmark jsPerf</a> <a href="/tags/ES6、promise/" style="font-size: 10px;">ES6、promise</a> <a href="/tags/GraphQL/" style="font-size: 10px;">GraphQL</a> <a href="/tags/H5-移动端优化/" style="font-size: 10px;">H5 移动端优化</a> <a href="/tags/H5、bug/" style="font-size: 10px;">H5、bug</a> <a href="/tags/JS设计模式-设计模式/" style="font-size: 10px;">JS设计模式 设计模式</a> <a href="/tags/Jenkins-CI/" style="font-size: 10px;">Jenkins CI</a> <a href="/tags/Lodash/" style="font-size: 10px;">Lodash</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angular-http-q-promise/" style="font-size: 10px;">angular $http $q promise</a> <a href="/tags/angular-q-promise/" style="font-size: 10px;">angular $q promise</a> <a href="/tags/angular-decorator/" style="font-size: 10px;">angular decorator</a> <a href="/tags/angular-filter/" style="font-size: 10px;">angular filter</a> <a href="/tags/angular-服务/" style="font-size: 10px;">angular 服务</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/angular、-http/" style="font-size: 10px;">angular、$http</a> <a href="/tags/angular、Karma/" style="font-size: 10px;">angular、Karma</a> <a href="/tags/angular、directive/" style="font-size: 10px;">angular、directive</a> <a href="/tags/angular、html5/" style="font-size: 10px;">angular、html5</a> <a href="/tags/angular、module、controller/" style="font-size: 10px;">angular、module、controller</a> <a href="/tags/angular、promise、-q、deferred/" style="font-size: 10px;">angular、promise、$q、deferred</a> <a href="/tags/angular、router/" style="font-size: 10px;">angular、router</a> <a href="/tags/angular、ui-router/" style="font-size: 10px;">angular、ui-router</a> <a href="/tags/angular、表达式、filter/" style="font-size: 10px;">angular、表达式、filter</a> <a href="/tags/app-跨平台/" style="font-size: 10px;">app,跨平台</a> <a href="/tags/aso/" style="font-size: 10px;">aso</a> <a href="/tags/blockchain/" style="font-size: 10px;">blockchain</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/css-1px/" style="font-size: 10px;">css 1px</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/debugger/" style="font-size: 10px;">debugger</a> <a href="/tags/es5-js/" style="font-size: 10px;">es5 js</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/fit/" style="font-size: 10px;">fit</a> <a href="/tags/flex-css/" style="font-size: 10px;">flex css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-github/" style="font-size: 10px;">git github</a> <a href="/tags/h5-webworkers/" style="font-size: 10px;">h5 webworkers</a> <a href="/tags/ifelse/" style="font-size: 10px;">ifelse</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/javascript、object-oriented、继承/" style="font-size: 10px;">javascript、object-oriented、继承</a> <a href="/tags/jest/" style="font-size: 10px;">jest</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/js-Array/" style="font-size: 10px;">js Array</a> <a href="/tags/js-Higher-order-function/" style="font-size: 10px;">js Higher-order-function</a> <a href="/tags/js-closure/" style="font-size: 10px;">js closure</a> <a href="/tags/js-lodash/" style="font-size: 10px;">js lodash</a> <a href="/tags/js-object/" style="font-size: 10px;">js object</a> <a href="/tags/js-scope/" style="font-size: 10px;">js scope</a> <a href="/tags/js-sea-js-模块化/" style="font-size: 10px;">js sea.js 模块化</a> <a href="/tags/js-this/" style="font-size: 10px;">js this</a> <a href="/tags/js-性能调试/" style="font-size: 10px;">js 性能调试</a> <a href="/tags/js-柯里化/" style="font-size: 10px;">js 柯里化</a> <a href="/tags/js-纯函数/" style="font-size: 10px;">js 纯函数</a> <a href="/tags/jsapi/" style="font-size: 10px;">jsapi</a> <a href="/tags/jsevent/" style="font-size: 10px;">jsevent</a> <a href="/tags/js、变态题/" style="font-size: 10px;">js、变态题</a> <a href="/tags/js、设计模式/" style="font-size: 10px;">js、设计模式</a> <a href="/tags/js、跨域、document-domain/" style="font-size: 10px;">js、跨域、document.domain</a> <a href="/tags/js异步编程/" style="font-size: 10px;">js异步编程</a> <a href="/tags/js模块化、AMD、CMD、CommonJs/" style="font-size: 10px;">js模块化、AMD、CMD、CommonJs</a> <a href="/tags/js继承/" style="font-size: 10px;">js继承</a> <a href="/tags/life、意念/" style="font-size: 10px;">life、意念</a> <a href="/tags/lodash-chain/" style="font-size: 10px;">lodash chain</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxhosts/" style="font-size: 10px;">maxhosts</a> <a href="/tags/mongoDB-数据库/" style="font-size: 10px;">mongoDB 数据库</a> <a href="/tags/mvp/" style="font-size: 10px;">mvp</a> <a href="/tags/mvvm/" style="font-size: 10px;">mvvm</a> <a href="/tags/node/" style="font-size: 12px;">node</a> <a href="/tags/node-debug/" style="font-size: 10px;">node debug</a> <a href="/tags/node-wechat/" style="font-size: 18px;">node wechat</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/node、enentLoop/" style="font-size: 10px;">node、enentLoop</a> <a href="/tags/promise、es6/" style="font-size: 10px;">promise、es6</a> <a href="/tags/rap/" style="font-size: 16px;">rap</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/react-ant-design/" style="font-size: 10px;">react ant-design</a> <a href="/tags/reflow、repaint/" style="font-size: 10px;">reflow、repaint</a> <a href="/tags/seo/" style="font-size: 18px;">seo</a> <a href="/tags/seo-新闻源/" style="font-size: 10px;">seo 新闻源</a> <a href="/tags/token、OAuth、鉴权/" style="font-size: 10px;">token、OAuth、鉴权</a> <a href="/tags/vh、vw、css3/" style="font-size: 10px;">vh、vw、css3</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/vue、多面应用/" style="font-size: 10px;">vue、多面应用</a> <a href="/tags/web/" style="font-size: 12px;">web</a> <a href="/tags/web-交互/" style="font-size: 10px;">web 交互</a> <a href="/tags/web、前端/" style="font-size: 10px;">web、前端</a> <a href="/tags/web、性能优化/" style="font-size: 10px;">web、性能优化</a> <a href="/tags/web缓存/" style="font-size: 10px;">web缓存</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/wechat-webstorm/" style="font-size: 10px;">wechat webstorm</a> <a href="/tags/win10、linux/" style="font-size: 10px;">win10、linux</a> <a href="/tags/window-history-html5/" style="font-size: 10px;">window.history html5</a> <a href="/tags/wxapp/" style="font-size: 14px;">wxapp</a> <a href="/tags/xss、csrf/" style="font-size: 10px;">xss、csrf</a> <a href="/tags/yarn-npm/" style="font-size: 10px;">yarn npm</a> <a href="/tags/人生/" style="font-size: 10px;">人生</a> <a href="/tags/前后端分享/" style="font-size: 10px;">前后端分享</a> <a href="/tags/前端脚手架/" style="font-size: 10px;">前端脚手架</a> <a href="/tags/埋点统计/" style="font-size: 10px;">埋点统计</a> <a href="/tags/建站-seo/" style="font-size: 10px;">建站 seo</a> <a href="/tags/性能、异常上报/" style="font-size: 10px;">性能、异常上报</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/生活/" style="font-size: 20px;">生活</a> <a href="/tags/移动端、fixed/" style="font-size: 10px;">移动端、fixed</a> <a href="/tags/统计、cloc/" style="font-size: 10px;">统计、cloc</a> <a href="/tags/解构赋值-es6/" style="font-size: 10px;">解构赋值 es6</a> <a href="/tags/跨域、postMessage、html5/" style="font-size: 10px;">跨域、postMessage、html5</a> <a href="/tags/路由-html5/" style="font-size: 10px;">路由 html5</a> <a href="/tags/防抖、节流/" style="font-size: 10px;">防抖、节流</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.webywx.com/">前端博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.yanwenxi.site/">web小站</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">前端在路上</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">前端在路上</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+			        
+						<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-GraphQL" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/15/GraphQL/" class="article-date">
+  	<time datetime="2018-10-15T06:12:39.000Z" itemprop="datePublished">2018-10-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      学习GraphQL
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GraphQL/">GraphQL</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="REST将会过时，而GraphQL则会长存"><a href="#REST将会过时，而GraphQL则会长存" class="headerlink" title="REST将会过时，而GraphQL则会长存"></a>REST将会过时，而GraphQL则会长存</h4><h4 id="一、为何要使用GraphQL"><a href="#一、为何要使用GraphQL" class="headerlink" title="一、为何要使用GraphQL?"></a>一、为何要使用GraphQL?</h4><p>GraphQL 能够非常漂亮地解决三个重要的问题：</p>
+<ul>
+<li>为了得到视图所需的数据，需要进行多轮的网络调用：借助 GraphQL，要获取所有的初始化数据，我们仅需一次到服务器的网络调用。要在 REST API 中达到相同的目的，我们需要引入非结构化的参数和条件，这是很难管理和扩展的。</li>
+<li>客户端对服务端的依赖：借助 GraphQL，客户端会使用一种请求语言，该语言：1）消除了服务器端硬编码数据形式或数量大小的必要性；2）将客户端与服务端解耦。这意味着我们能够独立于服务器端维护和改善客户端。</li>
+<li>糟糕的前端开发体验：借助 GraphQL，开发人员只需使用一种声明式的语言表达用户的界面数据需求即可。他们所描述的是需要什么数据，而不是如何得到这些数据。在 GraphQL 中，UI 所需的数据以及开发人员描述数据的方式之间存在紧密的联系。</li>
+</ul>
+<h3 id="二、什么是GraphQL"><a href="#二、什么是GraphQL" class="headerlink" title="二、什么是GraphQL"></a>二、什么是GraphQL</h3><p>GraphQL 就是关于数据通信的。我们有客户端和服务器端，它们之间都需要进行对话。客户端需要告诉服务器端它需要什么数据，而服务器端要以实际的数据满足客户端的需求，GraphQL 就位于这种通信之间。</p>
+<p>那为什么不能让客户端和服务器端直接通信呢？当然可以。</p>
+<p>有多个原因促使我们在客户端和服务器端之间放置一个 GraphQL 层。其中有个原因，可能也是最常见的，那就是效率。客户端通常需要跟服务端要求多个资源，而服务端通常只能理解如何响应单个资源。所以，客户端需要发起多轮请求，这样才能收集到它需要的所有数据。</p>
+<p>借助 GraphQL，我们可以将这种多请求的复杂性转移到服务端，让 GraphQL 层来对其进行处理。客户端对 GraphQL 层发起一个请求并且会得到一个响应，该响应中精确包含了客户端所需的内容。</p>
+<p>使用 GraphQL 还会有很多收益，比如，另外一个收益就是与多个服务进行通信的时候。如果你有多个客户端要从多个服务请求数据的时候，位于中间的 GraphQL 层能够简化和标准化这种通信。尽管这并不是针对 REST API 的（因为它也能很容易地实现），但是 GraphQL 运行时提供了一个结构化和标准化的方式来实现这一点。</p>
+<p>客户端不会与两个不同的数据服务直接交互，我们现在可以让客户端与 GraphQL 层进行通信。然后，GraphQL 层会与两个不同的数据服务进行通信。这样的话，GraphQL 首先能够将客户端进行隔离，这样它们就没有必要使用多种语言进行通信了，同时，GraphQL 还会将一个请求转换为针对不同服务的多个请求，这些不同的服务可能会使用不同的语言编写。</p>
+<p><code>让我们假设有三个不同的人，他们使用不同的语言并且具备不同类型的知识。假设你有一个问题，该问题需要组合这三个人的知识才能给出答案。如果你有一个能够说这三门语言的翻译器，那么为你的问题给出答案就会变得很容易。这其实就是 GraphQL 运行时所做的事情。</code></p>
+<p>我们需要在 GraphQL 运行时上定义模式，客户端会使用该模式。</p>
+<p>基本上来讲，模式就是一个能力文档，它包含了客户端可以请求 GraphQL 层的所有问题的列表。在如何使用模式方面有一定的灵活性，因为我们在这里所讨论的是一个节点图。模式主要体现的是 GraphQL 层所能回答的问题都有哪些限制。</p>
+<h4 id="三、REST-API-有什么问题呢？"><a href="#三、REST-API-有什么问题呢？" class="headerlink" title="三、REST API 有什么问题呢？"></a>三、REST API 有什么问题呢？</h4><p>REST API 最大的问题在于其多端点的特质。这需要客户端进行多轮请求才能获取到想要的数据。</p>
+<p>REST API 通常是端点的集合，其中每个端点代表了一个资源。所以，当客户端需要来自多个资源的数据时，就需要针对 REST API 发起多轮请求，这样才能将客户端所需的数据组合完整。</p>
+<p>在 REST API 中，没有客户端请求语言。客户端对服务端返回的数据没有控制权。在这方面，没有语言能够帮助它们实现这一点。更精确地说，客户端可用的语言非常有限。</p>
+<p>例如，用来实现读取（READ）的 REST API 一般不外乎如下两种形式：</p>
+<ul>
+<li>GET <code>/ResouceName</code>：获取指定资源的所有记录的列表；</li>
+<li>GET <code>/ResourceName/ResourceID</code>：根据 ID 获取单条记录。</li>
+</ul>
+<p>举例来说，客户端无法指定该选择记录中的哪个字段。这些信息位于 REST API 服务本身之中，不管客户端实际需要哪些字段，REST API 服务始终都会返回所有的字段。GraphQL 对该问题的描述术语是过度加载（over-fetching）不需要的信息。不管是对于客户端还是对于服务器端，这都是网络和内存资源的一种浪费。</p>
+<p>REST API 的另外一个大问题是版本化。如果你需要支持多版本的话，通常意味着要有多个端点。在使用和维护这些端点的时候，这通常会导致更多的问题，而这也可能是服务端出现代码重复的原因所在。</p>
+<p>上文所述的 REST API 的问题恰好是 GraphQL 所要致力解决的。上面所述的这些肯定不是 REST API 的所有问题，我也不想过多讨论 REST API 是什么，不是什么。我主要讲的是基于资源的 HTTP 端点 API。这些 API 最终都会变成常规 REST 端点和自定义专门端点的混合品，其中自定义的专门端点大多都是因为性能的原因而制作的。在这种情况下，GraphQL 能够提供好得多的方案。</p>
+<h4 id="四、GraphQL的魔力是如何实现的"><a href="#四、GraphQL的魔力是如何实现的" class="headerlink" title="四、GraphQL的魔力是如何实现的"></a>四、GraphQL的魔力是如何实现的</h4><p>在 GraphQL 背后有着很多理念和设计决策，但是最为重要的包括：</p>
+<ul>
+<li>GraphQL 模式是强类型的模式。要创建 GraphQL 模式，我们需要按照类型来定义字段。这些类型可以是原始类型，也可以是自定义类型，模式中的任何内容都需要一个类型。这种丰富的类型系统允许实现丰富特性，比如具备内省功能的 API，以及为客户端和服务端构建强大的工具；</li>
+<li>GraphQL 将数据以 Graph 的形式来进行表示，而数据很自然的表现形式就是图。如果想要表示任意的数据，那正确的结构就是图。GraphQL 运行时允许我们以图 API 的方式来表示数据，该 API 能够匹配数据的自然图形形状。</li>
+<li>GraphQL 具有一个声明式的特质来表示数据需求。GraphQL 为客户端提供了一种声明式的语言，允许它们描述其数据需求。这种声明式的特质围绕 GraphQL 语言创建了心智模型，这与我们使用英语思考数据需求的方式非常接近，从而使得 GraphQL API 要比其他替代方案容易得多。</li>
+</ul>
+<p>这些都是高层级的理念，接下来让我们看一些细节。</p>
+<p>为了解决多轮网络调用的问题，GraphQL 将响应服务器变成了只有一个端点。从根本上来讲，GraphQL 将自定义端点的思想发挥到了极致，将整个服务器变成了一个自定义的端点，使其能够应对所有的数据请求。</p>
+<p>与这个单端点概念相关的另一个重要理念是富客户端请求语言（rich client request language），这是使用自定义端点所需的。如果没有客户端请求语言的话，单端点是没有什么用处的。它需要有一种语言来处理自定义的请求并为该请求响应数据。</p>
+<p>具备客户端请求语言就意味着客户端将会是可控的。客户端能够确切地请求它们想要的内容，服务器端则能够确切地给出客户端想要的东西。这解决了过度加载的问题。</p>
+<p>在版本化方面，GraphQL 有一种非常有趣的做法，能够彻底避免版本化的问题。从根本上来讲，我们可以添加新的字段，而不必移除旧的字段，因为我们有一个图，从而可以通过添加节点来灵活地扩展这个图。所以，我们可以为旧 API 继续保留其路径，并引入新的 API，而不必将其标记为新版本。API 只是不断增长而已。</p>
+<p>这对于移动端尤为重要，因为我们无法控制它们使用哪个版本的 API。一旦安装之后，移动应用可能会多年一直使用相同版本的旧 API。在 Web 端，我们能够很容易地控制 API 的版本，我们只需推送并使用新的代码即可。对移动应用来说，这样做就有些困难了。</p>
+<h4 id="五、RESTful-API-与-GraphQL-API-的样例"><a href="#五、RESTful-API-与-GraphQL-API-的样例" class="headerlink" title="五、RESTful API 与 GraphQL API 的样例"></a>五、RESTful API 与 GraphQL API 的样例</h4><p>假设我们是开发人员，负责构建一个崭新的用户界面，展现《星球大战》电影及其角色。</p>
+<p>我们要构建的第一个 UI 界面很简单：显示每个《星球大战》人物信息的视图。例如，Darth Vader 以及他在哪些电影中出现过。这个视图将会展现人物的姓名、出生年份、星球名称以及他们所出现的电影的名字。</p>
+<p>听起来非常简单，但实际上我们在处理三种不同类型的资源：人物（Person）、星球（Planet）以及电影（Film）。这些资源之间的关系很简单，任何人都可以猜测数据的形状。每个 Person 对象属于一个 Planet 对象，同时每个 Person 对象有一个或多个 Film 对象。</p>
+<p>这个 UI 的 JSON 数据可能会如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;person&quot;: &#123;</span><br><span class="line">      &quot;name&quot;: &quot;Darth Vader&quot;,</span><br><span class="line">      &quot;birthYear&quot;: &quot;41.9BBY&quot;,</span><br><span class="line">      &quot;planet&quot;: &#123;</span><br><span class="line">        &quot;name&quot;: &quot;Tatooine&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;films&quot;: [</span><br><span class="line">        &#123; &quot;title&quot;: &quot;A New Hope&quot; &#125;,</span><br><span class="line">        &#123; &quot;title&quot;: &quot;The Empire Strikes Back&quot; &#125;,</span><br><span class="line">        &#123; &quot;title&quot;: &quot;Return of the Jedi&quot; &#125;,</span><br><span class="line">        &#123; &quot;title&quot;: &quot;Revenge of the Sith&quot; &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，我们看一下如何使用 RESTful API 请求该数据。</p>
+<p>我们需要一个人的信息，假设我们知道人员的 ID，暴露该信息的 RESTful API 预期将会是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET - /people/&#123;id&#125;</span><br></pre></td></tr></table></figure>
+<p>这个请求将会为我们提供该人员的姓名、生日和其他信息。一个好的 RESTful API 还会给我们提供该人员的星球 ID 以及这个人员所出现的所有电影的 ID 数组。</p>
+<p>该请求的 JSON 响应可能会像如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;Darth Vader&quot;,</span><br><span class="line">  &quot;birthYear&quot;: &quot;41.9BBY&quot;,</span><br><span class="line">  &quot;planetId&quot;: 1</span><br><span class="line">  &quot;filmIds&quot;: [1, 2, 3, 6],</span><br><span class="line">  *** 其他我们并不需要的信息 ***</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为了读取星球的名称，我们需要调用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET - /planets/1</span><br></pre></td></tr></table></figure>
+<p>随后，为了读取电影的名称，我们还要调用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET - /films/1</span><br><span class="line">GET - /films/2</span><br><span class="line">GET - /films/3</span><br><span class="line">GET - /films/6</span><br></pre></td></tr></table></figure>
+<p>从服务器端得到这六个响应之后，我们就可以就可以将它们组合起来以满足视图的数据需求。</p>
+<p>为了满足一个简单 UI 的数据需求，我们发起了六轮请求，除此之外，我们在这里的方式是命令式的。我们需要给出如何获取数据以及如何处理数据使其满足视图需求的指令。除此之外，在这个过程中还会过度加载视图并不需要的信息。</p>
+<p>当然，这仅仅是该数据的一种 RESTful API 实现方式而已。我们可能还会有更好的实现方式，让视图编写起来更加容易。例如，如果 API 服务器的实现能够嵌套资源并理解人员和电影之间的关联关系，那么我们通过该 API 来读取电影数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET - /people/&#123;id&#125;/films</span><br></pre></td></tr></table></figure>
+<p>但是，纯粹的 RESTful API 可能并不会实现这些，我们需要要求后端工程师为我们创建这个自定义的端点。这就是 RESTful API 进行扩展的现实：我们只能添加自定义端点来有效满足不断增长的客户端需求。管理这样的自定义端点是非常困难的。</p>
+<p>现在，我们再来看一下 GraphQL 的方式。GraphQL 在服务端拥抱了自定义端点的理念，并将其发挥到了极致。服务器只有一个端点，至于通道则无关紧要。如果你通过 HTTP 来实现的话，HTTP 方法当前也是无关紧要的。我们假设有一个通过 HTTP 暴露的 GraphQL 端点，其地址为<code>/graphql</code>。</p>
+<p>因为想要通过一轮请求就将数据获取到，所以需要有一种方式来向服务器表达完整的数据需求。我们通过一个 GraphQL 查询来实现这一点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET or POST - /graphql?query=&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<p>GraphQL 查询只是一个字符串，但是它需要包含我们所需数据的所有片段。此时，声明式的方式就能发挥作用了。</p>
+<p>在中文中，会这样描述我们的数据需求：我们需要一个人员的姓名、出生年份、星球的名字以及所有相关电影的名称。在 GraphQL 中，这会翻译为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  person(ID: ...) &#123;</span><br><span class="line">    name,</span><br><span class="line">    birthYear,</span><br><span class="line">    planet &#123;</span><br><span class="line">      name</span><br><span class="line">    &#125;,</span><br><span class="line">    films &#123;</span><br><span class="line">      title</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再次阅读一下使用中文表达的需求，然后将其与 GraphQL 查询进行对比。你会发现，它们非常接近。现在，对比一下这个 GraphQL 查询和我们开始时所见到的原始 JSON 数据。GraphQL 查询与 JSON 数据的格式完全相同，唯一的差异在于”值（value）“部分。如果我们将其想象为问题和答案的关系，所提出的问题就是将答案语句刨除了答案值。</p>
+<p>如果答案语句是：</p>
+<blockquote>
+<p>距离太阳最近的行星是水星。</p>
+</blockquote>
+<p>对该问题进行表述时，一种非常好的方式就是将相同语句的答案部分刨除掉：</p>
+<blockquote>
+<p>距离太阳最近的行星是什么？</p>
+</blockquote>
+<p>同样的关系可以用到 GraphQL 查询中。以 JSON 响应为例，我们将其中的”答案“部分（也就是 JSON 中的值）移除掉，最终就能得到一个 GraphQL 查询，它能够非常恰当地表述 JSON 响应所对应的问题。</p>
+<p>现在，对比一下 GraphQL 查询和我们为数据所定义的声明式 React UI。GraphQL 查询中的所有内容都用到了 UI 之中，而 UI 中用到的所有内容也都出现在了 GraphQL 查询中。</p>
+<p>这是 GraphQL 非常强大的思想模型。UI 知道它所需要的确切数据，抽取需求相对是非常容易的。生成 GraphQL 是一项非常简单的任务，只需将 UI 所需的数据直接抽取为变量即可。</p>
+<p>如果我们将这个模型反过来，它依然非常强大。有一个 GraphQL 查询之后，我们就能知道如何在 UI 中使用它的响应，这是因为查询与响应有着相同的”结构“。我们不需要探查响应就能知道如何使用它，我们甚至不需要任何关于该 API 的文档。它都是内置的。</p>
+<p><a href="https://github.com/graphql/swapi-graphql" target="_blank" rel="noopener">https://github.com/graphql/swapi-graphql</a> 站点将《星球大战》的数据托管为 GraphQL API。你可以在这里进行尝试，构建我们的人员数据对象。这里有些小的差异，我们稍后会进行讨论，如下给出了一个官方的查询，我们可以基于该 API 读取视图所需的数据（以 Darth Vader 为例）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  person(personID: 4) &#123;</span><br><span class="line">    name,</span><br><span class="line">    birthYear,</span><br><span class="line">    homeworld &#123;</span><br><span class="line">      name</span><br><span class="line">    &#125;,</span><br><span class="line">    filmConnection &#123;</span><br><span class="line">      films &#123;</span><br><span class="line">        title</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个请求给出的响应结构非常类似于我们视图所使用的结构，需要记住的是，我们在一轮请求中就得到了所有的数据。</p>
+<h4 id="六、GraphQL-灵活性的代价"><a href="#六、GraphQL-灵活性的代价" class="headerlink" title="六、GraphQL 灵活性的代价"></a>六、GraphQL 灵活性的代价</h4><p>完美的解决方案只可能出现在童话之中。GraphQL 带来了灵活性，同时也有一些值得关注的地方和问题。</p>
+<p>GraphQL 所带来的一个非常重要的风险就是资源耗尽攻击（即拒绝服务攻击）。GraphQL 服务器可以通过过于复杂的查询来进行攻击，这种查询将会消耗尽服务器的所有资源。它也非常容易查询深层的嵌套关联关系（用户 -&gt;好友 -&gt;好友），或者使用字段别名多次查询相同的字段。资源耗尽攻击并不是 GraphQL 特有的，但是在使用 GraphQL 的时候，我们必须格外小心。</p>
+<p>我们能够采取一些措施来缓解这种情况。我们可以在查询之前进行预先的成本分析，并限制人们可以消费的数据量。我们还可以实现超时功能，将消耗过长时间解析的请求杀掉。同时，因为 GraphQL 只是一个解析层，我们可以在 GraphQL 层之下，进行速度的限制。</p>
+<p>如果我们试图保护的 GraphQL API 端点不是公开的，也就是只用于客户端（Web 或移动）的内部使用，那么可以使用白名单的方式，服务器只能执行预选得到许可的查询。客户端可以使用一个唯一的查询标识符，请求服务器执行预先许可的查询。Facebook 似乎采用了这种方式。</p>
+<p>在使用 GraphQL 时，另外一个需要考虑的地方就是认证和授权。在 GraphQL 查询解析之前、之后或解析的过程中，我们需要在这方面进行处理吗？</p>
+<p>要回答这个问题，我们可以将 GraphQL 视为你自己的后端数据获取逻辑之上的一个 DSL（领域特定语言）。它只是一个分层，我们可以将其放到客户端和实际的数据服务（或多个服务）之间。</p>
+<p>我们将认证和授权视为另一个分层。GraphQL 并不会为实际的认证和授权逻辑提供帮助。它也不是做这个的。但是如果你想要将这些分层放到 GraphQL 之后的话，我们可以使用 GraphQL 在客户端和限制逻辑之间传输访问 token。这非常类似于在 RESTful API 认证和授权时，我们所采取的做法。</p>
+<p>在客户端数据缓存方面，GraphQL 也面临着更多的挑战。RESTful API 由于其字典（dictionary）的特性，因此更容易进行缓存。对应的地址给出数据，因此我们可以使用这个地址本身作为缓存的 key。</p>
+<p>在使用 GraphQL 的时候，我们可以采用类似的基本方法，使用查询的文本作为 key 来缓存它的响应。但是，这种方式是有一定限制的，效率不高，并且会导致数据一致性方面的问题。多个 GraphQL 查询的结果很容易出现重叠，这种基本的缓存机制不能解决重叠的问题。</p>
+<p>但是，在这方面有一个很好的解决方案。图查询（Graph Query）意味着图缓存。如果我们将 GraphQL 查询的响应规范化为一个扁平的记录集合，为每条记录提供一个全局唯一的 ID，那么我们就可以缓存这些记录，而不是整个响应。</p>
+<p>不过，这并不是一个简单的过程。记录会引用其他的记录，我们将会管理一个循环图。填充和读取缓存需要遍历查询。我们需要编码实现一个分层来处理缓存逻辑。但是，总体而言，这种方式要比基于响应的缓存高效得多。Relay.js 是采用该缓存策略的一个库，它会在内部进行自动管理。</p>
+<p>关于 GraphQL，我们最需要关注的问题可能就是所谓的 N+1 SQL 查询。GraphQL 查询字段被设计为独立的函数，在数据库中为这些字段解析获取数据可能会导致每个字段都需要一个新的数据库请求。</p>
+<p>对于简单的 RESTful API 端点，可以通过增强的结构化 SQL 查询来分析、检测和解决 N+1 查询问题。GraphQL 动态解析字段，因此并没有那么简单。幸好，Facebook 正在通过 DataLoader 方案来解决这个问题。</p>
+<p>顾名思义，DataLoader 是一个工具，我们可以借助它从数据库中读取数据，并将其提供给 GraphQL 解析函数使用。我们可以使用 DataLoader 读取数据，避免直接使用 SQL 查询从数据库中进行查询，DataLoader 将会作为我们的代理，减少实际发往数据库中的 SQL 查询。</p>
+<p>DataLoader 组合使用批处理和缓存来实现这一点。如果相同的客户端请求需要向数据库查询许多内容的话，DataLoader 能够合并这些问题，并从数据库中批量加载问题的答案。DataLoader 还会对答案进行缓存，后续的问题如果请求相同的资源的话，就可以使用缓存了。</p>
+<p>参考链接：<a href="http://suo.im/5foXDV" target="_blank" rel="noopener">http://suo.im/5foXDV</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/10/15/authentication/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">前后端常用的几种鉴权方式</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2018 前端在路上
+      </div>
+        <div class="footer-right">
+          <a href="http://webywx.com/" target="_blank">webywx</a>  Theme <a href="https://yanwenxi.site" target="_blank">前端在路上</a> by Scorpio
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

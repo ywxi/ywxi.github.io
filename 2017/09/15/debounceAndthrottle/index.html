@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>防抖和节流的节流的相关学习 | 闫文喜的个人前端博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是防抖和节流两者都是优化高频率执行js代码的一种手段。防抖常用于用户注册时手机号码和邮箱验证了，只有等用户输完了，才去检查格式是否正常等。节流常用于监听页面滚动事件。 比如搜索框，用户在输入的时候使用change事件去调用搜索，如果用户每一次输入都去搜索的话，那得消耗多大的服务器资源，即使你的服务器很强大，但是也不带这么玩的。 一、防抖—debounce其中的一种解决方案就是每次用户停止输入后">
+<meta name="keywords" content="防抖、节流">
+<meta property="og:type" content="article">
+<meta property="og:title" content="防抖和节流的节流的相关学习">
+<meta property="og:url" content="http://yoursite.com/2017/09/15/debounceAndthrottle/index.html">
+<meta property="og:site_name" content="闫文喜的个人前端博客">
+<meta property="og:description" content="什么是防抖和节流两者都是优化高频率执行js代码的一种手段。防抖常用于用户注册时手机号码和邮箱验证了，只有等用户输完了，才去检查格式是否正常等。节流常用于监听页面滚动事件。 比如搜索框，用户在输入的时候使用change事件去调用搜索，如果用户每一次输入都去搜索的话，那得消耗多大的服务器资源，即使你的服务器很强大，但是也不带这么玩的。 一、防抖—debounce其中的一种解决方案就是每次用户停止输入后">
+<meta property="og:locale" content="ch">
+<meta property="og:updated_time" content="2018-10-19T08:32:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="防抖和节流的节流的相关学习">
+<meta name="twitter:description" content="什么是防抖和节流两者都是优化高频率执行js代码的一种手段。防抖常用于用户注册时手机号码和邮箱验证了，只有等用户输完了，才去检查格式是否正常等。节流常用于监听页面滚动事件。 比如搜索框，用户在输入的时候使用change事件去调用搜索，如果用户每一次输入都去搜索的话，那得消耗多大的服务器资源，即使你的服务器很强大，但是也不带这么玩的。 一、防抖—debounce其中的一种解决方案就是每次用户停止输入后">
+  
+    <link rel="alternative" href="/atom.xml" title="闫文喜的个人前端博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">前端在路上</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+					        
+								<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Benchmark-jsPerf/" style="font-size: 10px;">Benchmark jsPerf</a> <a href="/tags/ES6、promise/" style="font-size: 10px;">ES6、promise</a> <a href="/tags/GraphQL/" style="font-size: 10px;">GraphQL</a> <a href="/tags/H5-移动端优化/" style="font-size: 10px;">H5 移动端优化</a> <a href="/tags/H5、bug/" style="font-size: 10px;">H5、bug</a> <a href="/tags/JS设计模式-设计模式/" style="font-size: 10px;">JS设计模式 设计模式</a> <a href="/tags/Jenkins-CI/" style="font-size: 10px;">Jenkins CI</a> <a href="/tags/Lodash/" style="font-size: 10px;">Lodash</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angular-http-q-promise/" style="font-size: 10px;">angular $http $q promise</a> <a href="/tags/angular-q-promise/" style="font-size: 10px;">angular $q promise</a> <a href="/tags/angular-decorator/" style="font-size: 10px;">angular decorator</a> <a href="/tags/angular-filter/" style="font-size: 10px;">angular filter</a> <a href="/tags/angular-服务/" style="font-size: 10px;">angular 服务</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/angular、-http/" style="font-size: 10px;">angular、$http</a> <a href="/tags/angular、Karma/" style="font-size: 10px;">angular、Karma</a> <a href="/tags/angular、directive/" style="font-size: 10px;">angular、directive</a> <a href="/tags/angular、html5/" style="font-size: 10px;">angular、html5</a> <a href="/tags/angular、module、controller/" style="font-size: 10px;">angular、module、controller</a> <a href="/tags/angular、promise、-q、deferred/" style="font-size: 10px;">angular、promise、$q、deferred</a> <a href="/tags/angular、router/" style="font-size: 10px;">angular、router</a> <a href="/tags/angular、ui-router/" style="font-size: 10px;">angular、ui-router</a> <a href="/tags/angular、表达式、filter/" style="font-size: 10px;">angular、表达式、filter</a> <a href="/tags/app-跨平台/" style="font-size: 10px;">app,跨平台</a> <a href="/tags/aso/" style="font-size: 10px;">aso</a> <a href="/tags/blockchain/" style="font-size: 10px;">blockchain</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/css-1px/" style="font-size: 10px;">css 1px</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/debugger/" style="font-size: 10px;">debugger</a> <a href="/tags/es5-js/" style="font-size: 10px;">es5 js</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/fit/" style="font-size: 10px;">fit</a> <a href="/tags/flex-css/" style="font-size: 10px;">flex css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-github/" style="font-size: 10px;">git github</a> <a href="/tags/h5-webworkers/" style="font-size: 10px;">h5 webworkers</a> <a href="/tags/ifelse/" style="font-size: 10px;">ifelse</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/javascript、object-oriented、继承/" style="font-size: 10px;">javascript、object-oriented、继承</a> <a href="/tags/jest/" style="font-size: 10px;">jest</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/js-Array/" style="font-size: 10px;">js Array</a> <a href="/tags/js-Higher-order-function/" style="font-size: 10px;">js Higher-order-function</a> <a href="/tags/js-closure/" style="font-size: 10px;">js closure</a> <a href="/tags/js-lodash/" style="font-size: 10px;">js lodash</a> <a href="/tags/js-object/" style="font-size: 10px;">js object</a> <a href="/tags/js-scope/" style="font-size: 10px;">js scope</a> <a href="/tags/js-sea-js-模块化/" style="font-size: 10px;">js sea.js 模块化</a> <a href="/tags/js-this/" style="font-size: 10px;">js this</a> <a href="/tags/js-性能调试/" style="font-size: 10px;">js 性能调试</a> <a href="/tags/js-柯里化/" style="font-size: 10px;">js 柯里化</a> <a href="/tags/js-纯函数/" style="font-size: 10px;">js 纯函数</a> <a href="/tags/jsapi/" style="font-size: 10px;">jsapi</a> <a href="/tags/jsevent/" style="font-size: 10px;">jsevent</a> <a href="/tags/js、变态题/" style="font-size: 10px;">js、变态题</a> <a href="/tags/js、设计模式/" style="font-size: 10px;">js、设计模式</a> <a href="/tags/js、跨域、document-domain/" style="font-size: 10px;">js、跨域、document.domain</a> <a href="/tags/js异步编程/" style="font-size: 10px;">js异步编程</a> <a href="/tags/js模块化、AMD、CMD、CommonJs/" style="font-size: 10px;">js模块化、AMD、CMD、CommonJs</a> <a href="/tags/js继承/" style="font-size: 10px;">js继承</a> <a href="/tags/life、意念/" style="font-size: 10px;">life、意念</a> <a href="/tags/lodash-chain/" style="font-size: 10px;">lodash chain</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxhosts/" style="font-size: 10px;">maxhosts</a> <a href="/tags/mongoDB-数据库/" style="font-size: 10px;">mongoDB 数据库</a> <a href="/tags/mvp/" style="font-size: 10px;">mvp</a> <a href="/tags/mvvm/" style="font-size: 10px;">mvvm</a> <a href="/tags/node/" style="font-size: 12px;">node</a> <a href="/tags/node-debug/" style="font-size: 10px;">node debug</a> <a href="/tags/node-wechat/" style="font-size: 18px;">node wechat</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/node、enentLoop/" style="font-size: 10px;">node、enentLoop</a> <a href="/tags/promise、es6/" style="font-size: 10px;">promise、es6</a> <a href="/tags/rap/" style="font-size: 16px;">rap</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/react-ant-design/" style="font-size: 10px;">react ant-design</a> <a href="/tags/reflow、repaint/" style="font-size: 10px;">reflow、repaint</a> <a href="/tags/seo/" style="font-size: 18px;">seo</a> <a href="/tags/seo-新闻源/" style="font-size: 10px;">seo 新闻源</a> <a href="/tags/token、OAuth、鉴权/" style="font-size: 10px;">token、OAuth、鉴权</a> <a href="/tags/vh、vw、css3/" style="font-size: 10px;">vh、vw、css3</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/vue、多面应用/" style="font-size: 10px;">vue、多面应用</a> <a href="/tags/web/" style="font-size: 12px;">web</a> <a href="/tags/web-交互/" style="font-size: 10px;">web 交互</a> <a href="/tags/web、前端/" style="font-size: 10px;">web、前端</a> <a href="/tags/web、性能优化/" style="font-size: 10px;">web、性能优化</a> <a href="/tags/web缓存/" style="font-size: 10px;">web缓存</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/wechat-webstorm/" style="font-size: 10px;">wechat webstorm</a> <a href="/tags/win10、linux/" style="font-size: 10px;">win10、linux</a> <a href="/tags/window-history-html5/" style="font-size: 10px;">window.history html5</a> <a href="/tags/wxapp/" style="font-size: 14px;">wxapp</a> <a href="/tags/xss、csrf/" style="font-size: 10px;">xss、csrf</a> <a href="/tags/yarn-npm/" style="font-size: 10px;">yarn npm</a> <a href="/tags/人生/" style="font-size: 10px;">人生</a> <a href="/tags/前后端分享/" style="font-size: 10px;">前后端分享</a> <a href="/tags/前端脚手架/" style="font-size: 10px;">前端脚手架</a> <a href="/tags/埋点统计/" style="font-size: 10px;">埋点统计</a> <a href="/tags/建站-seo/" style="font-size: 10px;">建站 seo</a> <a href="/tags/性能、异常上报/" style="font-size: 10px;">性能、异常上报</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/生活/" style="font-size: 20px;">生活</a> <a href="/tags/移动端、fixed/" style="font-size: 10px;">移动端、fixed</a> <a href="/tags/统计、cloc/" style="font-size: 10px;">统计、cloc</a> <a href="/tags/解构赋值-es6/" style="font-size: 10px;">解构赋值 es6</a> <a href="/tags/跨域、postMessage、html5/" style="font-size: 10px;">跨域、postMessage、html5</a> <a href="/tags/路由-html5/" style="font-size: 10px;">路由 html5</a> <a href="/tags/防抖、节流/" style="font-size: 10px;">防抖、节流</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.webywx.com/">前端博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.yanwenxi.site/">web小站</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">前端在路上</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">前端在路上</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+			        
+						<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-debounceAndthrottle" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/09/15/debounceAndthrottle/" class="article-date">
+  	<time datetime="2017-09-15T06:12:39.000Z" itemprop="datePublished">2017-09-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      防抖和节流的节流的相关学习
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/防抖、节流/">防抖、节流</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="什么是防抖和节流"><a href="#什么是防抖和节流" class="headerlink" title="什么是防抖和节流"></a>什么是防抖和节流</h3><p>两者都是优化高频率执行js代码的一种手段。防抖常用于用户注册时手机号码和邮箱验证了，只有等用户输完了，才去检查格式是否正常等。节流常用于监听页面滚动事件。</p>
+<p>比如搜索框，用户在输入的时候使用<code>change</code>事件去调用搜索，如果用户每一次输入都去搜索的话，那得消耗多大的服务器资源，即使你的服务器很强大，但是也不带这么玩的。</p>
+<h4 id="一、防抖—debounce"><a href="#一、防抖—debounce" class="headerlink" title="一、防抖—debounce"></a>一、防抖—debounce</h4><p>其中的一种解决方案就是每次用户停止输入后，延迟超过500ms时，才去搜索此时的String,这就是防抖。</p>
+<p>原理：将若干个函数调用合并成一次，并在给定时间过去之后仅被调用一次。</p>
+<p>代码实现如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">let timer=null;</span><br><span class="line">function debounce(fn,delay)&#123;</span><br><span class="line">    return function()&#123;</span><br><span class="line">        let context=this;</span><br><span class="line">        let args=arguments;</span><br><span class="line">        //清掉正在执行的函数，并重新执行</span><br><span class="line">        clearTimeout(timer);</span><br><span class="line">        timer = setTimeout(function()&#123;</span><br><span class="line">            fn.applay(context,args);</span><br><span class="line">        &#125;,delay);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">let flag= 0;</span><br><span class="line">function foo()&#123;</span><br><span class="line">    flag++;</span><br><span class="line">    console.log(flag);</span><br><span class="line">&#125;</span><br><span class="line">document.body.addEventListener(&apos;scroll&apos;,debounce(foo,2000));</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>1.debounce函数封装后，返回内部函数。</p>
+<p>2.每一次事件被触发，都会清除当前的timer然后重新设置超时并调用。这会导致每一次高频事件都会取消前一次的超时调用，导致事件处理程序不能被触发</p>
+<p>3.只有当高频事件停止，最后一次事件触发的超时调用才能在delay时间后执行</p>
+</blockquote>
+<h4 id="二、节流—throttle（这种解释有点啰嗦，不便理解，直接看最后）"><a href="#二、节流—throttle（这种解释有点啰嗦，不便理解，直接看最后）" class="headerlink" title="二、节流—throttle（这种解释有点啰嗦，不便理解，直接看最后）"></a>二、节流—throttle（这种解释有点啰嗦，不便理解，直接看最后）</h4><p>节流这种解决方案比防抖要宽松些，这时我们不想用户一味的输入，而是给用户一些搜索提示，所以在当中限制每过500ms就查询一次此时的String,这就是节流。</p>
+<p>原理：节流函数不管事件触发有多频繁，都会保证在规定时间内一定会执行一次真正的事件处理函数。</p>
+<p>代码实现有两种，一种是时间戳，另一种是定时器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">时间戳方法：</span><br><span class="line">let prev=Date.now();</span><br><span class="line">function throttle(fn,delay)&#123;</span><br><span class="line">    return function()&#123;</span><br><span class="line">        const context=this;</span><br><span class="line">        const args=arguments;</span><br><span class="line">        let now= Date.now();</span><br><span class="line">        if(now-prev&gt;=delay)&#123;</span><br><span class="line">            fn.apply(context,args);</span><br><span class="line">            prev=Date.now();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当高频事件触发时，第一次应该会立即执行（给事件绑定函数与真正触发事件的间隔如果大于delay的话），然后再怎么频繁触发事件，也都是会每delay秒才执行一次，而当最后一次事件触发完毕后，事件也不会再被执行。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">定时器方法：当触发事件的时候，设置一个定时器，再触发事件的时候，如果定时器存在，就不执行；直到delay后，定时器执行执行函数，清空定时器，这样就可以设置下个定时器了。</span><br><span class="line">let timer=null;</span><br><span class="line">function throttle(fn,delay)&#123;</span><br><span class="line">    return function()&#123;</span><br><span class="line">        let context=this;</span><br><span class="line">        let args=arguments;</span><br><span class="line">        if(!timer)&#123;</span><br><span class="line">            timer=setTimeout(function()&#123;</span><br><span class="line">                fn.apply(context,args);</span><br><span class="line">                timer=null;</span><br><span class="line">            &#125;,delay);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当第一次触发事件时，肯定不会立即执行函数，而是在delay秒后才执行，之后连续不断的触发，也会第delay秒执行一次。当最后一次停止触发后，由于定时器的delay延迟，可能还会执行一次函数</p>
+</blockquote>
+<p>最后，综合使用时间戳和定时器，完成一个事件触发时立即执行，触发完毕还能执行一次的节流函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let timer=null;</span><br><span class="line">let startTime = Date.now();</span><br><span class="line">function throttle(fn,delay)&#123;</span><br><span class="line">    return function()&#123;</span><br><span class="line">        let currentTime=Date.now();</span><br><span class="line">        let remaining=delay-(currentTime-startTime);</span><br><span class="line">        const context=this;</span><br><span class="line">        const args=argumnets;</span><br><span class="line">        clearTimeout(timer);</span><br><span class="line">        if(remaining&lt;=0)&#123;</span><br><span class="line">            fn.apply(context,args);</span><br><span class="line">            startTime=Date.now();</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            timer=setTimeout(fn,remaining);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>需要在每个delay时间中一定会执行一次函数，因此在节流函数使用开始时间、当前时间与delay来计算remaining,当小于等于0时表示该执行函数了。如果还没到时间的话就设定在remaining时间后发生，当然在remaining时间中如果又一次发生事件，那么会取消当前的计时器，并重新计算一个remaining来判断当前状态。</p>
+</blockquote>
+<h4 id="节流的另一种实现：更易于理解"><a href="#节流的另一种实现：更易于理解" class="headerlink" title="节流的另一种实现：更易于理解"></a>节流的另一种实现：更易于理解</h4><p>原理：声明一个变量当标志，记录当前代码是否在执行，如果空闲，则可以正常触发函数执行。如果代码正在运行，刚取消这次方法执行，直接return.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">let canRun=true;</span><br><span class="line">document.getElementById(&apos;throttle&apos;).onscroll=function()&#123;</span><br><span class="line">    if(!canRun)&#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    canRun=false;</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">        console.log(&apos;函数节流&apos;)；</span><br><span class="line">        canRun=true;</span><br><span class="line">    &#125;,500);</span><br><span class="line">&#125;</span><br><span class="line">当高频触发时，每隔500ms执行一次。</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/10/15/Vuex/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          vue状态管理器Vuex
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/15/flexbox/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">flexbox布局学习</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2018 前端在路上
+      </div>
+        <div class="footer-right">
+          <a href="http://webywx.com/" target="_blank">webywx</a>  Theme <a href="https://yanwenxi.site" target="_blank">前端在路上</a> by Scorpio
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

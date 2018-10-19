@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>前端知识点记录 | 闫文喜的个人前端博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、中文版chrome默认最小字号12px，如何设置小于12px的字体？12345678.small-font&amp;#123; //chrome浏览器   　　　  font-size:12px;         -webkit-transform-origin-x: 0;        -webkit-transform: scale(0.90);//利用css3的缩放，其最终大小是12*0.9=1">
+<meta name="keywords" content="web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端知识点记录">
+<meta property="og:url" content="http://yoursite.com/2017/12/28/knowledgePoint/index.html">
+<meta property="og:site_name" content="闫文喜的个人前端博客">
+<meta property="og:description" content="1、中文版chrome默认最小字号12px，如何设置小于12px的字体？12345678.small-font&amp;#123; //chrome浏览器   　　　  font-size:12px;         -webkit-transform-origin-x: 0;        -webkit-transform: scale(0.90);//利用css3的缩放，其最终大小是12*0.9=1">
+<meta property="og:locale" content="ch">
+<meta property="og:updated_time" content="2018-10-19T08:53:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端知识点记录">
+<meta name="twitter:description" content="1、中文版chrome默认最小字号12px，如何设置小于12px的字体？12345678.small-font&amp;#123; //chrome浏览器   　　　  font-size:12px;         -webkit-transform-origin-x: 0;        -webkit-transform: scale(0.90);//利用css3的缩放，其最终大小是12*0.9=1">
+  
+    <link rel="alternative" href="/atom.xml" title="闫文喜的个人前端博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">前端在路上</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+					        
+								<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Benchmark-jsPerf/" style="font-size: 10px;">Benchmark jsPerf</a> <a href="/tags/ES6、promise/" style="font-size: 10px;">ES6、promise</a> <a href="/tags/GraphQL/" style="font-size: 10px;">GraphQL</a> <a href="/tags/H5-移动端优化/" style="font-size: 10px;">H5 移动端优化</a> <a href="/tags/H5、bug/" style="font-size: 10px;">H5、bug</a> <a href="/tags/JS设计模式-设计模式/" style="font-size: 10px;">JS设计模式 设计模式</a> <a href="/tags/Jenkins-CI/" style="font-size: 10px;">Jenkins CI</a> <a href="/tags/Lodash/" style="font-size: 10px;">Lodash</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angular-http-q-promise/" style="font-size: 10px;">angular $http $q promise</a> <a href="/tags/angular-q-promise/" style="font-size: 10px;">angular $q promise</a> <a href="/tags/angular-decorator/" style="font-size: 10px;">angular decorator</a> <a href="/tags/angular-filter/" style="font-size: 10px;">angular filter</a> <a href="/tags/angular-服务/" style="font-size: 10px;">angular 服务</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/angular、-http/" style="font-size: 10px;">angular、$http</a> <a href="/tags/angular、Karma/" style="font-size: 10px;">angular、Karma</a> <a href="/tags/angular、directive/" style="font-size: 10px;">angular、directive</a> <a href="/tags/angular、html5/" style="font-size: 10px;">angular、html5</a> <a href="/tags/angular、module、controller/" style="font-size: 10px;">angular、module、controller</a> <a href="/tags/angular、promise、-q、deferred/" style="font-size: 10px;">angular、promise、$q、deferred</a> <a href="/tags/angular、router/" style="font-size: 10px;">angular、router</a> <a href="/tags/angular、ui-router/" style="font-size: 10px;">angular、ui-router</a> <a href="/tags/angular、表达式、filter/" style="font-size: 10px;">angular、表达式、filter</a> <a href="/tags/app-跨平台/" style="font-size: 10px;">app,跨平台</a> <a href="/tags/aso/" style="font-size: 10px;">aso</a> <a href="/tags/blockchain/" style="font-size: 10px;">blockchain</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/css-1px/" style="font-size: 10px;">css 1px</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/debugger/" style="font-size: 10px;">debugger</a> <a href="/tags/es5-js/" style="font-size: 10px;">es5 js</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/fit/" style="font-size: 10px;">fit</a> <a href="/tags/flex-css/" style="font-size: 10px;">flex css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-github/" style="font-size: 10px;">git github</a> <a href="/tags/h5-webworkers/" style="font-size: 10px;">h5 webworkers</a> <a href="/tags/ifelse/" style="font-size: 10px;">ifelse</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/javascript、object-oriented、继承/" style="font-size: 10px;">javascript、object-oriented、继承</a> <a href="/tags/jest/" style="font-size: 10px;">jest</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/js-Array/" style="font-size: 10px;">js Array</a> <a href="/tags/js-Higher-order-function/" style="font-size: 10px;">js Higher-order-function</a> <a href="/tags/js-closure/" style="font-size: 10px;">js closure</a> <a href="/tags/js-lodash/" style="font-size: 10px;">js lodash</a> <a href="/tags/js-object/" style="font-size: 10px;">js object</a> <a href="/tags/js-scope/" style="font-size: 10px;">js scope</a> <a href="/tags/js-sea-js-模块化/" style="font-size: 10px;">js sea.js 模块化</a> <a href="/tags/js-this/" style="font-size: 10px;">js this</a> <a href="/tags/js-性能调试/" style="font-size: 10px;">js 性能调试</a> <a href="/tags/js-柯里化/" style="font-size: 10px;">js 柯里化</a> <a href="/tags/js-纯函数/" style="font-size: 10px;">js 纯函数</a> <a href="/tags/jsapi/" style="font-size: 10px;">jsapi</a> <a href="/tags/jsevent/" style="font-size: 10px;">jsevent</a> <a href="/tags/js、变态题/" style="font-size: 10px;">js、变态题</a> <a href="/tags/js、设计模式/" style="font-size: 10px;">js、设计模式</a> <a href="/tags/js、跨域、document-domain/" style="font-size: 10px;">js、跨域、document.domain</a> <a href="/tags/js异步编程/" style="font-size: 10px;">js异步编程</a> <a href="/tags/js模块化、AMD、CMD、CommonJs/" style="font-size: 10px;">js模块化、AMD、CMD、CommonJs</a> <a href="/tags/js继承/" style="font-size: 10px;">js继承</a> <a href="/tags/life、意念/" style="font-size: 10px;">life、意念</a> <a href="/tags/lodash-chain/" style="font-size: 10px;">lodash chain</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxhosts/" style="font-size: 10px;">maxhosts</a> <a href="/tags/mongoDB-数据库/" style="font-size: 10px;">mongoDB 数据库</a> <a href="/tags/mvp/" style="font-size: 10px;">mvp</a> <a href="/tags/mvvm/" style="font-size: 10px;">mvvm</a> <a href="/tags/node/" style="font-size: 12px;">node</a> <a href="/tags/node-debug/" style="font-size: 10px;">node debug</a> <a href="/tags/node-wechat/" style="font-size: 18px;">node wechat</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/node、enentLoop/" style="font-size: 10px;">node、enentLoop</a> <a href="/tags/promise、es6/" style="font-size: 10px;">promise、es6</a> <a href="/tags/rap/" style="font-size: 16px;">rap</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/react-ant-design/" style="font-size: 10px;">react ant-design</a> <a href="/tags/reflow、repaint/" style="font-size: 10px;">reflow、repaint</a> <a href="/tags/seo/" style="font-size: 18px;">seo</a> <a href="/tags/seo-新闻源/" style="font-size: 10px;">seo 新闻源</a> <a href="/tags/token、OAuth、鉴权/" style="font-size: 10px;">token、OAuth、鉴权</a> <a href="/tags/vh、vw、css3/" style="font-size: 10px;">vh、vw、css3</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/vue、多面应用/" style="font-size: 10px;">vue、多面应用</a> <a href="/tags/web/" style="font-size: 12px;">web</a> <a href="/tags/web-交互/" style="font-size: 10px;">web 交互</a> <a href="/tags/web、前端/" style="font-size: 10px;">web、前端</a> <a href="/tags/web、性能优化/" style="font-size: 10px;">web、性能优化</a> <a href="/tags/web缓存/" style="font-size: 10px;">web缓存</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/wechat-webstorm/" style="font-size: 10px;">wechat webstorm</a> <a href="/tags/win10、linux/" style="font-size: 10px;">win10、linux</a> <a href="/tags/window-history-html5/" style="font-size: 10px;">window.history html5</a> <a href="/tags/wxapp/" style="font-size: 14px;">wxapp</a> <a href="/tags/xss、csrf/" style="font-size: 10px;">xss、csrf</a> <a href="/tags/yarn-npm/" style="font-size: 10px;">yarn npm</a> <a href="/tags/人生/" style="font-size: 10px;">人生</a> <a href="/tags/前后端分享/" style="font-size: 10px;">前后端分享</a> <a href="/tags/前端脚手架/" style="font-size: 10px;">前端脚手架</a> <a href="/tags/埋点统计/" style="font-size: 10px;">埋点统计</a> <a href="/tags/建站-seo/" style="font-size: 10px;">建站 seo</a> <a href="/tags/性能、异常上报/" style="font-size: 10px;">性能、异常上报</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/生活/" style="font-size: 20px;">生活</a> <a href="/tags/移动端、fixed/" style="font-size: 10px;">移动端、fixed</a> <a href="/tags/统计、cloc/" style="font-size: 10px;">统计、cloc</a> <a href="/tags/解构赋值-es6/" style="font-size: 10px;">解构赋值 es6</a> <a href="/tags/跨域、postMessage、html5/" style="font-size: 10px;">跨域、postMessage、html5</a> <a href="/tags/路由-html5/" style="font-size: 10px;">路由 html5</a> <a href="/tags/防抖、节流/" style="font-size: 10px;">防抖、节流</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.webywx.com/">前端博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.yanwenxi.site/">web小站</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">前端在路上</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">前端在路上</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+			        
+						<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-knowledgePoint" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/12/28/knowledgePoint/" class="article-date">
+  	<time datetime="2017-12-28T06:12:39.000Z" itemprop="datePublished">2017-12-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端知识点记录
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1、中文版chrome默认最小字号12px，如何设置小于12px的字体？"><a href="#1、中文版chrome默认最小字号12px，如何设置小于12px的字体？" class="headerlink" title="1、中文版chrome默认最小字号12px，如何设置小于12px的字体？"></a>1、中文版chrome默认最小字号12px，如何设置小于12px的字体？</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.small-font&#123; //chrome浏览器   </span><br><span class="line">　　　  font-size:12px; </span><br><span class="line">        -webkit-transform-origin-x: 0;</span><br><span class="line">        -webkit-transform: scale(0.90);//利用css3的缩放，其最终大小是12*0.9=10.8px;</span><br><span class="line">        &#125;</span><br><span class="line"> .smallsize-font&#123;</span><br><span class="line">     font-size:10.8px; //IE浏览器</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2、配置hosts文件"><a href="#2、配置hosts文件" class="headerlink" title="2、配置hosts文件"></a>2、配置hosts文件</h3><p>在浏览器中输入www.baidu.com之后，系统会先检查本地hosts文件是否存在域名映射，如果存在，则域名解析到此完成，在本地开发时大都是这么做。</p>
+<h3 id="3、建立测试数据"><a href="#3、建立测试数据" class="headerlink" title="3、建立测试数据"></a>3、建立测试数据</h3><p>项目下建立一个mock文件夹，里面直接新建json文件用来模拟请求回来的数据，比如goodslist.json。注：json文件里不能写注释，不能有多余的逗号，key需要用双引号包起来。</p>
+<h3 id="4、shell-终端"><a href="#4、shell-终端" class="headerlink" title="4、shell 终端"></a>4、shell 终端</h3><p>command+t 可以打开一个新的shell终端窗口，mac可以连续打开多个终端窗口。</p>
+<p>终端里可以直接手动拖入文件，他会自动识别出文件路径，而不用依次手动输入路径。</p>
+<h3 id="5、pm2"><a href="#5、pm2" class="headerlink" title="5、pm2"></a>5、pm2</h3><p>用pm2启动node程序，可以监控请求日志，可在一个终端窗口下启动多个进程，可在同一窗口下做更多的操作。</p>
+<p>mongoose是对mongodb的封装及扩展。</p>
+<p>res.end()输出的是字符串，res.json()可直接输出json串。</p>
+<p>websocket用的是ws协议。</p>
+<h3 id="6、node"><a href="#6、node" class="headerlink" title="6、node"></a>6、node</h3><p>1、基于chrome v8引擎   2、单线程    3、用js开发后端代码    4、非阻塞I/O</p>
+<p>Express框架：通过express-generator生成器快速构建一个项目  ，构建完成后先安装依赖，在运行项目。</p>
+<p>bin文件夹里放的是可执行文件。</p>
+<p>vue里：assets 和static都是用来存放静态资源的，assets更加偏向于放组件的资源。页面上的资源放在static.(static里的图片不会转变，它会以src的方式加载，一般都相对来说较大，而assets里的图片相对较小，一般都会打包到页面，不会以src的方式加载，一般会转成base64.)</p>
+<h3 id="7、js获取UA-user-agent-用户代理"><a href="#7、js获取UA-user-agent-用户代理" class="headerlink" title="7、js获取UA(user agent)用户代理"></a>7、js获取UA(user agent)用户代理</h3><p>通过navigator对象来获取：</p>
+<p>navigator.appName;//返回浏览器的的名称</p>
+<p>navigator.appCodeName;//返回浏览器的代码名</p>
+<p>navigator.appVersion;//返回浏览器的平台和版本信息</p>
+<p>userAgent 返回由客户机发送服务器的user-agent头部的值</p>
+<p>platform 返回运行浏览器的操作系统平台 </p>
+<p>cookieEnabled 返回指明浏览器中是否启用cookie的布尔值</p>
+<p>其他参数可以参照navigator对象</p>
+<h3 id="8、form表单"><a href="#8、form表单" class="headerlink" title="8、form表单"></a>8、form表单</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;form name=&quot;testform&quot; action=&quot;&quot; onsubmit=&quot;某个方法&quot;&gt;</span><br><span class="line">	&lt;input type=&quot;text&quot; name=&quot;fname&quot; /&gt;</span><br><span class="line">	&lt;input type=&quot;submit&quot; value=&quot;提交&quot; /&gt;//点击提交按钮时会触发onsubmit事件</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="9、jquery的ajax返回的是promise对象吗"><a href="#9、jquery的ajax返回的是promise对象吗" class="headerlink" title="9、jquery的ajax返回的是promise对象吗"></a>9、jquery的ajax返回的是promise对象吗</h3><p>不是，jquery的ajax返回的是deferred对象，通过Promise.resolve()方法将其转换为promise对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var ajaxPromise=Promise.resolve($.ajax(&apos;/mock.json&apos;));</span><br></pre></td></tr></table></figure>
+<h3 id="10、transform与transition区别"><a href="#10、transform与transition区别" class="headerlink" title="10、transform与transition区别"></a>10、transform与transition区别</h3><p>transform:2D/3D转换；  transition:过渡； 两者可单独使用</p>
+<p>transform 属性向元素应用 2D 或 3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜。它并不是一个动态属性，它是一个静态属性，注意它只是改变，并不是一个过程，所以该属性只对元素进行变换，不会产生过渡效果。它只是针对css的各种特殊改变，完全可以看作是与<code>width，height，position</code>等同类的属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">transform:rotate(45deg) 旋转(正数顺时针，负数则逆时针)  参数为度数</span><br><span class="line">transform:scale(.5,2) 缩放    </span><br><span class="line">transform:translate(x轴，y轴)，移动，元素从当前位置移动。</span><br><span class="line">transform:skew(45deg,0) 倾斜</span><br><span class="line">例：</span><br><span class="line">.testTransform&#123;</span><br><span class="line">    width:50px;</span><br><span class="line">    height:50px;</span><br><span class="line">    border:1px solid red;</span><br><span class="line">    transform:rotate(20deg);//使用时需要加上浏览器前缀-webkit/-moz/-ms/-o</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>transition可以实现动态效果，实际上是一定时间之内，一组css属性变换到另一组属性的动画展示过程。</p>
+<p>常用的四个属性：</p>
+<p>transition-property:all; 设置过渡效果的css属性名称</p>
+<p>transition-duration:过渡完成时间  transition-delay:是否延迟过渡</p>
+<p>transition-timing-function：规定速度效果的速度曲线</p>
+<p>一般来说transition属性应用到最初的样式里，而不是放在结束的样式里，即定义动画开始之前的元素外观的样式。只需要给元素设置一次transition，浏览器就会负责以动画展示从一个样式到另一个样式，再返回最初样式的变化过程。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.test1&#123;</span><br><span class="line">     color:black;</span><br><span class="line">  background-color:#fff;</span><br><span class="line">  transition:color,background-color;</span><br><span class="line">  transition-delay:1s, .5s;</span><br><span class="line">&#125;</span><br><span class="line">.test1:hover&#123;</span><br><span class="line">    color:red;</span><br><span class="line">   background-color:#ccc; </span><br><span class="line">&#125;</span><br><span class="line">常见的触发器是几个伪类:hover/:active/:target/:focus,也可以是两个类的改变。</span><br><span class="line"></span><br><span class="line">.test1add&#123;//通过增加或减少类名来实现过渡效果,有相应的css属性变化transition就起作用</span><br><span class="line">    color:green;</span><br><span class="line">   background-color:red; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="11、git-status"><a href="#11、git-status" class="headerlink" title="11、git status"></a>11、git status</h3><p>git status -s 以精简的方式显示文件状态   -s表示short,-s的输出标记会有两列，第一列是对staging区域而言，第二列是对working目录而言。</p>
+<p>工作区有一个隐藏目录.git，这个不算工作区，而是git的版本库。stage暂存区也存在于.git文件夹中。</p>
+<h3 id="12、gitHub用T键搜索"><a href="#12、gitHub用T键搜索" class="headerlink" title="12、gitHub用T键搜索"></a>12、gitHub用T键搜索</h3><p>github搜索某个库时，如libuv，在搜出来的结果中点进去，再直接按’’T键’’进行搜索，可以搜索包含搜索内容的所有文件。</p>
+<h3 id="13、unix时间戳"><a href="#13、unix时间戳" class="headerlink" title="13、unix时间戳"></a>13、unix时间戳</h3><p>Timestamp:现在至1970年的毫秒数。</p>
+<p>unix时间戳转换成标准时间：new Date(Timestamp)=&gt;标准时间</p>
+<h3 id="14、post请求"><a href="#14、post请求" class="headerlink" title="14、post请求"></a>14、post请求</h3><p>发送post请求一定要设置contentType，否则后台收不到请求体内容。发送post请求浏览器将参数自动格式化为key-value形式，如果只传vlaue，调试工具后台请求体参数你会发现’value:’,value当成了键，值为空。默认给转成了k-v形式。一定要规范。</p>
+<h4 id="15、js实现千位分隔符—tolocaleString"><a href="#15、js实现千位分隔符—tolocaleString" class="headerlink" title="15、js实现千位分隔符—tolocaleString()"></a>15、js实现千位分隔符—tolocaleString()</h4><p>数字的千位分隔符：三位一个逗号间隔。实现方法：(Number).toLocaleString()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(111223.562).toLocaleString()等价于Number(&apos;111223.562&apos;).toLocaleString()</span><br><span class="line">结果：&apos;111,223.562&apos;  //注：数字需要用&apos;()&apos;括起来</span><br><span class="line">如果数字为整数的话不想括号来，可以用两个点来调用：111223..toLocaleString()，当数字为小数的时候则不能用两个点的方法。</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/02/15/模块化开发/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          AMD、CMD、CommonJs和ES6对比
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/15/vue-multipage/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vue简单配置多页应用</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2018 前端在路上
+      </div>
+        <div class="footer-right">
+          <a href="http://webywx.com/" target="_blank">webywx</a>  Theme <a href="https://yanwenxi.site" target="_blank">前端在路上</a> by Scorpio
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

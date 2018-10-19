@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>前端性能与异常上报 | 闫文喜的个人前端博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、异常捕获对于web来说，需要捕获的异常无非就是以下两种  接口调用情况 页面逻辑是否错误，例如用户进入页面显示白屏。  对于接口调用情况，在前端通常需要上报客户端相关参数，例如：用户OS与浏览器版本、请求参数（如页面ID）；而对于页面逻辑是否错误问题，通常除了用户OS与浏览器版本外，需要的是报错的堆栈信息及具体报错位置。 #####异常捕获方法 全局捕获可以通过全局监听异常来捕获，通过wind">
+<meta name="keywords" content="性能、异常上报">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端性能与异常上报">
+<meta property="og:url" content="http://yoursite.com/2017/11/15/xingneng/index.html">
+<meta property="og:site_name" content="闫文喜的个人前端博客">
+<meta property="og:description" content="一、异常捕获对于web来说，需要捕获的异常无非就是以下两种  接口调用情况 页面逻辑是否错误，例如用户进入页面显示白屏。  对于接口调用情况，在前端通常需要上报客户端相关参数，例如：用户OS与浏览器版本、请求参数（如页面ID）；而对于页面逻辑是否错误问题，通常除了用户OS与浏览器版本外，需要的是报错的堆栈信息及具体报错位置。 #####异常捕获方法 全局捕获可以通过全局监听异常来捕获，通过wind">
+<meta property="og:locale" content="ch">
+<meta property="og:updated_time" content="2018-10-19T08:44:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端性能与异常上报">
+<meta name="twitter:description" content="一、异常捕获对于web来说，需要捕获的异常无非就是以下两种  接口调用情况 页面逻辑是否错误，例如用户进入页面显示白屏。  对于接口调用情况，在前端通常需要上报客户端相关参数，例如：用户OS与浏览器版本、请求参数（如页面ID）；而对于页面逻辑是否错误问题，通常除了用户OS与浏览器版本外，需要的是报错的堆栈信息及具体报错位置。 #####异常捕获方法 全局捕获可以通过全局监听异常来捕获，通过wind">
+  
+    <link rel="alternative" href="/atom.xml" title="闫文喜的个人前端博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">前端在路上</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+					        
+								<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Benchmark-jsPerf/" style="font-size: 10px;">Benchmark jsPerf</a> <a href="/tags/ES6、promise/" style="font-size: 10px;">ES6、promise</a> <a href="/tags/GraphQL/" style="font-size: 10px;">GraphQL</a> <a href="/tags/H5-移动端优化/" style="font-size: 10px;">H5 移动端优化</a> <a href="/tags/H5、bug/" style="font-size: 10px;">H5、bug</a> <a href="/tags/JS设计模式-设计模式/" style="font-size: 10px;">JS设计模式 设计模式</a> <a href="/tags/Jenkins-CI/" style="font-size: 10px;">Jenkins CI</a> <a href="/tags/Lodash/" style="font-size: 10px;">Lodash</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angular-http-q-promise/" style="font-size: 10px;">angular $http $q promise</a> <a href="/tags/angular-q-promise/" style="font-size: 10px;">angular $q promise</a> <a href="/tags/angular-decorator/" style="font-size: 10px;">angular decorator</a> <a href="/tags/angular-filter/" style="font-size: 10px;">angular filter</a> <a href="/tags/angular-服务/" style="font-size: 10px;">angular 服务</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/angular、-http/" style="font-size: 10px;">angular、$http</a> <a href="/tags/angular、Karma/" style="font-size: 10px;">angular、Karma</a> <a href="/tags/angular、directive/" style="font-size: 10px;">angular、directive</a> <a href="/tags/angular、html5/" style="font-size: 10px;">angular、html5</a> <a href="/tags/angular、module、controller/" style="font-size: 10px;">angular、module、controller</a> <a href="/tags/angular、promise、-q、deferred/" style="font-size: 10px;">angular、promise、$q、deferred</a> <a href="/tags/angular、router/" style="font-size: 10px;">angular、router</a> <a href="/tags/angular、ui-router/" style="font-size: 10px;">angular、ui-router</a> <a href="/tags/angular、表达式、filter/" style="font-size: 10px;">angular、表达式、filter</a> <a href="/tags/app-跨平台/" style="font-size: 10px;">app,跨平台</a> <a href="/tags/aso/" style="font-size: 10px;">aso</a> <a href="/tags/blockchain/" style="font-size: 10px;">blockchain</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/css-1px/" style="font-size: 10px;">css 1px</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/debugger/" style="font-size: 10px;">debugger</a> <a href="/tags/es5-js/" style="font-size: 10px;">es5 js</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/fit/" style="font-size: 10px;">fit</a> <a href="/tags/flex-css/" style="font-size: 10px;">flex css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-github/" style="font-size: 10px;">git github</a> <a href="/tags/h5-webworkers/" style="font-size: 10px;">h5 webworkers</a> <a href="/tags/ifelse/" style="font-size: 10px;">ifelse</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/javascript、object-oriented、继承/" style="font-size: 10px;">javascript、object-oriented、继承</a> <a href="/tags/jest/" style="font-size: 10px;">jest</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/js-Array/" style="font-size: 10px;">js Array</a> <a href="/tags/js-Higher-order-function/" style="font-size: 10px;">js Higher-order-function</a> <a href="/tags/js-closure/" style="font-size: 10px;">js closure</a> <a href="/tags/js-lodash/" style="font-size: 10px;">js lodash</a> <a href="/tags/js-object/" style="font-size: 10px;">js object</a> <a href="/tags/js-scope/" style="font-size: 10px;">js scope</a> <a href="/tags/js-sea-js-模块化/" style="font-size: 10px;">js sea.js 模块化</a> <a href="/tags/js-this/" style="font-size: 10px;">js this</a> <a href="/tags/js-性能调试/" style="font-size: 10px;">js 性能调试</a> <a href="/tags/js-柯里化/" style="font-size: 10px;">js 柯里化</a> <a href="/tags/js-纯函数/" style="font-size: 10px;">js 纯函数</a> <a href="/tags/jsapi/" style="font-size: 10px;">jsapi</a> <a href="/tags/jsevent/" style="font-size: 10px;">jsevent</a> <a href="/tags/js、变态题/" style="font-size: 10px;">js、变态题</a> <a href="/tags/js、设计模式/" style="font-size: 10px;">js、设计模式</a> <a href="/tags/js、跨域、document-domain/" style="font-size: 10px;">js、跨域、document.domain</a> <a href="/tags/js异步编程/" style="font-size: 10px;">js异步编程</a> <a href="/tags/js模块化、AMD、CMD、CommonJs/" style="font-size: 10px;">js模块化、AMD、CMD、CommonJs</a> <a href="/tags/js继承/" style="font-size: 10px;">js继承</a> <a href="/tags/life、意念/" style="font-size: 10px;">life、意念</a> <a href="/tags/lodash-chain/" style="font-size: 10px;">lodash chain</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxhosts/" style="font-size: 10px;">maxhosts</a> <a href="/tags/mongoDB-数据库/" style="font-size: 10px;">mongoDB 数据库</a> <a href="/tags/mvp/" style="font-size: 10px;">mvp</a> <a href="/tags/mvvm/" style="font-size: 10px;">mvvm</a> <a href="/tags/node/" style="font-size: 12px;">node</a> <a href="/tags/node-debug/" style="font-size: 10px;">node debug</a> <a href="/tags/node-wechat/" style="font-size: 18px;">node wechat</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/node、enentLoop/" style="font-size: 10px;">node、enentLoop</a> <a href="/tags/promise、es6/" style="font-size: 10px;">promise、es6</a> <a href="/tags/rap/" style="font-size: 16px;">rap</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/react-ant-design/" style="font-size: 10px;">react ant-design</a> <a href="/tags/reflow、repaint/" style="font-size: 10px;">reflow、repaint</a> <a href="/tags/seo/" style="font-size: 18px;">seo</a> <a href="/tags/seo-新闻源/" style="font-size: 10px;">seo 新闻源</a> <a href="/tags/token、OAuth、鉴权/" style="font-size: 10px;">token、OAuth、鉴权</a> <a href="/tags/vh、vw、css3/" style="font-size: 10px;">vh、vw、css3</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/vue、多面应用/" style="font-size: 10px;">vue、多面应用</a> <a href="/tags/web/" style="font-size: 12px;">web</a> <a href="/tags/web-交互/" style="font-size: 10px;">web 交互</a> <a href="/tags/web、前端/" style="font-size: 10px;">web、前端</a> <a href="/tags/web、性能优化/" style="font-size: 10px;">web、性能优化</a> <a href="/tags/web缓存/" style="font-size: 10px;">web缓存</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/wechat-webstorm/" style="font-size: 10px;">wechat webstorm</a> <a href="/tags/win10、linux/" style="font-size: 10px;">win10、linux</a> <a href="/tags/window-history-html5/" style="font-size: 10px;">window.history html5</a> <a href="/tags/wxapp/" style="font-size: 14px;">wxapp</a> <a href="/tags/xss、csrf/" style="font-size: 10px;">xss、csrf</a> <a href="/tags/yarn-npm/" style="font-size: 10px;">yarn npm</a> <a href="/tags/人生/" style="font-size: 10px;">人生</a> <a href="/tags/前后端分享/" style="font-size: 10px;">前后端分享</a> <a href="/tags/前端脚手架/" style="font-size: 10px;">前端脚手架</a> <a href="/tags/埋点统计/" style="font-size: 10px;">埋点统计</a> <a href="/tags/建站-seo/" style="font-size: 10px;">建站 seo</a> <a href="/tags/性能、异常上报/" style="font-size: 10px;">性能、异常上报</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/生活/" style="font-size: 20px;">生活</a> <a href="/tags/移动端、fixed/" style="font-size: 10px;">移动端、fixed</a> <a href="/tags/统计、cloc/" style="font-size: 10px;">统计、cloc</a> <a href="/tags/解构赋值-es6/" style="font-size: 10px;">解构赋值 es6</a> <a href="/tags/跨域、postMessage、html5/" style="font-size: 10px;">跨域、postMessage、html5</a> <a href="/tags/路由-html5/" style="font-size: 10px;">路由 html5</a> <a href="/tags/防抖、节流/" style="font-size: 10px;">防抖、节流</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.webywx.com/">前端博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.yanwenxi.site/">web小站</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">前端在路上</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">前端在路上</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+			        
+						<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-xingneng" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/11/15/xingneng/" class="article-date">
+  	<time datetime="2017-11-15T06:12:39.000Z" itemprop="datePublished">2017-11-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端性能与异常上报
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能、异常上报/">性能、异常上报</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="一、异常捕获"><a href="#一、异常捕获" class="headerlink" title="一、异常捕获"></a>一、异常捕获</h4><p>对于web来说，需要捕获的异常无非就是以下两种</p>
+<ul>
+<li>接口调用情况</li>
+<li>页面逻辑是否错误，例如用户进入页面显示白屏。</li>
+</ul>
+<p>对于接口调用情况，在前端通常需要上报客户端相关参数，例如：用户OS与浏览器版本、请求参数（如页面ID）；而对于页面逻辑是否错误问题，通常除了用户OS与浏览器版本外，需要的是报错的堆栈信息及具体报错位置。</p>
+<p>#####异常捕获方法</p>
+<h5 id="全局捕获"><a href="#全局捕获" class="headerlink" title="全局捕获"></a>全局捕获</h5><p>可以通过全局监听异常来捕获，通过window.onerror或者addEventListener,举个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">window.onerror = function(errorMessage,scriptURI,lineNo,columnNo,error)&#123;</span><br><span class="line">    console.log(&apos;errorMessage: &apos; + errorMessage); // 异常信息</span><br><span class="line">  console.log(&apos;scriptURI: &apos; + scriptURI); // 异常文件路径</span><br><span class="line">  console.log(&apos;lineNo: &apos; + lineNo); // 异常行号</span><br><span class="line">  console.log(&apos;columnNo: &apos; + columnNo); // 异常列号</span><br><span class="line">  console.log(&apos;error: &apos; + error); // 异常堆栈信息</span><br><span class="line">  // ...</span><br><span class="line">  // 异常上报</span><br><span class="line">&#125;</span><br><span class="line">throw new Error(&apos;这是一个错误示例&apos;)</span><br></pre></td></tr></table></figure>
+<p>通过<code>window.onerror</code>事件，可以得到具体的异常信息、异常文件的URL、异常的行号与列号及异常的堆栈信息，再捕获异常后，统一上报至我们的日志服务器。</p>
+<p>亦或是，通过<code>window.addEventListener</code>方法来进行异常上报，道理同理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">window.addEventListener(&apos;error&apos;,function(各个参数)&#123;</span><br><span class="line">    console.log(arguments); </span><br><span class="line">  // 异常上报</span><br><span class="line">&#125;)</span><br><span class="line">throw new Error(&apos;这是一个错误&apos;);</span><br></pre></td></tr></table></figure>
+<h5 id="try…catch"><a href="#try…catch" class="headerlink" title="try…catch"></a>try…catch</h5><p>使用<code>try... catch</code>虽然能够较好地进行异常捕获，不至于使得页面由于一处错误挂掉，但<code>try ... catch</code>捕获方式显得过于臃肿，大多代码使用<code>try ... catch</code>包裹，影响代码可读性。</p>
+<h4 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h4><h5 id="跨域脚本无法准确捕获异常"><a href="#跨域脚本无法准确捕获异常" class="headerlink" title="跨域脚本无法准确捕获异常"></a>跨域脚本无法准确捕获异常</h5><p>跨域之后<code>window.onerror</code>根本捕获不到正确的异常信息，而是统一返回一个<code>Script error</code>，</p>
+<p>解决方案：对<code>script</code>标签增加一个<code>crossorigin=”anonymous”</code>，并且服务器添加<code>Access-Control-Allow-Origin</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;http://cdn.xxx.com/index.js&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">index.js</span><br><span class="line">throw new Error(&apos;这是一个错误&apos;)//此时onerror就能正常监听到indexjs抛出的错误</span><br></pre></td></tr></table></figure>
+<h5 id="sourceMap"><a href="#sourceMap" class="headerlink" title="sourceMap"></a>sourceMap</h5><p>通常在生产环境下的代码是经过<code>webpack</code>打包后压缩混淆的代码，我们发现所有的报错的代码行数都在第一行了，为什么呢？这是因为在生产环境下，我们的代码被压缩成了一行：</p>
+<p>解决办法是开启<code>webpack</code>的<code>source-map</code>，我们利用<code>webpack</code>打包后的生成的一份<code>.map</code>的脚本文件就可以让浏览器对错误位置进行追踪了。其实就是<code>webpack.config.js</code>中加上一行<code>devtool: &#39;source-map&#39;</code>.</p>
+<p>开启<code>source-map</code>的缺陷是兼容性，目前只有<code>Chrome</code>浏览器和<code>Firefox</code>浏览器才对<code>source-map</code>支持。不过我们对这一类情况也有解决办法。可以使用引入<code>npm</code>库来支持<code>source-map</code>，这个库可以运行在客户端也可以运行在服务端。</p>
+<h3 id="二、性能监控"><a href="#二、性能监控" class="headerlink" title="二、性能监控"></a>二、性能监控</h3><h4 id="最简单的性能监控"><a href="#最简单的性能监控" class="headerlink" title="最简单的性能监控"></a>最简单的性能监控</h4><p>最常见的性能监控需求则是需要我们统计用户从开始请求页面到所有<code>DOM</code>元素渲染完成的时间，也就是俗称的首屏加载时间，<code>DOM</code>提供了这一接口，监听<code>document</code>的<code>DOMContentLoaded</code>事件与<code>window</code>的<code>load</code>事件可统计页面首屏加载时间即所有<code>DOM</code>渲染时间：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;title&gt;&lt;/title&gt;</span><br><span class="line">  &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    // 记录页面加载开始时间</span><br><span class="line">    var timerStart = Date.now();</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">  &lt;!-- 加载静态资源，如样式资源 --&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;!-- 加载静态JS资源 --&gt;</span><br><span class="line">  &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    document.addEventListener(&apos;DOMContentLoaded&apos;, function() &#123;</span><br><span class="line">      console.log(&quot;DOM 挂载时间: &quot;, Date.now() - timerStart);</span><br><span class="line">      // 性能日志上报</span><br><span class="line">    &#125;);</span><br><span class="line">    window.addEventListener(&apos;load&apos;, function() &#123;</span><br><span class="line">      console.log(&quot;所有资源加载完成时间: &quot;, Date.now()-timerStart);</span><br><span class="line">      // 性能日志上报</span><br><span class="line">    &#125;);</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>对于使用框架，如<code>Vue</code>或者说<code>React</code>，组件是异步渲染然后挂载到<code>DOM</code>的，在页面初始化时并没有太多的<code>DOM</code>节点，可以参考下文<a href="https://link.juejin.im/?target=https%3A%2F%2Fsegmentfault.com%2Fa%2F1190000013016763" target="_blank" rel="noopener">关于首屏时间采集自动化的解决方案</a>来对渲染时间进行打点。</p>
+<h4 id="performance"><a href="#performance" class="headerlink" title="performance"></a>performance</h4><p>但是以上时间的监控过于粗略，例如我们想统计文档的网络加载耗时、解析<code>DOM</code>的耗时与渲染<code>DOM</code>的耗时，就不太好办到了，所幸的是浏览器提供了<code>window.performance</code>接口，几乎所有的浏览器都支持此接口。</p>
+<p><code>window,performance</code>主要包括有<code>memory</code>、<code>navigation</code>、<code>timing</code>以及<code>timeOrigin</code>及<code>onresourcetimingbufferfull</code>方法。</p>
+<h4 id="计算网站性能"><a href="#计算网站性能" class="headerlink" title="计算网站性能"></a>计算网站性能</h4><p>使用<code>performance</code>的<code>timing</code>属性，可以拿到页面性能相关的数据</p>
+<h3 id="三、日志上报"><a href="#三、日志上报" class="headerlink" title="三、日志上报"></a>三、日志上报</h3><p>####单独的日志域名</p>
+<p>对于日志上报使用单独的日志域名的目的是避免对业务造成影响。其一，对于服务器来说，我们肯定不希望占用业务服务器的计算资源，也不希望过多的日志在业务服务器堆积，造成业务服务器的存储空间不够的情况。其二，我们知道在页面初始化的过程中，会对页面加载时间、PV、UV等数据进行上报，这些上报请求会和加载业务数据几乎是同时刻发出，而浏览器一般会对同一个域名的请求量有并发数的限制，如<code>Chrome</code>会有对并发数为<code>6</code>个的限制。因此需要对日志系统单独设定域名，最小化对页面加载性能造成的影响。</p>
+<h4 id="跨域问题"><a href="#跨域问题" class="headerlink" title="跨域问题"></a>跨域问题</h4><p>对于单独的日志域名，肯定会涉及到跨域的问题，采取的解决方案一般有以下两种：</p>
+<ul>
+<li>一种是构造空的<code>Image</code>对象的方式，其原因是请求图片并不涉及到跨域的问题；</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var url = &apos;xxx&apos;;</span><br><span class="line">new Image().src = url;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>利用<code>Ajax</code>上报日志，必须对日志服务器接口开启跨域请求头部<code>Access-Control-Allow-Origin:*</code>，这里<code>Ajax</code>就并不强制使用<code>GET</code>请求了，即可克服<code>URL</code>长度限制的问题。</li>
+</ul>
+<p>大多使用的是第一种的方式，也就是构造空的<code>Image</code>对象，但是我们知道对于<code>GET</code>请求会有长度的限制，需要确保的是请求的长度不会超过阈值。</p>
+<h4 id="省去响应主体"><a href="#省去响应主体" class="headerlink" title="省去响应主体"></a>省去响应主体</h4><p>使用的是第一种的方式，也就是构造空的<code>Image</code>对象，但是我们知道对于<code>GET</code>请求会有长度的限制，需要确保的是请求的长度不会超过阈值。</p>
+<h4 id="合并上报"><a href="#合并上报" class="headerlink" title="合并上报"></a>合并上报</h4><p>类似于雪碧图的思想，如果我们的应用需要上报的日志数量很多，那么有必要合并日志进行统一的上报。</p>
+<p>解决方案可以是尝试在用户离开页面或者组件销毁时发送一个异步的<code>POST</code>请求来进行上报，但是尝试在卸载（<code>unload</code>）文档之前向<code>web</code>服务器发送数据。保证在文档卸载期间发送数据一直是一个困难。因为用户代理通常会忽略在卸载事件处理器中产生的异步<code>XMLHttpRequest</code>，因为此时已经会跳转到下一个页面。所以这里是必须设置为同步的<code>XMLHttpRequest</code>请求。</p>
+<p>使用同步的方式势必会对用户体验造成影响，甚至会让用户感受到浏览器卡死感觉，对于产品而言，体验非常不好，可以使用<code>sendBeacon()</code>方法，将会使用户代理在有机会时异步地向服务器发送数据，同时不会延迟页面的卸载或影响下一导航的载入性能。这就解决了提交分析数据时的所有的问题：使它可靠，异步并且不会影响下一页面的加载。此外，代码实际上还要比其他技术简单！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">window.addEventListener(&apos;unload&apos;, logData, false);</span><br><span class="line"></span><br><span class="line">function logData() &#123;</span><br><span class="line">    navigator.sendBeacon(&quot;/log&quot;, analyticsData);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>代码难免有问题，对于异常可以使用<code>window.onerror</code>或者<code>addEventListener</code>的方式添加全局的异常捕获侦听函数，但可能使用这种方式无法正确捕获到错误：对于跨域的脚本，需要对<code>script</code>标签增加一个<code>crossorigin=”anonymous”</code>；对于生产环境打包的代码，无法正确定位到异常产生的行数，可以使用<code>source-map</code>来解决；而对于使用框架的情况，需要在框架统一的异常捕获处埋点。</p>
+<p>而对于性能的监控，所幸的是浏览器提供了<code>window.performance API</code>，通过这个<code>API</code>，很便捷地获取到当前页面性能相关的数据。</p>
+<p>而这些异常和性能数据如何上报呢？一般说来，为了避免对业务产生的影响，会单独建立日志服务器和日志域名，但对于不同的域名，又会产生跨域的问题。我们可以通过构造空的<code>Image</code>对象来解决，亦或是通过设定跨域请求头部<code>Access-Control-Allow-Origin:*</code>来解决。此外，如果上报的性能和日志数据高频触发，则可以在页面<code>unload</code>时统一上报，而<code>unload</code>时的异步请求又可能会被浏览器所忽略，且不能改为同步请求。此时<code>navigator.sendBeacon API</code>可算帮了我们大忙，它可用于通过<code>HTTP</code>将少量数据异步传输到<code>Web</code>服务器。而忽略页面<code>unload</code>时的影响。</p>
+<p>出处链接：<a href="https://juejin.im/post/5b5dcfb46fb9a04f8f37afbb" target="_blank" rel="noopener">https://juejin.im/post/5b5dcfb46fb9a04f8f37afbb</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/15/JsEvent-loop/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          js事件循环
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/15/TDZ/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">es6中的暂时性死区</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2018 前端在路上
+      </div>
+        <div class="footer-right">
+          <a href="http://webywx.com/" target="_blank">webywx</a>  Theme <a href="https://yanwenxi.site" target="_blank">前端在路上</a> by Scorpio
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

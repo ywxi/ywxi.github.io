@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>flexbox布局学习 | 闫文喜的个人前端博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="适用于父元素上：display:flex;  //设置为弹性盒模型 flex-direction：row/row-reverse/column/column-reverse 确定主轴方向,此设置项设置的是子元素的排列方向。 flex-wrap:nowrap/wrap/wrap-reverse   弹性盒的子元素超出父容器时是否换行。 flex-flow: ‘flex-direction’ ‘fle">
+<meta name="keywords" content="flexbox">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flexbox布局学习">
+<meta property="og:url" content="http://yoursite.com/2017/08/15/flexbox/index.html">
+<meta property="og:site_name" content="闫文喜的个人前端博客">
+<meta property="og:description" content="适用于父元素上：display:flex;  //设置为弹性盒模型 flex-direction：row/row-reverse/column/column-reverse 确定主轴方向,此设置项设置的是子元素的排列方向。 flex-wrap:nowrap/wrap/wrap-reverse   弹性盒的子元素超出父容器时是否换行。 flex-flow: ‘flex-direction’ ‘fle">
+<meta property="og:locale" content="ch">
+<meta property="og:updated_time" content="2018-10-19T08:40:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="flexbox布局学习">
+<meta name="twitter:description" content="适用于父元素上：display:flex;  //设置为弹性盒模型 flex-direction：row/row-reverse/column/column-reverse 确定主轴方向,此设置项设置的是子元素的排列方向。 flex-wrap:nowrap/wrap/wrap-reverse   弹性盒的子元素超出父容器时是否换行。 flex-flow: ‘flex-direction’ ‘fle">
+  
+    <link rel="alternative" href="/atom.xml" title="闫文喜的个人前端博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">前端在路上</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+					        
+								<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Benchmark-jsPerf/" style="font-size: 10px;">Benchmark jsPerf</a> <a href="/tags/ES6、promise/" style="font-size: 10px;">ES6、promise</a> <a href="/tags/GraphQL/" style="font-size: 10px;">GraphQL</a> <a href="/tags/H5-移动端优化/" style="font-size: 10px;">H5 移动端优化</a> <a href="/tags/H5、bug/" style="font-size: 10px;">H5、bug</a> <a href="/tags/JS设计模式-设计模式/" style="font-size: 10px;">JS设计模式 设计模式</a> <a href="/tags/Jenkins-CI/" style="font-size: 10px;">Jenkins CI</a> <a href="/tags/Lodash/" style="font-size: 10px;">Lodash</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angular-http-q-promise/" style="font-size: 10px;">angular $http $q promise</a> <a href="/tags/angular-q-promise/" style="font-size: 10px;">angular $q promise</a> <a href="/tags/angular-decorator/" style="font-size: 10px;">angular decorator</a> <a href="/tags/angular-filter/" style="font-size: 10px;">angular filter</a> <a href="/tags/angular-服务/" style="font-size: 10px;">angular 服务</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/angular、-http/" style="font-size: 10px;">angular、$http</a> <a href="/tags/angular、Karma/" style="font-size: 10px;">angular、Karma</a> <a href="/tags/angular、directive/" style="font-size: 10px;">angular、directive</a> <a href="/tags/angular、html5/" style="font-size: 10px;">angular、html5</a> <a href="/tags/angular、module、controller/" style="font-size: 10px;">angular、module、controller</a> <a href="/tags/angular、promise、-q、deferred/" style="font-size: 10px;">angular、promise、$q、deferred</a> <a href="/tags/angular、router/" style="font-size: 10px;">angular、router</a> <a href="/tags/angular、ui-router/" style="font-size: 10px;">angular、ui-router</a> <a href="/tags/angular、表达式、filter/" style="font-size: 10px;">angular、表达式、filter</a> <a href="/tags/app-跨平台/" style="font-size: 10px;">app,跨平台</a> <a href="/tags/aso/" style="font-size: 10px;">aso</a> <a href="/tags/blockchain/" style="font-size: 10px;">blockchain</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/css-1px/" style="font-size: 10px;">css 1px</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/debugger/" style="font-size: 10px;">debugger</a> <a href="/tags/es5-js/" style="font-size: 10px;">es5 js</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/fit/" style="font-size: 10px;">fit</a> <a href="/tags/flex-css/" style="font-size: 10px;">flex css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-github/" style="font-size: 10px;">git github</a> <a href="/tags/h5-webworkers/" style="font-size: 10px;">h5 webworkers</a> <a href="/tags/ifelse/" style="font-size: 10px;">ifelse</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/javascript、object-oriented、继承/" style="font-size: 10px;">javascript、object-oriented、继承</a> <a href="/tags/jest/" style="font-size: 10px;">jest</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/js-Array/" style="font-size: 10px;">js Array</a> <a href="/tags/js-Higher-order-function/" style="font-size: 10px;">js Higher-order-function</a> <a href="/tags/js-closure/" style="font-size: 10px;">js closure</a> <a href="/tags/js-lodash/" style="font-size: 10px;">js lodash</a> <a href="/tags/js-object/" style="font-size: 10px;">js object</a> <a href="/tags/js-scope/" style="font-size: 10px;">js scope</a> <a href="/tags/js-sea-js-模块化/" style="font-size: 10px;">js sea.js 模块化</a> <a href="/tags/js-this/" style="font-size: 10px;">js this</a> <a href="/tags/js-性能调试/" style="font-size: 10px;">js 性能调试</a> <a href="/tags/js-柯里化/" style="font-size: 10px;">js 柯里化</a> <a href="/tags/js-纯函数/" style="font-size: 10px;">js 纯函数</a> <a href="/tags/jsapi/" style="font-size: 10px;">jsapi</a> <a href="/tags/jsevent/" style="font-size: 10px;">jsevent</a> <a href="/tags/js、变态题/" style="font-size: 10px;">js、变态题</a> <a href="/tags/js、设计模式/" style="font-size: 10px;">js、设计模式</a> <a href="/tags/js、跨域、document-domain/" style="font-size: 10px;">js、跨域、document.domain</a> <a href="/tags/js异步编程/" style="font-size: 10px;">js异步编程</a> <a href="/tags/js模块化、AMD、CMD、CommonJs/" style="font-size: 10px;">js模块化、AMD、CMD、CommonJs</a> <a href="/tags/js继承/" style="font-size: 10px;">js继承</a> <a href="/tags/life、意念/" style="font-size: 10px;">life、意念</a> <a href="/tags/lodash-chain/" style="font-size: 10px;">lodash chain</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxhosts/" style="font-size: 10px;">maxhosts</a> <a href="/tags/mongoDB-数据库/" style="font-size: 10px;">mongoDB 数据库</a> <a href="/tags/mvp/" style="font-size: 10px;">mvp</a> <a href="/tags/mvvm/" style="font-size: 10px;">mvvm</a> <a href="/tags/node/" style="font-size: 12px;">node</a> <a href="/tags/node-debug/" style="font-size: 10px;">node debug</a> <a href="/tags/node-wechat/" style="font-size: 18px;">node wechat</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/node、enentLoop/" style="font-size: 10px;">node、enentLoop</a> <a href="/tags/promise、es6/" style="font-size: 10px;">promise、es6</a> <a href="/tags/rap/" style="font-size: 16px;">rap</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/react-ant-design/" style="font-size: 10px;">react ant-design</a> <a href="/tags/reflow、repaint/" style="font-size: 10px;">reflow、repaint</a> <a href="/tags/seo/" style="font-size: 18px;">seo</a> <a href="/tags/seo-新闻源/" style="font-size: 10px;">seo 新闻源</a> <a href="/tags/token、OAuth、鉴权/" style="font-size: 10px;">token、OAuth、鉴权</a> <a href="/tags/vh、vw、css3/" style="font-size: 10px;">vh、vw、css3</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/vue、多面应用/" style="font-size: 10px;">vue、多面应用</a> <a href="/tags/web/" style="font-size: 12px;">web</a> <a href="/tags/web-交互/" style="font-size: 10px;">web 交互</a> <a href="/tags/web、前端/" style="font-size: 10px;">web、前端</a> <a href="/tags/web、性能优化/" style="font-size: 10px;">web、性能优化</a> <a href="/tags/web缓存/" style="font-size: 10px;">web缓存</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/wechat-webstorm/" style="font-size: 10px;">wechat webstorm</a> <a href="/tags/win10、linux/" style="font-size: 10px;">win10、linux</a> <a href="/tags/window-history-html5/" style="font-size: 10px;">window.history html5</a> <a href="/tags/wxapp/" style="font-size: 14px;">wxapp</a> <a href="/tags/xss、csrf/" style="font-size: 10px;">xss、csrf</a> <a href="/tags/yarn-npm/" style="font-size: 10px;">yarn npm</a> <a href="/tags/人生/" style="font-size: 10px;">人生</a> <a href="/tags/前后端分享/" style="font-size: 10px;">前后端分享</a> <a href="/tags/前端脚手架/" style="font-size: 10px;">前端脚手架</a> <a href="/tags/埋点统计/" style="font-size: 10px;">埋点统计</a> <a href="/tags/建站-seo/" style="font-size: 10px;">建站 seo</a> <a href="/tags/性能、异常上报/" style="font-size: 10px;">性能、异常上报</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/生活/" style="font-size: 20px;">生活</a> <a href="/tags/移动端、fixed/" style="font-size: 10px;">移动端、fixed</a> <a href="/tags/统计、cloc/" style="font-size: 10px;">统计、cloc</a> <a href="/tags/解构赋值-es6/" style="font-size: 10px;">解构赋值 es6</a> <a href="/tags/跨域、postMessage、html5/" style="font-size: 10px;">跨域、postMessage、html5</a> <a href="/tags/路由-html5/" style="font-size: 10px;">路由 html5</a> <a href="/tags/防抖、节流/" style="font-size: 10px;">防抖、节流</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.webywx.com/">前端博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.yanwenxi.site/">web小站</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">前端在路上</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">前端在路上</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+			        
+						<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-flexbox" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/15/flexbox/" class="article-date">
+  	<time datetime="2017-08-15T06:12:39.000Z" itemprop="datePublished">2017-08-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      flexbox布局学习
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flexbox/">flexbox</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="适用于父元素上："><a href="#适用于父元素上：" class="headerlink" title="适用于父元素上："></a>适用于父元素上：</h3><p>display:flex;  //设置为弹性盒模型</p>
+<p>flex-direction：row/row-reverse/column/column-reverse 确定主轴方向,此设置项设置的是子元素的排列方向。</p>
+<p>flex-wrap:nowrap/wrap/wrap-reverse   弹性盒的子元素超出父容器时是否换行。</p>
+<p>flex-flow: ‘flex-direction’ ‘flex-wrap’    两者的复合写法</p>
+<p>justify-content:flex-start/flex-end/center/space-between/space-around  确定在主轴方向上的对齐方式</p>
+<p>align-items:flex-start/flex-end/center/baseline/stretch 确定子元素在交叉轴上的对齐方式（stretch：意思是尽可能的拉伸，子元素不能设置高度才能生效。）</p>
+<p>align-content: flex-start/flex-end/center/space-between/space-around /stretch 用来处理交叉轴的空白区域。(只有一行此属性不生效，适用于超出换行的情况)</p>
+<h3 id="适用于子元素上："><a href="#适用于子元素上：" class="headerlink" title="适用于子元素上："></a>适用于子元素上：</h3><p>align-self: 用来覆盖父容器指定的对齐方式（交叉轴方向）。除了align-items值之外，还可以设置为auto;当其设置为auto时，其计算值是父节点的属性align-items的值。如果该节点没有父节点，则计算值为“stretch”.</p>
+<p>order:用整数值来定义排列顺序，数值小的排在前面。可以为负值。</p>
+<h5 id="下面是不常用的"><a href="#下面是不常用的" class="headerlink" title="下面是不常用的"></a>下面是不常用的</h5><p>flex-grow:<number>(default 0)   不允许为负值。设置或检索弹性盒的扩展比例。如果有剩余空间，根据弹性盒子元素所设置的扩展因子作为比率为分配剩余的空间。当有多余空间时此属性起作用。</number></p>
+<p>flex-shrink:<number>(default 1)  设置或检索弹性盒的收缩比率（根据弹性盒子元素所设置的收缩因子作为比率来收缩空间）当有内容溢出时此属性起作用。</number></p>
+<p>Flex:none或者flex-grow flex-shrink flex-basic  复合属性。设置或检索伸缩盒对象的子元素如何分配空间。值为none,计算值为 0 0 auto.如果缩写flex:1,则计算值为 1 1 0%;</p>
+<p>Flex-basis:定义弹性盒子元素的默认基准值。子元素扩展内容或者收缩内容时以flex-basis的值为基准。</p>
+<p>Flex-basis的值可以为auto、百分比、具体的px值。设置为百分比时是相对于父元素的百分比。如果设置了除auto以外的值 ，则对子元素设置的width不起作用。如果设置值为auto,则宽度以width值为准。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">flex:0 1 auto; =&gt;flex的默认值</span><br><span class="line">flex:1;=&gt;flex:1 1 0%;</span><br><span class="line">flex:none;=&gt;flex：0 0 auto;</span><br><span class="line">flex:auto;=&gt;flex:1 1 auto;</span><br></pre></td></tr></table></figure>
+<p>最后记住：flex也有兼容性问题。分为09版本和12版本，兼容写法可以参考swiper。其实每个版本只是属性名和值不一样，意思是一样滴。</p>
+<p>下面举个三栏布局的应用粟子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    *&#123;</span><br><span class="line">        margin: 0;</span><br><span class="line">        padding: 0;</span><br><span class="line">    &#125;</span><br><span class="line">    .wrap &gt; *&#123;</span><br><span class="line">        height: 100px;</span><br><span class="line">        width: 100%;</span><br><span class="line">    &#125;</span><br><span class="line">    .wrap&#123;</span><br><span class="line">        display: flex;</span><br><span class="line">        flex-wrap: wrap;</span><br><span class="line">    &#125;</span><br><span class="line">    .header&#123;</span><br><span class="line">         background-color: red;</span><br><span class="line">     &#125;</span><br><span class="line">    .main&#123;</span><br><span class="line">        background-color: #27ff21;</span><br><span class="line">        height: 200px;</span><br><span class="line">    &#125;</span><br><span class="line">    .aside1&#123;</span><br><span class="line">        background-color: #fff419;</span><br><span class="line">        height: 200px;</span><br><span class="line">    &#125;</span><br><span class="line">    .aside2&#123;</span><br><span class="line">        background-color: #3b24ff;</span><br><span class="line">        height: 200px;</span><br><span class="line">    &#125;</span><br><span class="line">    .footer&#123;</span><br><span class="line">        background-color: #ff985c;</span><br><span class="line">    &#125;</span><br><span class="line">    @media all and (min-width: 600px) &#123;</span><br><span class="line">        .aside&#123;</span><br><span class="line">            flex:1 0%;/*省略了收缩比例，等同于flex:1 1 0%*/</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    @media all and (min-width: 800px) &#123;</span><br><span class="line">        .main&#123;</span><br><span class="line">            flex:2 0%;/*flex-basis设置为除auto以处的值，此时宽度不生效了*/</span><br><span class="line">        &#125;</span><br><span class="line">        .aside1&#123;</span><br><span class="line">            order: -1;</span><br><span class="line">        &#125;</span><br><span class="line">        .header&#123;</span><br><span class="line">            order:-2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;header&quot;&gt;header&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;main&quot;&gt;main&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;aside aside1&quot;&gt;aside1&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;aside aside2&quot;&gt;aside2&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;footer&quot;&gt;footer&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/15/debounceAndthrottle/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          防抖和节流的节流的相关学习
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/15/repaintandreflow/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">浏览器渲染之重排与重绘</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2018 前端在路上
+      </div>
+        <div class="footer-right">
+          <a href="http://webywx.com/" target="_blank">webywx</a>  Theme <a href="https://yanwenxi.site" target="_blank">前端在路上</a> by Scorpio
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

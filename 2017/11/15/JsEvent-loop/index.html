@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>js事件循环 | 闫文喜的个人前端博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JS是单线程的js是单线程的脚本语言，在同一时间只能干一件事，为了协调事件、用互交互、脚本和UI渲染等行为，防止主线程阻塞，Event Loop方案就诞生了 为什么是单线程呢？举个粟子，js主要用途之一是操作DOM，假如js同时有两个线程，同时对同一个dom进行操作，这时浏览器会蒙蔽了，不知道听哪个线程了，没有办法谁的优先级高，所以避免此问题，js是单线程的。 执行栈与任务队列#####1、执行栈">
+<meta name="keywords" content="jsevent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js事件循环">
+<meta property="og:url" content="http://yoursite.com/2017/11/15/JsEvent-loop/index.html">
+<meta property="og:site_name" content="闫文喜的个人前端博客">
+<meta property="og:description" content="JS是单线程的js是单线程的脚本语言，在同一时间只能干一件事，为了协调事件、用互交互、脚本和UI渲染等行为，防止主线程阻塞，Event Loop方案就诞生了 为什么是单线程呢？举个粟子，js主要用途之一是操作DOM，假如js同时有两个线程，同时对同一个dom进行操作，这时浏览器会蒙蔽了，不知道听哪个线程了，没有办法谁的优先级高，所以避免此问题，js是单线程的。 执行栈与任务队列#####1、执行栈">
+<meta property="og:locale" content="ch">
+<meta property="og:updated_time" content="2018-10-19T08:36:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js事件循环">
+<meta name="twitter:description" content="JS是单线程的js是单线程的脚本语言，在同一时间只能干一件事，为了协调事件、用互交互、脚本和UI渲染等行为，防止主线程阻塞，Event Loop方案就诞生了 为什么是单线程呢？举个粟子，js主要用途之一是操作DOM，假如js同时有两个线程，同时对同一个dom进行操作，这时浏览器会蒙蔽了，不知道听哪个线程了，没有办法谁的优先级高，所以避免此问题，js是单线程的。 执行栈与任务队列#####1、执行栈">
+  
+    <link rel="alternative" href="/atom.xml" title="闫文喜的个人前端博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">前端在路上</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+					        
+								<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Benchmark-jsPerf/" style="font-size: 10px;">Benchmark jsPerf</a> <a href="/tags/ES6、promise/" style="font-size: 10px;">ES6、promise</a> <a href="/tags/GraphQL/" style="font-size: 10px;">GraphQL</a> <a href="/tags/H5-移动端优化/" style="font-size: 10px;">H5 移动端优化</a> <a href="/tags/H5、bug/" style="font-size: 10px;">H5、bug</a> <a href="/tags/JS设计模式-设计模式/" style="font-size: 10px;">JS设计模式 设计模式</a> <a href="/tags/Jenkins-CI/" style="font-size: 10px;">Jenkins CI</a> <a href="/tags/Lodash/" style="font-size: 10px;">Lodash</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angular-http-q-promise/" style="font-size: 10px;">angular $http $q promise</a> <a href="/tags/angular-q-promise/" style="font-size: 10px;">angular $q promise</a> <a href="/tags/angular-decorator/" style="font-size: 10px;">angular decorator</a> <a href="/tags/angular-filter/" style="font-size: 10px;">angular filter</a> <a href="/tags/angular-服务/" style="font-size: 10px;">angular 服务</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/angular、-http/" style="font-size: 10px;">angular、$http</a> <a href="/tags/angular、Karma/" style="font-size: 10px;">angular、Karma</a> <a href="/tags/angular、directive/" style="font-size: 10px;">angular、directive</a> <a href="/tags/angular、html5/" style="font-size: 10px;">angular、html5</a> <a href="/tags/angular、module、controller/" style="font-size: 10px;">angular、module、controller</a> <a href="/tags/angular、promise、-q、deferred/" style="font-size: 10px;">angular、promise、$q、deferred</a> <a href="/tags/angular、router/" style="font-size: 10px;">angular、router</a> <a href="/tags/angular、ui-router/" style="font-size: 10px;">angular、ui-router</a> <a href="/tags/angular、表达式、filter/" style="font-size: 10px;">angular、表达式、filter</a> <a href="/tags/app-跨平台/" style="font-size: 10px;">app,跨平台</a> <a href="/tags/aso/" style="font-size: 10px;">aso</a> <a href="/tags/blockchain/" style="font-size: 10px;">blockchain</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/css-1px/" style="font-size: 10px;">css 1px</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/debugger/" style="font-size: 10px;">debugger</a> <a href="/tags/es5-js/" style="font-size: 10px;">es5 js</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/fit/" style="font-size: 10px;">fit</a> <a href="/tags/flex-css/" style="font-size: 10px;">flex css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-github/" style="font-size: 10px;">git github</a> <a href="/tags/h5-webworkers/" style="font-size: 10px;">h5 webworkers</a> <a href="/tags/ifelse/" style="font-size: 10px;">ifelse</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/javascript、object-oriented、继承/" style="font-size: 10px;">javascript、object-oriented、继承</a> <a href="/tags/jest/" style="font-size: 10px;">jest</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/js-Array/" style="font-size: 10px;">js Array</a> <a href="/tags/js-Higher-order-function/" style="font-size: 10px;">js Higher-order-function</a> <a href="/tags/js-closure/" style="font-size: 10px;">js closure</a> <a href="/tags/js-lodash/" style="font-size: 10px;">js lodash</a> <a href="/tags/js-object/" style="font-size: 10px;">js object</a> <a href="/tags/js-scope/" style="font-size: 10px;">js scope</a> <a href="/tags/js-sea-js-模块化/" style="font-size: 10px;">js sea.js 模块化</a> <a href="/tags/js-this/" style="font-size: 10px;">js this</a> <a href="/tags/js-性能调试/" style="font-size: 10px;">js 性能调试</a> <a href="/tags/js-柯里化/" style="font-size: 10px;">js 柯里化</a> <a href="/tags/js-纯函数/" style="font-size: 10px;">js 纯函数</a> <a href="/tags/jsapi/" style="font-size: 10px;">jsapi</a> <a href="/tags/jsevent/" style="font-size: 10px;">jsevent</a> <a href="/tags/js、变态题/" style="font-size: 10px;">js、变态题</a> <a href="/tags/js、设计模式/" style="font-size: 10px;">js、设计模式</a> <a href="/tags/js、跨域、document-domain/" style="font-size: 10px;">js、跨域、document.domain</a> <a href="/tags/js异步编程/" style="font-size: 10px;">js异步编程</a> <a href="/tags/js模块化、AMD、CMD、CommonJs/" style="font-size: 10px;">js模块化、AMD、CMD、CommonJs</a> <a href="/tags/js继承/" style="font-size: 10px;">js继承</a> <a href="/tags/life、意念/" style="font-size: 10px;">life、意念</a> <a href="/tags/lodash-chain/" style="font-size: 10px;">lodash chain</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxhosts/" style="font-size: 10px;">maxhosts</a> <a href="/tags/mongoDB-数据库/" style="font-size: 10px;">mongoDB 数据库</a> <a href="/tags/mvp/" style="font-size: 10px;">mvp</a> <a href="/tags/mvvm/" style="font-size: 10px;">mvvm</a> <a href="/tags/node/" style="font-size: 12px;">node</a> <a href="/tags/node-debug/" style="font-size: 10px;">node debug</a> <a href="/tags/node-wechat/" style="font-size: 18px;">node wechat</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/node、enentLoop/" style="font-size: 10px;">node、enentLoop</a> <a href="/tags/promise、es6/" style="font-size: 10px;">promise、es6</a> <a href="/tags/rap/" style="font-size: 16px;">rap</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/react-ant-design/" style="font-size: 10px;">react ant-design</a> <a href="/tags/reflow、repaint/" style="font-size: 10px;">reflow、repaint</a> <a href="/tags/seo/" style="font-size: 18px;">seo</a> <a href="/tags/seo-新闻源/" style="font-size: 10px;">seo 新闻源</a> <a href="/tags/token、OAuth、鉴权/" style="font-size: 10px;">token、OAuth、鉴权</a> <a href="/tags/vh、vw、css3/" style="font-size: 10px;">vh、vw、css3</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/vue、多面应用/" style="font-size: 10px;">vue、多面应用</a> <a href="/tags/web/" style="font-size: 12px;">web</a> <a href="/tags/web-交互/" style="font-size: 10px;">web 交互</a> <a href="/tags/web、前端/" style="font-size: 10px;">web、前端</a> <a href="/tags/web、性能优化/" style="font-size: 10px;">web、性能优化</a> <a href="/tags/web缓存/" style="font-size: 10px;">web缓存</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/wechat-webstorm/" style="font-size: 10px;">wechat webstorm</a> <a href="/tags/win10、linux/" style="font-size: 10px;">win10、linux</a> <a href="/tags/window-history-html5/" style="font-size: 10px;">window.history html5</a> <a href="/tags/wxapp/" style="font-size: 14px;">wxapp</a> <a href="/tags/xss、csrf/" style="font-size: 10px;">xss、csrf</a> <a href="/tags/yarn-npm/" style="font-size: 10px;">yarn npm</a> <a href="/tags/人生/" style="font-size: 10px;">人生</a> <a href="/tags/前后端分享/" style="font-size: 10px;">前后端分享</a> <a href="/tags/前端脚手架/" style="font-size: 10px;">前端脚手架</a> <a href="/tags/埋点统计/" style="font-size: 10px;">埋点统计</a> <a href="/tags/建站-seo/" style="font-size: 10px;">建站 seo</a> <a href="/tags/性能、异常上报/" style="font-size: 10px;">性能、异常上报</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/生活/" style="font-size: 20px;">生活</a> <a href="/tags/移动端、fixed/" style="font-size: 10px;">移动端、fixed</a> <a href="/tags/统计、cloc/" style="font-size: 10px;">统计、cloc</a> <a href="/tags/解构赋值-es6/" style="font-size: 10px;">解构赋值 es6</a> <a href="/tags/跨域、postMessage、html5/" style="font-size: 10px;">跨域、postMessage、html5</a> <a href="/tags/路由-html5/" style="font-size: 10px;">路由 html5</a> <a href="/tags/防抖、节流/" style="font-size: 10px;">防抖、节流</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.webywx.com/">前端博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.yanwenxi.site/">web小站</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">前端在路上</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">前端在路上</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+			        
+						<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-JsEvent-loop" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/11/15/JsEvent-loop/" class="article-date">
+  	<time datetime="2017-11-15T06:12:39.000Z" itemprop="datePublished">2017-11-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      js事件循环
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jsevent/">jsevent</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="JS是单线程的"><a href="#JS是单线程的" class="headerlink" title="JS是单线程的"></a>JS是单线程的</h3><p>js是单线程的脚本语言，在同一时间只能干一件事，为了协调事件、用互交互、脚本和UI渲染等行为，防止主线程阻塞，Event Loop方案就诞生了</p>
+<p>为什么是单线程呢？举个粟子，js主要用途之一是操作DOM，假如js同时有两个线程，同时对同一个dom进行操作，这时浏览器会蒙蔽了，不知道听哪个线程了，没有办法谁的优先级高，所以避免此问题，js是单线程的。</p>
+<h3 id="执行栈与任务队列"><a href="#执行栈与任务队列" class="headerlink" title="执行栈与任务队列"></a>执行栈与任务队列</h3><p>#####1、执行栈</p>
+<p>当执行某个函数、用户点击一次鼠标或者发送ajax等时，只要指定过回调函数，这些事件发生时就会进入执行栈中，等待主线程读取，遵循先进先出原则。</p>
+<h4 id="2、主线程"><a href="#2、主线程" class="headerlink" title="2、主线程"></a>2、主线程</h4><p>主线程跟执行栈是不同的概念，主线程规定现在执行执行栈中的哪个事件。</p>
+<p>当遇到一个异步事件后，并不会一直等待异步事件的返回结果，而是将这个事件挂在与执行栈不同的队列中，我们称之为任务队列（Task Queue）</p>
+<p>当主线程执行栈中的所有代码执行完成后种（同步代码），主线程会去查看任务队列是否有任务，如果有，那么主线程会依次执行那些任务队列中的回调函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">let a = () =&gt; &#123;</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">        console.log(&apos;任务队列函数1&apos;)</span><br><span class="line">    &#125;, 0)</span><br><span class="line">    for (let i = 0; i &lt; 5; i++) &#123;</span><br><span class="line">        console.log(&apos;a的for循环&apos;)</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(&apos;a事件执行完&apos;)</span><br><span class="line">&#125;</span><br><span class="line">let b = () =&gt; &#123;</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">        console.log(&apos;任务队列函数2&apos;)</span><br><span class="line">    &#125;, 0)</span><br><span class="line">    for (let i = 0; i &lt; 5; i++) &#123;</span><br><span class="line">        console.log(&apos;b的for循环&apos;)</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(&apos;b事件执行完&apos;)</span><br><span class="line">&#125;</span><br><span class="line">let c = () =&gt; &#123;</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">        console.log(&apos;任务队列函数3&apos;)</span><br><span class="line">    &#125;, 0)</span><br><span class="line">    for (let i = 0; i &lt; 5; i++) &#123;</span><br><span class="line">        console.log(&apos;c的for循环&apos;)</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(&apos;c事件执行完&apos;)</span><br><span class="line">&#125;</span><br><span class="line">a();</span><br><span class="line">b();</span><br><span class="line">c();</span><br><span class="line">// 当a、b、c函数都执行完成之后，三个setTimeout才会依次执行</span><br><span class="line">输出结果：5次a的for循环、a事件执行完、5次b的for循环、b事件执行完、5次c的for循环、c事件执行完、任务队列函数1、任务队列函数2、任务队列函数3</span><br></pre></td></tr></table></figure>
+<h3 id="js异步执行的运行机制"><a href="#js异步执行的运行机制" class="headerlink" title="js异步执行的运行机制"></a>js异步执行的运行机制</h3><p>1、所有任务都在主线程上执行，形成一个执行栈。</p>
+<p>2、主线程之外，还存在一个任务队列task queue，只要异步任务有了运行结果，就在任务队列之中放置一个事件。</p>
+<p>3、一旦执行栈中的所有同步任务执行完毕，系统就会读取任务队列，那些对应的异步任务、结束等待状态，进入执行栈并开始执行。</p>
+<p>4、主线程不断重复上面的第三步。</p>
+<h3 id="宏任务与微任务"><a href="#宏任务与微任务" class="headerlink" title="宏任务与微任务"></a>宏任务与微任务</h3><p>异步任务分为 宏任务macrotask和微任务microtask,不同的API注册的任务会依次进入自身对应的队列中，然后等待Event Loop将它们依次压入执行栈中执行。</p>
+<p>宏任务：script(整体代码)、setTimeout   setInterval  UI渲染 I/O  postMessage   MessageChannel   setImmediate(node环境)</p>
+<p>微任务：Promise  MutaionObserver  process.nextTick(node环境)</p>
+<h3 id="Event-Loop-事件循环"><a href="#Event-Loop-事件循环" class="headerlink" title="Event Loop 事件循环"></a>Event Loop 事件循环</h3><p>事件循环中，每一次循环称为tick,每一tick的任务如下：</p>
+<p>1、执行栈选择最先进入队列的宏任务（通常是script整体代码），如果有则执行。</p>
+<p>2、检查是否存在Microtask，如果存在则不停的执行，直到清空microtask队列。</p>
+<p>3、更新render（每一次事件循环，浏览器都可能会去更新渲染）</p>
+<p>4、重复以上步骤</p>
+<p>总结：宏任务—&gt;所有微任务—&gt;宏任务</p>
+<p>可以这么理解哈：1、可将所有任务看成两个队列，执行队列与事件队列</p>
+<p>​    2、执行队列是同步的，事件队列是异步的，宏任务放入事件列表，微任务放入执行队列之后，事件队列之前。</p>
+<p>​    3、当执行完同步代码之后，就会执行位于执行列表之后的微任务，然后再执行事件列表中的宏任务。</p>
+<h3 id="练练手"><a href="#练练手" class="headerlink" title="练练手"></a>练练手</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//执行顺序的问题</span><br><span class="line">setTimeout(function()&#123;</span><br><span class="line">    console.log(1)</span><br><span class="line">&#125;);</span><br><span class="line">new Promise(function(resolve,reject)&#123;</span><br><span class="line">    console.log(2)</span><br><span class="line">    resolve(3)</span><br><span class="line">&#125;).then(function(val)&#123;</span><br><span class="line">    console.log(val)</span><br><span class="line">&#125;);</span><br><span class="line">console.log(4);</span><br><span class="line">输出结果：2、4、3、1</span><br><span class="line">//分析</span><br><span class="line">1、先执行script同步代码</span><br><span class="line">	先执行new Promise中的打印2，then后面的不执行属于微任务(new Promise是同步代码)，然后执行打印4</span><br><span class="line">2、执行script宏任务后，执行微任务，打印3，没有其他的微任务了。</span><br><span class="line">3、执行另一个宏任务，定时器打印1.</span><br></pre></td></tr></table></figure>
+<p>来源链接：<a href="https://segmentfault.com/a/1190000015317434?utm_medium=hao.caibaojian.com&amp;utm_source=hao.caibaojian.com&amp;share_user=1030000000178452" target="_blank" rel="noopener">https://segmentfault.com/a/1190000015317434?utm_medium=hao.caibaojian.com&amp;utm_source=hao.caibaojian.com&amp;share_user=1030000000178452</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/12/10/MVVM实现原理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          mvvm实现原理相关记录
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/15/xingneng/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">前端性能与异常上报</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2018 前端在路上
+      </div>
+        <div class="footer-right">
+          <a href="http://webywx.com/" target="_blank">webywx</a>  Theme <a href="https://yanwenxi.site" target="_blank">前端在路上</a> by Scorpio
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

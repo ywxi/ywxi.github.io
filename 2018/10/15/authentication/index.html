@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>前后端常用的几种鉴权方式 | 闫文喜的个人前端博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="神码是鉴权呢？鉴权（authentication）是指验证用户是否拥有访问系统的权利。 目前常用的四种鉴权方式：1、HTTP Basic Authentication 2、session-cookie 3、token验证 4、OAuth(开放授权) ###1、HTTP Basic Authentication 这种授权方式是浏览器遵守http协议实现的基本授权方式,HTTP协议进行通信的过程中，H">
+<meta name="keywords" content="token、OAuth、鉴权">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前后端常用的几种鉴权方式">
+<meta property="og:url" content="http://yoursite.com/2018/10/15/authentication/index.html">
+<meta property="og:site_name" content="闫文喜的个人前端博客">
+<meta property="og:description" content="神码是鉴权呢？鉴权（authentication）是指验证用户是否拥有访问系统的权利。 目前常用的四种鉴权方式：1、HTTP Basic Authentication 2、session-cookie 3、token验证 4、OAuth(开放授权) ###1、HTTP Basic Authentication 这种授权方式是浏览器遵守http协议实现的基本授权方式,HTTP协议进行通信的过程中，H">
+<meta property="og:locale" content="ch">
+<meta property="og:updated_time" content="2018-10-19T08:28:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前后端常用的几种鉴权方式">
+<meta name="twitter:description" content="神码是鉴权呢？鉴权（authentication）是指验证用户是否拥有访问系统的权利。 目前常用的四种鉴权方式：1、HTTP Basic Authentication 2、session-cookie 3、token验证 4、OAuth(开放授权) ###1、HTTP Basic Authentication 这种授权方式是浏览器遵守http协议实现的基本授权方式,HTTP协议进行通信的过程中，H">
+  
+    <link rel="alternative" href="/atom.xml" title="闫文喜的个人前端博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">前端在路上</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+					        
+								<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Benchmark-jsPerf/" style="font-size: 10px;">Benchmark jsPerf</a> <a href="/tags/ES6、promise/" style="font-size: 10px;">ES6、promise</a> <a href="/tags/GraphQL/" style="font-size: 10px;">GraphQL</a> <a href="/tags/H5-移动端优化/" style="font-size: 10px;">H5 移动端优化</a> <a href="/tags/H5、bug/" style="font-size: 10px;">H5、bug</a> <a href="/tags/JS设计模式-设计模式/" style="font-size: 10px;">JS设计模式 设计模式</a> <a href="/tags/Jenkins-CI/" style="font-size: 10px;">Jenkins CI</a> <a href="/tags/Lodash/" style="font-size: 10px;">Lodash</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angular-http-q-promise/" style="font-size: 10px;">angular $http $q promise</a> <a href="/tags/angular-q-promise/" style="font-size: 10px;">angular $q promise</a> <a href="/tags/angular-decorator/" style="font-size: 10px;">angular decorator</a> <a href="/tags/angular-filter/" style="font-size: 10px;">angular filter</a> <a href="/tags/angular-服务/" style="font-size: 10px;">angular 服务</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/angular、-http/" style="font-size: 10px;">angular、$http</a> <a href="/tags/angular、Karma/" style="font-size: 10px;">angular、Karma</a> <a href="/tags/angular、directive/" style="font-size: 10px;">angular、directive</a> <a href="/tags/angular、html5/" style="font-size: 10px;">angular、html5</a> <a href="/tags/angular、module、controller/" style="font-size: 10px;">angular、module、controller</a> <a href="/tags/angular、promise、-q、deferred/" style="font-size: 10px;">angular、promise、$q、deferred</a> <a href="/tags/angular、router/" style="font-size: 10px;">angular、router</a> <a href="/tags/angular、ui-router/" style="font-size: 10px;">angular、ui-router</a> <a href="/tags/angular、表达式、filter/" style="font-size: 10px;">angular、表达式、filter</a> <a href="/tags/app-跨平台/" style="font-size: 10px;">app,跨平台</a> <a href="/tags/aso/" style="font-size: 10px;">aso</a> <a href="/tags/blockchain/" style="font-size: 10px;">blockchain</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/css-1px/" style="font-size: 10px;">css 1px</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/debugger/" style="font-size: 10px;">debugger</a> <a href="/tags/es5-js/" style="font-size: 10px;">es5 js</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/fit/" style="font-size: 10px;">fit</a> <a href="/tags/flex-css/" style="font-size: 10px;">flex css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-github/" style="font-size: 10px;">git github</a> <a href="/tags/h5-webworkers/" style="font-size: 10px;">h5 webworkers</a> <a href="/tags/ifelse/" style="font-size: 10px;">ifelse</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/javascript、object-oriented、继承/" style="font-size: 10px;">javascript、object-oriented、继承</a> <a href="/tags/jest/" style="font-size: 10px;">jest</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/js-Array/" style="font-size: 10px;">js Array</a> <a href="/tags/js-Higher-order-function/" style="font-size: 10px;">js Higher-order-function</a> <a href="/tags/js-closure/" style="font-size: 10px;">js closure</a> <a href="/tags/js-lodash/" style="font-size: 10px;">js lodash</a> <a href="/tags/js-object/" style="font-size: 10px;">js object</a> <a href="/tags/js-scope/" style="font-size: 10px;">js scope</a> <a href="/tags/js-sea-js-模块化/" style="font-size: 10px;">js sea.js 模块化</a> <a href="/tags/js-this/" style="font-size: 10px;">js this</a> <a href="/tags/js-性能调试/" style="font-size: 10px;">js 性能调试</a> <a href="/tags/js-柯里化/" style="font-size: 10px;">js 柯里化</a> <a href="/tags/js-纯函数/" style="font-size: 10px;">js 纯函数</a> <a href="/tags/jsapi/" style="font-size: 10px;">jsapi</a> <a href="/tags/jsevent/" style="font-size: 10px;">jsevent</a> <a href="/tags/js、变态题/" style="font-size: 10px;">js、变态题</a> <a href="/tags/js、设计模式/" style="font-size: 10px;">js、设计模式</a> <a href="/tags/js、跨域、document-domain/" style="font-size: 10px;">js、跨域、document.domain</a> <a href="/tags/js异步编程/" style="font-size: 10px;">js异步编程</a> <a href="/tags/js模块化、AMD、CMD、CommonJs/" style="font-size: 10px;">js模块化、AMD、CMD、CommonJs</a> <a href="/tags/js继承/" style="font-size: 10px;">js继承</a> <a href="/tags/life、意念/" style="font-size: 10px;">life、意念</a> <a href="/tags/lodash-chain/" style="font-size: 10px;">lodash chain</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxhosts/" style="font-size: 10px;">maxhosts</a> <a href="/tags/mongoDB-数据库/" style="font-size: 10px;">mongoDB 数据库</a> <a href="/tags/mvp/" style="font-size: 10px;">mvp</a> <a href="/tags/mvvm/" style="font-size: 10px;">mvvm</a> <a href="/tags/node/" style="font-size: 12px;">node</a> <a href="/tags/node-debug/" style="font-size: 10px;">node debug</a> <a href="/tags/node-wechat/" style="font-size: 18px;">node wechat</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/node、enentLoop/" style="font-size: 10px;">node、enentLoop</a> <a href="/tags/promise、es6/" style="font-size: 10px;">promise、es6</a> <a href="/tags/rap/" style="font-size: 16px;">rap</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/react-ant-design/" style="font-size: 10px;">react ant-design</a> <a href="/tags/reflow、repaint/" style="font-size: 10px;">reflow、repaint</a> <a href="/tags/seo/" style="font-size: 18px;">seo</a> <a href="/tags/seo-新闻源/" style="font-size: 10px;">seo 新闻源</a> <a href="/tags/token、OAuth、鉴权/" style="font-size: 10px;">token、OAuth、鉴权</a> <a href="/tags/vh、vw、css3/" style="font-size: 10px;">vh、vw、css3</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/vue、多面应用/" style="font-size: 10px;">vue、多面应用</a> <a href="/tags/web/" style="font-size: 12px;">web</a> <a href="/tags/web-交互/" style="font-size: 10px;">web 交互</a> <a href="/tags/web、前端/" style="font-size: 10px;">web、前端</a> <a href="/tags/web、性能优化/" style="font-size: 10px;">web、性能优化</a> <a href="/tags/web缓存/" style="font-size: 10px;">web缓存</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/wechat-webstorm/" style="font-size: 10px;">wechat webstorm</a> <a href="/tags/win10、linux/" style="font-size: 10px;">win10、linux</a> <a href="/tags/window-history-html5/" style="font-size: 10px;">window.history html5</a> <a href="/tags/wxapp/" style="font-size: 14px;">wxapp</a> <a href="/tags/xss、csrf/" style="font-size: 10px;">xss、csrf</a> <a href="/tags/yarn-npm/" style="font-size: 10px;">yarn npm</a> <a href="/tags/人生/" style="font-size: 10px;">人生</a> <a href="/tags/前后端分享/" style="font-size: 10px;">前后端分享</a> <a href="/tags/前端脚手架/" style="font-size: 10px;">前端脚手架</a> <a href="/tags/埋点统计/" style="font-size: 10px;">埋点统计</a> <a href="/tags/建站-seo/" style="font-size: 10px;">建站 seo</a> <a href="/tags/性能、异常上报/" style="font-size: 10px;">性能、异常上报</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/生活/" style="font-size: 20px;">生活</a> <a href="/tags/移动端、fixed/" style="font-size: 10px;">移动端、fixed</a> <a href="/tags/统计、cloc/" style="font-size: 10px;">统计、cloc</a> <a href="/tags/解构赋值-es6/" style="font-size: 10px;">解构赋值 es6</a> <a href="/tags/跨域、postMessage、html5/" style="font-size: 10px;">跨域、postMessage、html5</a> <a href="/tags/路由-html5/" style="font-size: 10px;">路由 html5</a> <a href="/tags/防抖、节流/" style="font-size: 10px;">防抖、节流</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.webywx.com/">前端博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.yanwenxi.site/">web小站</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">前端在路上</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">前端在路上</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yanwenxi" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ywx_software@foxmail.com" title="mail">mail</a>
+			        
+						<a class="qq" target="_blank" href="http://www.webywx.com" title="qq">qq</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-authentication" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/15/authentication/" class="article-date">
+  	<time datetime="2018-10-15T06:12:39.000Z" itemprop="datePublished">2018-10-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前后端常用的几种鉴权方式
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/token、OAuth、鉴权/">token、OAuth、鉴权</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="神码是鉴权呢？"><a href="#神码是鉴权呢？" class="headerlink" title="神码是鉴权呢？"></a>神码是鉴权呢？</h4><p>鉴权（authentication）是指验证用户是否拥有访问系统的权利。</p>
+<h4 id="目前常用的四种鉴权方式："><a href="#目前常用的四种鉴权方式：" class="headerlink" title="目前常用的四种鉴权方式："></a>目前常用的四种鉴权方式：</h4><p>1、HTTP Basic Authentication</p>
+<p>2、session-cookie</p>
+<p>3、token验证</p>
+<p>4、OAuth(开放授权)</p>
+<p>###1、HTTP Basic Authentication</p>
+<p>这种授权方式是浏览器遵守http协议实现的基本授权方式,HTTP协议进行通信的过程中，HTTP协议定义了基本认证认证允许HTTP服务器对客户端进行用户身份证的方法。</p>
+<ul>
+<li>认证过程</li>
+</ul>
+<p>1． 客户端向服务器请求数据，请求的内容可能是一个网页或者是一个ajax异步请求，此时，假设客户端尚未被验证，则客户端提供如下请求至服务器:</p>
+<p>  Get /index.html HTTP/1.0<br>  Host:www.google.com</p>
+<p> 2． 服务器向客户端发送验证请求代码401,（WWW-Authenticate: Basic realm=”google.com”这句话是关键，如果没有客户端不会弹出用户名和密码输入界面）服务器返回的数据大抵如下：</p>
+<p>  HTTP/1.0 401 Unauthorised<br>  Server: SokEvo/1.0<br>  WWW-Authenticate: Basic realm=”google.com”<br>  Content-Type: text/html<br>  Content-Length: xxx</p>
+<p>  3． 当符合http1.0或1.1规范的客户端（如IE，FIREFOX）收到401返回值时，将自动弹出一个登录窗口，要求用户输入用户名和密码。（弹出框是浏览器默认的）</p>
+<p> 4． 用户输入用户名和密码后，将用户名及密码以BASE64加密方式加密，并将密文放入前一条请求信息中，则客户端发送的第一条请求信息则变成如下内容：</p>
+<p>  Get /index.html HTTP/1.0<br>  Host:www.google.com<br>  Authorization: Basic d2FuZzp3YW5n</p>
+<p>注：d2FuZzp3YW5n表示加密后的用户名及密码（用户名：密码 然后通过base64加密，加密过程是浏览器默认的行为，不需要我们人为加密，我们只需要输入用户名密码即可）</p>
+<p>  5． 服务器收到上述请求信息后，将Authorization字段后的用户信息取出、解密，将解密后的用户名及密码与用户数据库进行比较验证，如用户名及密码正确，服务器则根据请求，将所请求资源发送给客户端</p>
+<p><strong>效果：</strong><br>  客户端未未认证的时候，会弹出用户名密码输入框，这个时候请求时属于pending状态，这个时候其实服务当用户输入用户名密码的时候客户端会再次发送带Authentication头的请求。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">server.js</span><br><span class="line">let express = require(&quot;express&quot;);</span><br><span class="line">let app = express();</span><br><span class="line"></span><br><span class="line">    app.use(express.static(__dirname+&apos;/public&apos;));</span><br><span class="line"></span><br><span class="line">    app.get(&quot;/Authentication_base&quot;,function(req,res)&#123;</span><br><span class="line">        console.log(&apos;req.headers.authorization:&apos;,req.headers)</span><br><span class="line">        if(!req.headers.authorization)&#123;</span><br><span class="line">            res.set(&#123;</span><br><span class="line">               &apos;WWW-Authenticate&apos;:&apos;Basic realm=&quot;wang&quot;&apos;</span><br><span class="line">            &#125;);</span><br><span class="line">            res.status(401).end();</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            let base64 = req.headers.authorization.split(&quot; &quot;)[1];</span><br><span class="line">            let userPass = new Buffer(base64, &apos;base64&apos;).toString().split(&quot;:&quot;);</span><br><span class="line">            let user = userPass[0];</span><br><span class="line">            let pass = userPass[1];</span><br><span class="line">            if(user==&quot;wang&quot;&amp;&amp;pass=&quot;wang&quot;)&#123;</span><br><span class="line">                res.end(&quot;OK&quot;);</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                res.status(401).end();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;)</span><br><span class="line">    app.listen(9090)</span><br><span class="line">    </span><br><span class="line">index.html:</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    $(function()&#123;</span><br><span class="line">    send(&apos;./Authentication_base&apos;);</span><br><span class="line">    &#125;)</span><br><span class="line">    var send = function(url)&#123;</span><br><span class="line">    $.ajax(&#123;  </span><br><span class="line">    url : url,  </span><br><span class="line">    method : &apos;GET&apos;,  </span><br><span class="line">    &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"> &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>当然有登陆就有注销，我们会发现当我们认证成功后每次请求请求头都会带上Authentication及里面的内容，那么如何做到让这次登陆失效的？</p>
+<p>  网上查了半天，目前最有效的方式就是在注销操作的时候，专门在服务器设置一个专门的注销账号，当接收到的Authentication信息为注销用户名密码的时候就便注销成功了，而客户端在注销操作的时候，手动的的去修改请求头重的Authentication，将他设置未服务器默认的注销账号和密码。</p>
+<p>  通过上面的简单讲解 其实我们已经可以返现这种验证方式的缺陷加密方式简单，仅仅是base64加密，这种加密方式是可逆的。同时在每个请求的头上都会附带上用户名和密码信息，这样在外网是很容易被嗅探器探测到的。</p>
+<p><strong>总结:</strong></p>
+<p>  正式因为这样，这种加密方式一般多被用在内部安全性要求不高的的系统上，只是相对的多，总的来说现在使用这种鉴权比较少了。如果项目需要部署在公网上，这种方式不推荐，当然你也可以和SSL来加密传输，这样会好一点.</p>
+<h4 id="2、session-cookie"><a href="#2、session-cookie" class="headerlink" title="2、session-cookie"></a>2、session-cookie</h4><p>这种方式是利用服务器端的session（会话）和浏览器端的cookie来实现前后端的认证，由于http请求时是无状态的，服务器正常情况下是不知道当前请求之前有没有来过，这个时候我们如果要记录状态，就需要在服务器端创建一个会话(seesion),将同一个客户端的请求都维护在各自得会会话中，每当请求到达服务器端的时候，先去查一下该客户端有没有在服务器端创建seesion，如果有则已经认证成功了，否则就没有认证。<br><strong>session-cookie认证主要分四步：</strong> </p>
+<p>  1、服务器在接受客户端首次访问时在服务器端创建seesion，然后保存seesion(我们可以将seesion保存在内存中，也可以保存在redis中，推荐使用后者)，然后给这个session生成一个唯一的标识字符串,然后在响应头中种下这个唯一标识字符串。<br> 2、签名。这一步只是对sid进行加密处理，服务端会根据这个secret密钥进行解密。（非必需步骤）<br>  3、浏览器中收到请求响应的时候会解析响应头，然后将sid保存在本地cookie中，浏览器在下次http请求的请求头中会带上该域名下的cookie信息，<br>   4、服务器在接受客户端请求时会去解析请求头cookie中的sid，然后根据这个sid去找服务器端保存的该客户端的session，然后判断该请求是否合法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">server.js</span><br><span class="line">var express =require(&apos;express&apos;);</span><br><span class="line">var RedisStore = require(&apos;connect-redis&apos;)(express.session);</span><br><span class="line">var app =express();</span><br><span class="line">var secret = &apos;yanwenxi&apos;;</span><br><span class="line">//设置cookie</span><br><span class="line">app.use(express.cookieParser(secret));</span><br><span class="line">//设置session</span><br><span class="line">app.use(express.session(&#123;</span><br><span class="line">    store: new RedisStore(&#123;</span><br><span class="line">        host:&apos;127.0.0.1&apos;,</span><br><span class="line">        port:9999,</span><br><span class="line">        db:&apos;session_db&apos;</span><br><span class="line">    &#125;),</span><br><span class="line">    secret:secret</span><br><span class="line">&#125;))</span><br><span class="line">app.get(&apos;/&apos;,function(req,res)&#123;</span><br><span class="line">    var session = req.session;</span><br><span class="line">    session.time = session.time ||0;</span><br><span class="line">    var n= session.time++;</span><br><span class="line">    res.send(&apos;hello,session id:&apos;+session.id+&apos;count:&apos;+n);</span><br><span class="line">&#125;)</span><br><span class="line">app.listen(9000);</span><br></pre></td></tr></table></figure>
+<h4 id="3、token验证"><a href="#3、token验证" class="headerlink" title="3、token验证"></a>3、token验证</h4><p><strong>auth2.0流程分为六步：</strong></p>
+<p>第一步. 向用户请求授权，现在很多的网站在登陆的时候都有第三方登陆的入口，当我们点击等第三方入口时，第三方授权服务会引导我们进入第三方登陆授权页面。</p>
+<p>通过第三方请求授权页面的浏览器地址栏地址可以看出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://graph.qq.com/oauth2.0/show?which=Login&amp;display=pc&amp;response_type=code&amp;client_id=100270989&amp;redirect_uri=https%3A%2F%2Fpassport.csdn.net%2Faccount%2Flogin%3Foauth_provider%3DQQProvider&amp;state=test1</span><br></pre></td></tr></table></figure>
+<p>这里的地址里面的%是浏览器强制编码后的显示我们可以使用decodeURIComponent进行解码，解码后是这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://graph.qq.com/oauth2.0/show?which=Login&amp;display=pc&amp;response_type=code&amp;client_id=100270989&amp;redirect_uri=https://passport.csdn.net/account/login?oauth_provider=QQProvider&amp;state=test1</span><br></pre></td></tr></table></figure>
+<p>这个url地址我们可以看见Auth2.0常见的几个参数：<br>​      response_type，返回类型<br>​      client_id，第三方应用id,由授权服务器（qq）在第三方应用提交时颁发给第三方应用。<br>​      redirect_uri，登陆成功重定向页面<br>​      oauth_provider，第三方授权提供方<br>​      state，由第三方应用给出的随机码<br>第二步. 返回用户凭证（code），并返回一个凭证（code），当用户点击授权并登陆后，授权服务器将生成一个用户凭证（code）。这个用户凭证会附加在重定向的地址redirect_uri的后面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://passport.csdn.net/account/login?code=9e3efa6cea739f9aaab2&amp;state=XXX</span><br></pre></td></tr></table></figure>
+<p>第3步. 请求授权服务器授权:</p>
+<p>  经过第二部获取code后后面的工作就可以交给后台去处理的，和用户的交互就结束了。接下来我的需要获取Access Token，我们需要用他来向授权服务器获取用户信息等资源。<br>  第三方应用后台通过第二步的凭证（code）向授权服务器请求Access Token，这时候需要以下几个信息：</p>
+<ul>
+<li>client_id 标识第三方应用的id，由授权服务器（Github）在第三方应用提交时颁发给第三方应用</li>
+<li>client_secret 第三方应用和授权服务器之间的安全凭证，由授权服务器（Github）在第三方应用提交时颁发给第三方应用</li>
+<li>code 第一步中返回的用户凭证redirect_uri 第一步生成用户凭证后跳转到第二步时的地址</li>
+<li>state 由第三方应用给出的随机码</li>
+</ul>
+<p>第四步. 授权服务器同意授权后，返回一个资源访问的凭证（Access Token）。</p>
+<p>第五步. 第三方应用通过第四步的凭证（Access Token）向资源服务器请求相关资源。</p>
+<p>第六步. 资源服务器验证凭证（Access Token）通过后，将第三方应用请求的资源返回。</p>
+<p>从用户角度来说，第三方授权可以让我们快速的登陆应用，无需进行繁琐的注册,同时不用记住各种账号密码。只需要记住自己常用的几个账号就ok了。<br>从产品经理的角度来所，这种授权方式提高用户的体验满意度。另一方面可以获取更多的用户。</p>
+<p>最后，授权方式多种多样，主要还是要取决于我们对于产品的定位。如果我们的产品只是在企业内部使用，token和session就可以满足我们的需求，如果是面向互联网的大众用户，那么第三方授权在用户体验度上会有一个很大的提升。</p>
+<p>参考链接：<a href="https://blog.csdn.net/wang839305939/article/details/78713124/" target="_blank" rel="noopener">https://blog.csdn.net/wang839305939/article/details/78713124/</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/10/15/GraphQL/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          学习GraphQL
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/15/1px/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">移动端1px细线解决方案总结</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2018 前端在路上
+      </div>
+        <div class="footer-right">
+          <a href="http://webywx.com/" target="_blank">webywx</a>  Theme <a href="https://yanwenxi.site" target="_blank">前端在路上</a> by Scorpio
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
